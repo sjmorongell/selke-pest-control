@@ -180,24 +180,26 @@ export default function App() {
       )}
 
       {/* Header */}
-      <header className="bg-white shadow-md sticky top-0 z-50">
+      <header className="bg-white shadow-md sticky top-0 z-50" role="banner">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center">
-            <img src={newLogo} alt="Selke Pest Control" className="h-14 md:h-16" />
+            <a href="/" aria-label="Selke Pest Control - Home">
+              <img src={newLogo} alt="Selke Pest Control logo" className="h-14 md:h-16" width="180" height="64" />
+            </a>
           </div>
-          <div className="hidden lg:flex items-center gap-6">
+          <nav className="hidden lg:flex items-center gap-6" aria-label="Main navigation">
             <a href="#services" className="text-gray-700 hover:text-cyan-500 transition-colors">Services</a>
             <a href="#why-us" className="text-gray-700 hover:text-cyan-500 transition-colors">Why Us</a>
             <button onClick={() => setIsPestLibraryOpen(true)} className="text-gray-700 hover:text-cyan-500 transition-colors">Pest Library</button>
             <a href="#tips" className="text-gray-700 hover:text-cyan-500 transition-colors">Tips</a>
             <a href="#faq" className="text-gray-700 hover:text-cyan-500 transition-colors">FAQ</a>
-          </div>
+          </nav>
           <div className="flex items-center gap-3">
             <a href="#" className="hidden md:block text-sm text-gray-700 hover:text-cyan-500 transition-colors px-4 py-2 border border-gray-300 rounded-lg hover:border-cyan-500">
               Customer Portal
             </a>
-            <a href="tel:704-728-0204" className="bg-cyan-500 text-white px-4 md:px-6 py-3 rounded-lg hover:bg-cyan-600 transition-colors flex items-center gap-2 text-sm md:text-base">
-              <Phone className="w-4 h-4" />
+            <a href="tel:704-728-0204" className="bg-cyan-500 text-white px-4 md:px-6 py-3 rounded-lg hover:bg-cyan-600 transition-colors flex items-center gap-2 text-sm md:text-base" aria-label="Call Selke Pest Control at 704-728-0204">
+              <Phone className="w-4 h-4" aria-hidden="true" />
               <span className="hidden sm:inline">704-728-0204</span>
             </a>
           </div>
@@ -205,7 +207,7 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-cyan-900 text-white py-24 md:py-40">
+      <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-cyan-900 text-white py-24 md:py-40" aria-label="Hero - Charlotte Metro Pest Control">
         <div className="absolute inset-0 bg-black/60"></div>
         <div
           className="absolute inset-0 bg-cover bg-center opacity-25"
@@ -234,10 +236,7 @@ export default function App() {
             }
           `}</style>
           <div className="relative">
-            {/* Glow effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full blur-xl opacity-40"></div>
-
-            {/* Main badge */}
             <div className="relative bg-gradient-to-br from-yellow-400 via-amber-500 to-orange-600 rounded-full p-1 shadow-2xl transform rotate-12 group-hover:rotate-0 group-hover:scale-110 transition-all duration-300 animate-shake-4">
               <div className="bg-white rounded-full p-6">
                 <div className="text-center">
@@ -307,7 +306,7 @@ export default function App() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-gray-50">
+      <section id="services" className="py-20 bg-gray-50" aria-label="Our Services">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl mb-4">Our Services</h2>
@@ -450,8 +449,10 @@ export default function App() {
               <div className="relative">
                 <img
                   src={techWalking}
-                  alt="Professional pest control service"
+                  alt="Selke Pest Control technician performing professional pest control service in Charlotte Metro area"
                   className="rounded-2xl shadow-2xl"
+                  width="600"
+                  height="500"
                 />
               </div>
             </div>
@@ -546,7 +547,7 @@ export default function App() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section id="why-us" className="py-20 bg-white">
+      <section id="why-us" className="py-20 bg-white" aria-label="Why Choose Selke Pest Control">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl mb-4">Why Choose Selke Pest Control?</h2>
@@ -605,7 +606,8 @@ export default function App() {
       </section>
 
       {/* Customer Reviews */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50" aria-label="Customer Reviews" itemScope itemType="https://schema.org/LocalBusiness">
+        <meta itemProp="name" content="Selke Pest Control" />
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl mb-4">What Our Customers Say</h2>
@@ -658,15 +660,17 @@ export default function App() {
                 rating: 5
               }
             ].map((review, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-lg">
-                <div className="flex gap-1 mb-4">
+              <div key={index} className="bg-white rounded-xl p-6 shadow-lg" itemScope itemType="https://schema.org/Review">
+                <div className="flex gap-1 mb-4" itemScope itemType="https://schema.org/Rating" itemProp="reviewRating">
+                  <meta itemProp="ratingValue" content={String(review.rating)} />
+                  <meta itemProp="bestRating" content="5" />
                   {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" aria-hidden="true" />
                   ))}
                 </div>
-                <p className="text-gray-700 mb-4 italic">"{review.text}"</p>
-                <div>
-                  <p className="font-semibold">{review.name}</p>
+                <p className="text-gray-700 mb-4 italic" itemProp="reviewBody">"{review.text}"</p>
+                <div itemScope itemType="https://schema.org/Person" itemProp="author">
+                  <p className="font-semibold" itemProp="name">{review.name}</p>
                   <p className="text-sm text-gray-500">{review.location}</p>
                 </div>
               </div>
@@ -676,10 +680,11 @@ export default function App() {
       </section>
 
       {/* Service Areas Section */}
-      <section id="areas" className="py-16 bg-white">
+      <section id="areas" className="py-16 bg-white" aria-label="Service Areas - Charlotte Metro">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl mb-4">Serving the Charlotte Metro Area</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">Pest control services in Mooresville, NC and surrounding Charlotte Metro communities</p>
           </div>
           <div className="max-w-4xl mx-auto">
             <div className="flex flex-wrap justify-center gap-3">
@@ -726,7 +731,7 @@ export default function App() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20 bg-white">
+      <section id="faq" className="py-20 bg-white" aria-label="Frequently Asked Questions">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl mb-4">Frequently Asked Questions</h2>
@@ -803,7 +808,7 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-gray-900 text-white py-12" role="contentinfo" aria-label="Site footer">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
@@ -811,10 +816,10 @@ export default function App() {
               <p className="text-gray-400 mb-3">
                 Family-owned and locally operated. Protecting Charlotte Metro homes with professional, reliable pest control services.
               </p>
-              <p className="text-gray-400">
-                <MapPin className="w-4 h-4 inline mr-2" />
-                Based out of Mooresville, North Carolina
-              </p>
+              <address className="text-gray-400 not-italic" itemScope itemType="https://schema.org/PostalAddress">
+                <MapPin className="w-4 h-4 inline mr-2" aria-hidden="true" />
+                Based out of <span itemProp="addressLocality">Mooresville</span>, <span itemProp="addressRegion">North Carolina</span>
+              </address>
             </div>
             <div>
               <h3 className="text-lg mb-4">Quick Links</h3>
