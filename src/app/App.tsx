@@ -184,7 +184,7 @@ export default function App() {
         <div className="container mx-auto px-4 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center">
             <a href="/" aria-label="Selke Pest Control - Home">
-              <img src={newLogo} alt="Selke Pest Control logo" className="h-14 md:h-16" width="180" height="64" />
+              <img src={newLogo} alt="Selke Pest Control logo" className="h-14 md:h-16" />
             </a>
           </div>
           <nav className="hidden lg:flex items-center gap-6" aria-label="Main navigation">
