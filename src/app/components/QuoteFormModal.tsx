@@ -40,8 +40,16 @@ export function QuoteFormModal({ isOpen, onClose }: QuoteFormModalProps) {
 
     try {
       // Get reCAPTCHA token
-      const token = await (window as any).grecaptcha.execute('6LfeCvMsAAAAACOr9IAPU42iKu39uoxV-O5DuovB', { action: 'submit' });
-
+     const token = await new Promise<string>((resolve, reject) => {
+  (window as any).grecaptcha.ready(async () => {
+    try {
+      const t = await (window as any).grecaptcha.execute('6LfeCvMsAAAAACOr9IAPU42iKu39uoxV-O5DuovB', { action: 'submit' });
+      resolve(t);
+    } catch (err) {
+      reject(err);
+    }
+  });
+});
       // Send email via EmailJS
       await emailjs.send(
         'service_lrhj3zl', // Service ID
