@@ -20,6 +20,18 @@ export default function App() {
   const [openProcessStep, setOpenProcessStep] = useState<number | null>(null);
   const [isLegalModalOpen, setIsLegalModalOpen] = useState(false);
   const [isAreasDropdownOpen, setIsAreasDropdownOpen] = useState(false);
+  const [isPestsDropdownOpen, setIsPestsDropdownOpen] = useState(false);
+
+  const pestLinks = [
+    { name: 'Mosquito Control', slug: 'mosquito-control-charlotte-nc' },
+    { name: 'Ant Control', slug: 'ant-control-charlotte-nc' },
+    { name: 'Tick Control', slug: 'tick-control-charlotte-nc' },
+    { name: 'Cockroach Control', slug: 'cockroach-control-charlotte-nc' },
+    { name: 'Spider Control', slug: 'spider-control-charlotte-nc' },
+    { name: 'Wasp Control', slug: 'wasp-control-charlotte-nc' },
+    { name: 'Flea Control', slug: 'flea-control-charlotte-nc' },
+    { name: 'Rodent Control', slug: 'rodent-control-charlotte-nc' },
+  ];
 
   const serviceAreas = [
     { name: 'Mooresville', slug: 'pest-control-mooresville-nc' },
@@ -104,6 +116,20 @@ export default function App() {
             <button onClick={() => setIsPestLibraryOpen(true)} className="text-gray-700 hover:text-cyan-500 transition-colors">Pest Library</button>
             <a href="#tips" className="text-gray-700 hover:text-cyan-500 transition-colors">Tips</a>
             <a href="#faq" className="text-gray-700 hover:text-cyan-500 transition-colors">FAQ</a>
+            <div className="relative" onMouseEnter={() => setIsPestsDropdownOpen(true)} onMouseLeave={() => setIsPestsDropdownOpen(false)}>
+              <button className="flex items-center gap-1 text-gray-700 hover:text-cyan-500 transition-colors">
+                Pest Control <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isPestsDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {isPestsDropdownOpen && (
+                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50">
+                  <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2 min-w-[220px]">
+                    {pestLinks.map(({ name, slug }) => (
+                      <a key={slug} href={`/${slug}`} className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 transition-colors">{name}</a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
             <div className="relative" onMouseEnter={() => setIsAreasDropdownOpen(true)} onMouseLeave={() => setIsAreasDropdownOpen(false)}>
               <button className="flex items-center gap-1 text-gray-700 hover:text-cyan-500 transition-colors">
                 Service Areas <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isAreasDropdownOpen ? 'rotate-180' : ''}`} />
