@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin, Shield, Clock, Star, Bug, Home, Leaf, Award, Users, ChevronDown, Droplets, Wind, Zap, AlertCircle, CheckCircle, Calendar, Scissors, TreeDeciduous, Check, X } from 'lucide-react';
+import { Phone, Mail, MapPin, Shield, Clock, Star, Bug, Home, Leaf, Award, Users, ChevronDown, Droplets, Wind, Zap, AlertCircle, CheckCircle, Calendar, Scissors, TreeDeciduous, Check, X, Menu } from 'lucide-react';
 import { useState } from 'react';
 import { QuoteFormModal } from './components/QuoteFormModal';
 import { BlogArticle } from './components/BlogArticle';
@@ -21,6 +21,9 @@ export default function App() {
   const [isLegalModalOpen, setIsLegalModalOpen] = useState(false);
   const [isAreasDropdownOpen, setIsAreasDropdownOpen] = useState(false);
   const [isPestsDropdownOpen, setIsPestsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobilePestsOpen, setMobilePestsOpen] = useState(false);
+  const [mobileAreasOpen, setMobileAreasOpen] = useState(false);
 
   const pestLinks = [
     { name: 'Mosquito Control', slug: 'mosquito-control-charlotte-nc' },
@@ -105,19 +108,19 @@ export default function App() {
 
       {activeBlogData && <BlogModal isOpen={!!activeBlog} onClose={() => setActiveBlog(null)} title={activeBlogData.title} content={activeBlogData.content} icon={activeBlogData.icon} />}
 
-      <header className="bg-white shadow-md sticky top-0 z-50" role="banner">
+      <header className="bg-white shadow-md sticky top-0 z-50 relative" role="banner">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center">
             <a href="/" aria-label="Selke Pest Control - Home"><img src={newLogo} alt="Selke Pest Control logo" className="h-14 md:h-16" /></a>
           </div>
-          <nav className="hidden lg:flex items-center gap-6" aria-label="Main navigation">
-            <a href="#services" className="text-gray-700 hover:text-cyan-500 transition-colors">Services</a>
-            <a href="#why-us" className="text-gray-700 hover:text-cyan-500 transition-colors">Why Us</a>
-            <button onClick={() => setIsPestLibraryOpen(true)} className="text-gray-700 hover:text-cyan-500 transition-colors">Pest Library</button>
-            <a href="#tips" className="text-gray-700 hover:text-cyan-500 transition-colors">Tips</a>
-            <a href="#faq" className="text-gray-700 hover:text-cyan-500 transition-colors">FAQ</a>
+          <nav className="hidden lg:flex items-center gap-4" aria-label="Main navigation">
+            <a href="#services" className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">Services</a>
+            <a href="#why-us" className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">Why Us</a>
+            <button onClick={() => setIsPestLibraryOpen(true)} className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">Pest Library</button>
+            <a href="#tips" className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">Tips</a>
+            <a href="#faq" className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">FAQ</a>
             <div className="relative" onMouseEnter={() => setIsPestsDropdownOpen(true)} onMouseLeave={() => setIsPestsDropdownOpen(false)}>
-              <button className="flex items-center gap-1 text-gray-700 hover:text-cyan-500 transition-colors">
+              <button className="flex items-center gap-1 text-sm text-gray-700 hover:text-cyan-500 transition-colors">
                 Pest Control <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isPestsDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
               {isPestsDropdownOpen && (
@@ -131,7 +134,7 @@ export default function App() {
               )}
             </div>
             <div className="relative" onMouseEnter={() => setIsAreasDropdownOpen(true)} onMouseLeave={() => setIsAreasDropdownOpen(false)}>
-              <button className="flex items-center gap-1 text-gray-700 hover:text-cyan-500 transition-colors">
+              <button className="flex items-center gap-1 text-sm text-gray-700 hover:text-cyan-500 transition-colors">
                 Service Areas <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isAreasDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
               {isAreasDropdownOpen && (
@@ -150,8 +153,48 @@ export default function App() {
             <a href="tel:704-728-0204" className="bg-cyan-500 text-white px-4 md:px-6 py-3 rounded-lg hover:bg-cyan-600 transition-colors flex items-center gap-2 text-sm md:text-base" aria-label="Call Selke Pest Control at 704-728-0204">
               <Phone className="w-4 h-4" aria-hidden="true" /><span className="hidden sm:inline">704-728-0204</span>
             </a>
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Toggle menu">
+              {isMobileMenuOpen ? <X className="w-6 h-6 text-gray-700" /> : <Menu className="w-6 h-6 text-gray-700" />}
+            </button>
           </div>
         </div>
+        {isMobileMenuOpen && (
+          <div className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-xl border-t border-gray-100 z-50 max-h-[80vh] overflow-y-auto">
+            <div className="container mx-auto px-4 py-3 space-y-1">
+              <a href="#services" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Services</a>
+              <a href="#why-us" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Why Us</a>
+              <button onClick={() => { setIsPestLibraryOpen(true); setIsMobileMenuOpen(false); }} className="w-full text-left px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors">Pest Library</button>
+              <a href="#tips" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Tips</a>
+              <a href="#faq" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
+              <div>
+                <button onClick={() => setMobilePestsOpen(!mobilePestsOpen)} className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-cyan-50 rounded-lg transition-colors">
+                  <span>Pest Control</span><ChevronDown className={`w-4 h-4 transition-transform ${mobilePestsOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {mobilePestsOpen && (
+                  <div className="pl-4 space-y-1 pb-2">
+                    {pestLinks.map(({ name, slug }) => (
+                      <a key={slug} href={`/${slug}`} className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>{name}</a>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div>
+                <button onClick={() => setMobileAreasOpen(!mobileAreasOpen)} className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-cyan-50 rounded-lg transition-colors">
+                  <span>Service Areas</span><ChevronDown className={`w-4 h-4 transition-transform ${mobileAreasOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {mobileAreasOpen && (
+                  <div className="pl-4 grid grid-cols-2 gap-1 pb-2">
+                    {serviceAreas.map(({ name, slug }) => (
+                      <a key={slug} href={`/${slug}`} className="px-3 py-2 text-sm text-gray-600 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>{name}</a>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <a href="#" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors">Customer Portal</a>
+              <a href="tel:704-728-0204" className="block bg-cyan-500 text-white px-4 py-3 rounded-lg text-center font-semibold hover:bg-cyan-600 transition-colors mt-2">Call 704-728-0204</a>
+            </div>
+          </div>
+        )}
       </header>
 
       <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-cyan-900 text-white py-24 md:py-40" aria-label="Hero - Charlotte Metro Pest Control">
