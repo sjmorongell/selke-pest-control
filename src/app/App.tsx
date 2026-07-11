@@ -5,6 +5,7 @@ import { BlogArticle } from './components/BlogArticle';
 import { BlogModal } from './components/BlogModal';
 import { PestLibraryModal } from './components/PestLibraryModal';
 import { LegalModal } from './components/LegalModal';
+import { ReviewsCarousel } from './components/ReviewsCarousel';
 import FooterLogo from './components/FooterLogo';
 import { blogArticles } from './utils/blogContent';
 import newLogo from '../imports/Screenshot_2026-05-18_213802.png';
@@ -243,19 +244,13 @@ export default function App() {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50" aria-label="Customer Reviews" itemScope itemType="https://schema.org/LocalBusiness">
-        <meta itemProp="name" content="Selke Pest Control" />
+      <section className="py-20 bg-gray-50" aria-label="Customer Reviews">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16"><h2 className="text-3xl md:text-4xl mb-4">What Our Customers Say</h2><p className="text-xl text-gray-600 max-w-2xl mx-auto">Trusted by Charlotte Metro families</p></div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {[{name:"Sarah M.",location:"Mooresville",text:"Finally found a pest control company I can trust! The technician was professional, thorough, and explained everything. No more ants in my kitchen!",rating:5},{name:"Mike R.",location:"Huntersville",text:"We bundle the mosquito and general pest service and it's been a game changer. We can actually enjoy our backyard again. Highly recommend!",rating:5},{name:"Jennifer L.",location:"Cornelius",text:"Best decision we made for our home. The Selke team is responsive, professional, and their treatments actually work. Worth every penny.",rating:5},{name:"David K.",location:"Charlotte",text:"I was skeptical at first, but after one treatment the difference was incredible. No more spiders, roaches gone, and great customer service.",rating:5},{name:"Amanda T.",location:"Davidson",text:"As a pet owner, I was worried about chemicals. Selke uses safe products and my dogs are fine. Plus, no more fleas! Thank you!",rating:5},{name:"Robert S.",location:"Lake Norman",text:"The mosquito control is amazing. We had our first outdoor party in years without being eaten alive. The team is fantastic!",rating:5},{name:"Lisa P.",location:"Matthews",text:"Family-owned and it shows. They treat you like a neighbor, not a number. Quick response, fair pricing, and excellent results.",rating:5}].map((review, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-lg" itemScope itemType="https://schema.org/Review">
-                <div className="flex gap-1 mb-4" itemScope itemType="https://schema.org/Rating" itemProp="reviewRating"><meta itemProp="ratingValue" content={String(review.rating)} /><meta itemProp="bestRating" content="5" />{[...Array(review.rating)].map((_, i) => <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" aria-hidden="true" />)}</div>
-                <p className="text-gray-700 mb-4 italic" itemProp="reviewBody">"{review.text}"</p>
-                <div itemScope itemType="https://schema.org/Person" itemProp="author"><p className="font-semibold" itemProp="name">{review.name}</p><p className="text-sm text-gray-500">{review.location}</p></div>
-              </div>
-            ))}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl mb-4">What Our Customers Say</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Real reviews from real Charlotte Metro homeowners</p>
           </div>
+          <ReviewsCarousel />
         </div>
       </section>
 
