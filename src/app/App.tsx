@@ -1,5 +1,5 @@
-import { Phone, Mail, MapPin, Shield, Clock, Star, Bug, Home, Leaf, Award, Users, ChevronDown, Droplets, Wind, Zap, AlertCircle, CheckCircle, Calendar, Scissors, TreeDeciduous, Check, X, Menu } from 'lucide-react';
-import { useState } from 'react';
+import { Phone, Mail, MapPin, Shield, Clock, Star, Bug, Home, Leaf, Award, Users, ChevronDown, Droplets, Wind, Zap, AlertCircle, CheckCircle, Scissors, TreeDeciduous, Check, X, Menu } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { QuoteFormModal } from './components/QuoteFormModal';
 import { BlogArticle } from './components/BlogArticle';
 import { BlogModal } from './components/BlogModal';
@@ -10,6 +10,18 @@ import FooterLogo from './components/FooterLogo';
 import { blogArticles } from './utils/blogContent';
 import newLogo from '../imports/Screenshot_2026-05-18_213802.png';
 import techWalking from '../imports/b492d4f6-f650-412b-b5ac-975c7d404996-1.png';
+
+const PEST_ACTIVITY = [
+  { name: 'Mosquitoes', emoji: '🦟', slug: 'mosquito-control-charlotte-nc', peak: 'May – Oct', months: [1,2,4,6,9,10,10,10,8,6,2,1] },
+  { name: 'Ants', emoji: '🐜', slug: 'ant-control-charlotte-nc', peak: 'Mar – Sep', months: [2,2,6,8,9,10,9,8,7,5,3,2] },
+  { name: 'Ticks', emoji: '🕷️', slug: 'tick-control-charlotte-nc', peak: 'Apr – Aug', months: [1,2,5,8,10,10,10,9,7,4,2,1] },
+  { name: 'Cockroaches', emoji: '🪳', slug: 'cockroach-control-charlotte-nc', peak: 'Jun – Sep', months: [3,3,4,5,7,9,10,10,9,6,4,3] },
+  { name: 'Spiders', emoji: '🕸️', slug: 'spider-control-charlotte-nc', peak: 'Aug – Oct', months: [2,2,3,4,5,6,7,9,10,10,6,3] },
+  { name: 'Wasps', emoji: '🐝', slug: 'wasp-control-charlotte-nc', peak: 'Jun – Oct', months: [1,1,2,4,6,8,9,10,10,8,3,1] },
+  { name: 'Fleas', emoji: '🐛', slug: 'flea-control-charlotte-nc', peak: 'May – Sep', months: [2,2,3,5,8,10,10,10,8,5,3,2] },
+  { name: 'Rodents', emoji: '🐭', slug: 'rodent-control-charlotte-nc', peak: 'Sep – Feb', months: [8,7,5,3,3,2,2,3,6,8,9,10] },
+];
+const ACTIVITY_MONTHS = ['J','F','M','A','M','J','J','A','S','O','N','D'];
 
 export default function App() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -24,6 +36,13 @@ export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobilePestsOpen, setMobilePestsOpen] = useState(false);
   const [mobileAreasOpen, setMobileAreasOpen] = useState(false);
+  const [showPromoPopup, setShowPromoPopup] = useState(false);
+  const [promoPopupDismissed, setPromoPopupDismissed] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowPromoPopup(true), 10000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const pestLinks = [
     { name: 'Mosquito Control', slug: 'mosquito-control-charlotte-nc' },
@@ -199,7 +218,7 @@ export default function App() {
 
       <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-cyan-900 text-white py-24 md:py-40" aria-label="Hero - Charlotte Metro Pest Control">
         <div className="absolute inset-0 bg-black/60"></div>
-        <div className="absolute inset-0 bg-cover bg-center opacity-25" style={{ backgroundImage: `url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920)` }}></div>
+        <div className="absolute inset-0 bg-cover inset-0 bg-cover bg-center opacity-25" style={{ backgroundImage: `url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920)` }}></div>
         <button onClick={() => setIsGuaranteeModalOpen(true)} className="absolute bottom-8 right-8 hidden md:block cursor-pointer group">
           <style>{`@keyframes shake{0%,100%{transform:rotate(12deg) translateX(0)}25%{transform:rotate(12deg) translateX(-10px)}75%{transform:rotate(12deg) translateX(10px)}}.animate-shake-4{animation:shake 0.5s ease-in-out 4}`}</style>
           <div className="relative">
@@ -282,7 +301,7 @@ export default function App() {
               ))}
             </div>
             {openProcessStep !== null && (
-              <div className="bg-gray-50 rounded-xl p-8 border-2 border-cyan-500 animate-in fade-in slide-in-from-top-2 duration-300">
+              <div className="bg-gray-50 rounded-xl p-8 border-2 border-cyan-500">
                 <h3 className="text-2xl mb-4 text-cyan-700">{processSteps[openProcessStep].title}</h3>
                 <p className="text-gray-700 text-lg">{processSteps[openProcessStep].description}</p>
               </div>
@@ -333,6 +352,59 @@ export default function App() {
               ))}
             </div>
             <div className="text-center mt-8"><p className="text-gray-600">Don't see your city? <a href="tel:704-728-0204" className="text-cyan-600 hover:text-cyan-700 font-semibold">Call us at 704-728-0204</a></p></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pest Activity Calendar */}
+      <section className="py-20 bg-gray-900 text-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 bg-cyan-500/20 border border-cyan-500/30 rounded-full px-4 py-2 mb-4">
+              <Bug className="w-4 h-4 text-cyan-400" /><span className="text-sm text-cyan-300">Charlotte Metro, NC</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl mb-4">When Pests Are Most Active</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto text-lg">Know what's coming before it arrives. Each pest has a season — here's the full year at a glance for the Charlotte area.</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            {PEST_ACTIVITY.map(({ name, emoji, slug, peak, months }) => (
+              <a key={slug} href={`/${slug}`} className="bg-gray-800 rounded-2xl p-5 hover:bg-gray-750 hover:ring-2 hover:ring-cyan-500/50 transition-all group block">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-3xl">{emoji}</span>
+                  <div>
+                    <p className="font-bold text-white group-hover:text-cyan-400 transition-colors">{name}</p>
+                    <p className="text-xs text-cyan-400">Peak: {peak}</p>
+                  </div>
+                </div>
+                <div className="flex items-end gap-0.5" style={{ height: '48px' }}>
+                  {months.map((level, i) => {
+                    const barPx = Math.max(3, Math.round((level / 10) * 44));
+                    const isPeak = level >= 7;
+                    return (
+                      <div
+                        key={i}
+                        className={`flex-1 rounded-sm ${isPeak ? 'bg-cyan-400' : level >= 4 ? 'bg-cyan-700' : 'bg-gray-600'}`}
+                        style={{ height: `${barPx}px` }}
+                        title={`${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][i]}: ${level}/10`}
+                      />
+                    );
+                  })}
+                </div>
+                <div className="flex gap-0.5 mt-1">
+                  {ACTIVITY_MONTHS.map(m => (
+                    <div key={m} className="flex-1 text-center">
+                      <span className="text-gray-600 text-[9px]">{m}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-gray-500 mt-3 group-hover:text-cyan-400 transition-colors">View treatment options →</p>
+              </a>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <button onClick={() => setIsQuoteModalOpen(true)} className="bg-cyan-500 text-white px-10 py-4 rounded-xl hover:bg-cyan-600 transition-all text-lg shadow-xl">
+              Protect Your Home Year-Round
+            </button>
           </div>
         </div>
       </section>
@@ -406,6 +478,38 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* $25 Promo Popup — appears after 10 seconds */}
+      {showPromoPopup && !promoPopupDismissed && (
+        <div className="fixed bottom-6 right-6 z-50 w-full max-w-sm">
+          <style>{`@keyframes slideUpPop{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}.promo-popup{animation:slideUpPop 0.45s cubic-bezier(0.16,1,0.3,1) forwards}`}</style>
+          <div className="promo-popup bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden">
+            <div className="bg-gradient-to-r from-cyan-500 to-cyan-600 px-5 py-4 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">🎉</span>
+                <p className="text-white font-bold text-lg">New Customer Special</p>
+              </div>
+              <button onClick={() => setPromoPopupDismissed(true)} className="text-white/70 hover:text-white transition-colors p-1">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="p-5">
+              <p className="text-4xl font-black text-gray-900 mb-1">$25 Off</p>
+              <p className="text-gray-500 text-sm mb-1">Your first pest control treatment</p>
+              <p className="text-gray-700 font-medium mb-5">No hassle. Get outside again!</p>
+              <button
+                onClick={() => { setIsQuoteModalOpen(true); setPromoPopupDismissed(true); }}
+                className="w-full bg-cyan-500 text-white py-3.5 rounded-xl font-semibold hover:bg-cyan-600 transition-colors text-lg"
+              >
+                Claim My $25 Off →
+              </button>
+              <button onClick={() => setPromoPopupDismissed(true)} className="w-full text-gray-400 text-sm mt-2.5 py-1 hover:text-gray-600 transition-colors">
+                No thanks, I'll pay full price
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
