@@ -101,16 +101,12 @@ export default function PestPage({ pest }: PestPageProps) {
           <a href="/" aria-label="Selke Pest Control - Home">
             <img src={newLogo} alt="Selke Pest Control logo" className="h-14 md:h-16" />
           </a>
-
-          {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-4" aria-label="Main navigation">
             <a href="/#services" className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">Services</a>
             <a href="/#why-us" className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">Why Us</a>
             <a href="/" className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">Pest Library</a>
             <a href="/#tips" className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">Tips</a>
             <a href="/#faq" className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">FAQ</a>
-
-            {/* Pest Control dropdown */}
             <div className="relative" onMouseEnter={() => setIsPestsDropdownOpen(true)} onMouseLeave={() => setIsPestsDropdownOpen(false)}>
               <button className="flex items-center gap-1 text-sm text-gray-700 hover:text-cyan-500 transition-colors">
                 Pest Control <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isPestsDropdownOpen ? 'rotate-180' : ''}`} />
@@ -125,8 +121,6 @@ export default function PestPage({ pest }: PestPageProps) {
                 </div>
               )}
             </div>
-
-            {/* Service Areas dropdown */}
             <div className="relative" onMouseEnter={() => setIsAreasDropdownOpen(true)} onMouseLeave={() => setIsAreasDropdownOpen(false)}>
               <button className="flex items-center gap-1 text-sm text-gray-700 hover:text-cyan-500 transition-colors">
                 Service Areas <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isAreasDropdownOpen ? 'rotate-180' : ''}`} />
@@ -142,23 +136,16 @@ export default function PestPage({ pest }: PestPageProps) {
               )}
             </div>
           </nav>
-
           <div className="flex items-center gap-3">
             <a href="#" className="hidden md:block text-sm text-gray-700 hover:text-cyan-500 transition-colors px-4 py-2 border border-gray-300 rounded-lg hover:border-cyan-500">Customer Portal</a>
             <a href="tel:704-728-0204" className="bg-cyan-500 text-white px-4 md:px-6 py-3 rounded-lg hover:bg-cyan-600 transition-colors flex items-center gap-2 text-sm md:text-base">
               <Phone className="w-4 h-4" /><span className="hidden sm:inline">704-728-0204</span>
             </a>
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-              aria-label="Toggle menu"
-            >
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Toggle menu">
               {isMobileMenuOpen ? <X className="w-6 h-6 text-gray-700" /> : <Menu className="w-6 h-6 text-gray-700" />}
             </button>
           </div>
         </div>
-
-        {/* Mobile menu */}
         {isMobileMenuOpen && (
           <div className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-xl border-t border-gray-100 z-50 max-h-[80vh] overflow-y-auto">
             <div className="container mx-auto px-4 py-3 space-y-1">
@@ -167,7 +154,6 @@ export default function PestPage({ pest }: PestPageProps) {
               <a href="/" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Pest Library</a>
               <a href="/#tips" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Tips</a>
               <a href="/#faq" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
-
               <div>
                 <button onClick={() => setMobilePestsOpen(!mobilePestsOpen)} className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-cyan-50 rounded-lg transition-colors">
                   <span>Pest Control</span><ChevronDown className={`w-4 h-4 transition-transform ${mobilePestsOpen ? 'rotate-180' : ''}`} />
@@ -180,7 +166,6 @@ export default function PestPage({ pest }: PestPageProps) {
                   </div>
                 )}
               </div>
-
               <div>
                 <button onClick={() => setMobileAreasOpen(!mobileAreasOpen)} className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-cyan-50 rounded-lg transition-colors">
                   <span>Service Areas</span><ChevronDown className={`w-4 h-4 transition-transform ${mobileAreasOpen ? 'rotate-180' : ''}`} />
@@ -193,7 +178,6 @@ export default function PestPage({ pest }: PestPageProps) {
                   </div>
                 )}
               </div>
-
               <a href="#" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors">Customer Portal</a>
               <a href="tel:704-728-0204" className="block bg-cyan-500 text-white px-4 py-3 rounded-lg text-center font-semibold hover:bg-cyan-600 transition-colors mt-2">Call 704-728-0204</a>
             </div>
@@ -212,7 +196,7 @@ export default function PestPage({ pest }: PestPageProps) {
         </div>
       </nav>
 
-      {/* Hero — centered text + background image matching home page */}
+      {/* Hero */}
       <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-cyan-900 text-white py-24 md:py-36 overflow-hidden">
         <div className="absolute inset-0 bg-black/60" />
         <div className="absolute inset-0 bg-cover bg-center opacity-25" style={{ backgroundImage: `url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920)` }} />
@@ -226,10 +210,7 @@ export default function PestPage({ pest }: PestPageProps) {
             <p className="text-lg md:text-xl mb-4 text-gray-300 max-w-3xl mx-auto">{pest.heroSub}</p>
             <p className="text-base text-gray-400 mb-10">Family-owned • Licensed & Insured • 100% Satisfaction Guarantee</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <button
-                onClick={() => setIsQuoteModalOpen(true)}
-                className="bg-cyan-500 text-white px-10 py-5 rounded-xl hover:bg-cyan-600 transition-all text-lg shadow-xl hover:shadow-2xl transform hover:scale-105"
-              >
+              <button onClick={() => setIsQuoteModalOpen(true)} className="bg-cyan-500 text-white px-10 py-5 rounded-xl hover:bg-cyan-600 transition-all text-lg shadow-xl hover:shadow-2xl transform hover:scale-105">
                 Get $25 Off My First Treatment
               </button>
               <a href="tel:704-728-0204" className="bg-white text-gray-900 px-10 py-5 rounded-xl hover:bg-gray-100 transition-all text-lg flex items-center justify-center gap-2 shadow-xl">
@@ -248,7 +229,7 @@ export default function PestPage({ pest }: PestPageProps) {
         </div>
       </section>
 
-      {/* No-brainer offer banner */}
+      {/* Offer banner */}
       <div className="bg-gradient-to-r from-cyan-600 to-cyan-500 text-white py-4">
         <div className="container mx-auto px-4 text-center">
           <p className="text-lg font-semibold">🎉 New Customer Special — <span className="underline">$25 Off</span> your first {pest.pest} treatment. <button onClick={() => setIsQuoteModalOpen(true)} className="font-bold underline hover:no-underline ml-1">Claim it now →</button></p>
@@ -263,7 +244,7 @@ export default function PestPage({ pest }: PestPageProps) {
         </div>
       </section>
 
-      {/* Signs of Infestation */}
+      {/* Signs — signs[].title + signs[].desc */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -274,7 +255,10 @@ export default function PestPage({ pest }: PestPageProps) {
                   <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <AlertTriangle className="w-4 h-4 text-orange-500" />
                   </div>
-                  <p className="text-gray-700">{sign}</p>
+                  <div>
+                    <p className="font-semibold text-gray-800 mb-1">{sign.title}</p>
+                    <p className="text-gray-600 text-sm">{sign.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -282,7 +266,7 @@ export default function PestPage({ pest }: PestPageProps) {
         </div>
       </section>
 
-      {/* Risks */}
+      {/* Risks — risks[].title + risks[].desc */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -294,7 +278,10 @@ export default function PestPage({ pest }: PestPageProps) {
                   <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <X className="w-4 h-4 text-red-500" />
                   </div>
-                  <p className="text-gray-700">{risk}</p>
+                  <div>
+                    <p className="font-semibold text-gray-800 mb-1">{risk.title}</p>
+                    <p className="text-gray-600 text-sm">{risk.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -302,7 +289,7 @@ export default function PestPage({ pest }: PestPageProps) {
         </div>
       </section>
 
-      {/* NC Species */}
+      {/* NC Species — ncSpecies[].name + ncSpecies[].desc + ncSpecies[].threat */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -317,7 +304,10 @@ export default function PestPage({ pest }: PestPageProps) {
                     </div>
                     <h3 className="font-semibold text-gray-800">{species.name}</h3>
                   </div>
-                  <p className="text-gray-600 text-sm pl-11">{species.note}</p>
+                  <p className="text-gray-600 text-sm mb-2">{species.desc}</p>
+                  {species.threat && (
+                    <p className="text-xs text-orange-600 font-medium bg-orange-50 rounded-lg px-3 py-1.5">{species.threat}</p>
+                  )}
                 </div>
               ))}
             </div>
@@ -360,7 +350,7 @@ export default function PestPage({ pest }: PestPageProps) {
         </div>
       </section>
 
-      {/* Why DIY Fails */}
+      {/* Why DIY Fails — whyDiyFails[] plain strings */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -378,19 +368,22 @@ export default function PestPage({ pest }: PestPageProps) {
         </div>
       </section>
 
-      {/* Our Treatment */}
+      {/* Treatment — treatment[].step + treatment[].desc */}
       <section className="py-16 bg-gradient-to-br from-cyan-600 to-cyan-700 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl mb-4">How Selke Eliminates {pest.pestPlural}</h2>
             <p className="text-lg text-cyan-100 mb-8">Our proven, NC-climate-tested approach targets {pest.pest.toLowerCase()}s at every life stage:</p>
             <div className="grid md:grid-cols-2 gap-4">
-              {pest.treatment.map((step, i) => (
+              {pest.treatment.map((item, i) => (
                 <div key={i} className="flex items-start gap-4 bg-white/10 rounded-xl p-5 border border-white/20">
                   <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <CheckCircle className="w-4 h-4 text-white" />
                   </div>
-                  <p className="text-white">{step}</p>
+                  <div>
+                    <p className="font-semibold text-white mb-1">{item.step}</p>
+                    <p className="text-cyan-100 text-sm">{item.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -462,9 +455,7 @@ export default function PestPage({ pest }: PestPageProps) {
             <div>
               <FooterLogo className="h-20 mb-4" />
               <p className="text-gray-400 mb-3">Family-owned and locally operated. Protecting Charlotte Metro homes with professional, reliable pest control services.</p>
-              <address className="text-gray-400 not-italic">
-                <MapPin className="w-4 h-4 inline mr-2" />Based out of Mooresville, North Carolina
-              </address>
+              <address className="text-gray-400 not-italic"><MapPin className="w-4 h-4 inline mr-2" />Based out of Mooresville, North Carolina</address>
             </div>
             <div>
               <h3 className="text-lg mb-4">Pest Control Services</h3>
