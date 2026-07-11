@@ -244,7 +244,7 @@ export default function PestPage({ pest }: PestPageProps) {
         </div>
       </section>
 
-      {/* Signs — signs[].title + signs[].desc */}
+      {/* Signs */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -266,7 +266,7 @@ export default function PestPage({ pest }: PestPageProps) {
         </div>
       </section>
 
-      {/* Risks — risks[].title + risks[].desc */}
+      {/* Risks */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -289,7 +289,7 @@ export default function PestPage({ pest }: PestPageProps) {
         </div>
       </section>
 
-      {/* NC Species — ncSpecies[].name + ncSpecies[].desc + ncSpecies[].threat */}
+      {/* NC Species */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -323,22 +323,27 @@ export default function PestPage({ pest }: PestPageProps) {
             <p className="text-gray-600 mb-2 text-lg">{pest.seasonNote}</p>
             <p className="text-sm text-cyan-600 font-medium mb-8">Peak months: {pest.peakMonths}</p>
             <div className="bg-gray-50 rounded-2xl p-6 md:p-8">
-              <div className="flex items-end gap-2 h-40">
+              <div className="flex items-end gap-1.5" style={{ height: '160px' }}>
                 {pest.activityByMonth.map((level, i) => {
-                  const heightPct = Math.max(4, (level / 10) * 100);
+                  const barPx = Math.max(4, Math.round((level / 10) * 160));
                   const isPeak = level >= 7;
                   return (
-                    <div key={i} className="flex-1 flex flex-col items-center gap-1">
-                      <div
-                        className={`w-full rounded-t-lg transition-all ${isPeak ? 'bg-cyan-500' : level >= 4 ? 'bg-cyan-300' : 'bg-gray-300'}`}
-                        style={{ height: `${heightPct}%` }}
-                        title={`${MONTHS[i]}: ${level}/10`}
-                      />
-                      <span className="text-xs text-gray-500 hidden sm:block">{MONTHS[i]}</span>
-                      <span className="text-xs text-gray-500 sm:hidden">{MONTHS[i].charAt(0)}</span>
-                    </div>
+                    <div
+                      key={i}
+                      className={`flex-1 rounded-t-lg ${isPeak ? 'bg-cyan-500' : level >= 4 ? 'bg-cyan-300' : 'bg-gray-300'}`}
+                      style={{ height: `${barPx}px` }}
+                      title={`${MONTHS[i]}: ${level}/10`}
+                    />
                   );
                 })}
+              </div>
+              <div className="flex gap-1.5 mt-2">
+                {MONTHS.map(m => (
+                  <div key={m} className="flex-1 text-center">
+                    <span className="text-xs text-gray-500 hidden sm:block">{m}</span>
+                    <span className="text-xs text-gray-500 sm:hidden">{m.charAt(0)}</span>
+                  </div>
+                ))}
               </div>
               <div className="flex items-center gap-4 mt-4 text-sm text-gray-500">
                 <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-cyan-500 inline-block" /> Peak activity</span>
@@ -350,7 +355,7 @@ export default function PestPage({ pest }: PestPageProps) {
         </div>
       </section>
 
-      {/* Why DIY Fails — whyDiyFails[] plain strings */}
+      {/* Why DIY Fails */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -368,7 +373,7 @@ export default function PestPage({ pest }: PestPageProps) {
         </div>
       </section>
 
-      {/* Treatment — treatment[].step + treatment[].desc */}
+      {/* Treatment */}
       <section className="py-16 bg-gradient-to-br from-cyan-600 to-cyan-700 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -434,7 +439,7 @@ export default function PestPage({ pest }: PestPageProps) {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-5xl mb-6">Ready to Get Rid of {pest.pestPlural}?</h2>
-            <p className="text-xl mb-4 text-cyan-100">New customers get $25 off their first treatment. No contracts. No hassle.</p>
+            <p className="text-xl mb-4 text-cyan-100">New customers get $25 off their first treatment. No hassle. Get outside again!</p>
             <p className="text-lg mb-10">Monday - Saturday: 8:00 AM - 8:00 PM EST</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="tel:704-728-0204" className="bg-white text-cyan-700 px-10 py-5 rounded-xl hover:bg-gray-100 transition-all flex items-center justify-center gap-2 text-lg shadow-xl">
