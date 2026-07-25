@@ -45,7 +45,7 @@ export default function CityPage({ city }: CityPageProps) {
             "@type": "LocalBusiness",
             "name": "Selke Pest Control",
             "description": `Professional pest control services in ${city.name}, ${city.state} — general pest, mosquito, and flea/tick control.`,
-            "url": `https://selkepestcontrol.com/${city.slug}`,
+            "url": `https://www.selkepestcontrol.com/${city.slug}`,
             "telephone": "+1-704-728-0204",
             "email": "sales@selkepestcontrol.com",
             "areaServed": {
