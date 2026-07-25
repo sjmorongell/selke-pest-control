@@ -13,53 +13,272 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.join(__dirname, '..', 'dist');
 const baseUrl = 'https://www.selkepestcontrol.com';
 
+// ─── City Pages ───────────────────────────────────────────────────────────────
+
 const cityPages = [
-  { slug: 'pest-control-mooresville-nc', title: 'Pest Control in Mooresville, NC | Selke Pest Control', description: 'Selke Pest Control is based in Mooresville, NC — your local pest control experts. General pest, mosquito & flea/tick control for Lake Norman area homes. 100% guarantee. Call 704-728-0204.', h1: "Mooresville's Home-Town Pest Control", intro: "Selke Pest Control is proud to call Mooresville, North Carolina home. We've served Mooresville families for 15+ years with general pest control, mosquito barrier treatments, and flea and tick control. The Point, The Farms, Morrison Plantation, Beacon Pointe, Harbor at the Pointe — we know every neighborhood and every pest challenge in this city.", topPests: ['Mosquitoes', 'Ticks', 'Fire Ants', 'Rodents'], neighborhoods: ['The Point', 'The Farms', 'Morrison Plantation', 'Beacon Pointe', 'Harbor at the Pointe'], county: 'Iredell County' },
-  { slug: 'pest-control-charlotte-nc', title: 'Pest Control in Charlotte, NC | Selke Pest Control', description: 'Professional pest control in Charlotte, NC. Selke Pest Control serves Myers Park, Eastover, Foxcroft, Quail Hollow & all Charlotte neighborhoods. General pest, mosquito & flea/tick control. Call 704-728-0204.', h1: "Charlotte's Pest Control Experts", intro: "Charlotte, North Carolina is one of the top 10 worst cities for mosquitoes in the US. Selke Pest Control provides expert general pest control, mosquito barrier treatments, and flea and tick control throughout Charlotte and Mecklenburg County. We serve Myers Park, Eastover, Foxcroft, Morrocroft Estates, Quail Hollow, and every Charlotte neighborhood.", topPests: ['Mosquitoes', 'Ants (Fire & Carpenter)', 'Ticks', 'Cockroaches'], neighborhoods: ['Myers Park', 'Eastover', 'Foxcroft', 'Morrocroft Estates', 'Quail Hollow'], county: 'Mecklenburg County' },
-  { slug: 'pest-control-huntersville-nc', title: 'Pest Control in Huntersville, NC | Selke Pest Control', description: 'Expert pest control in Huntersville, NC. Serving Birkdale, Skybrook, Northstone, The Hamptons, Wynfield & all Huntersville neighborhoods. Mosquito, flea/tick & general pest control. Call 704-728-0204.', h1: "Huntersville's Trusted Pest Control", intro: "Huntersville, NC is one of the fastest-growing towns in the US — and its proximity to Lake Norman and Mountain Island Lake creates some of the most intense mosquito pressure in the Charlotte metro. Selke Pest Control serves all Huntersville communities including Birkdale, Skybrook, Northstone, The Hamptons, and Wynfield with professional pest control, mosquito barrier treatments, and tick and flea control.", topPests: ['Mosquitoes', 'Ticks', 'Fire Ants', 'Spiders & General Pests'], neighborhoods: ['Birkdale', 'Skybrook', 'Northstone', 'The Hamptons', 'Wynfield'], county: 'Mecklenburg County' },
-  { slug: 'pest-control-cornelius-nc', title: 'Pest Control in Cornelius, NC | Selke Pest Control', description: "Professional pest control in Cornelius, NC. Serving The Peninsula, Patrick's Purchase, Jetton Cove, Alexander Island & all Cornelius neighborhoods. Mosquito, tick & general pest control. Call 704-728-0204.", h1: 'Cornelius Pest Control on Lake Norman', intro: "Cornelius, NC sits directly on the eastern shore of Lake Norman — and that means mosquito pressure that starts earlier, lasts later, and hits harder than inland communities. Selke Pest Control specializes in the unique pest challenges of Cornelius's lakefront communities. We serve The Peninsula, Patrick's Purchase, Jetton Cove, Alexander Island, and every Cornelius neighborhood.", topPests: ['Mosquitoes', 'Ticks', 'Stinging Insects', 'Ants & General Pests'], neighborhoods: ["The Peninsula", "Patrick's Purchase", 'Jetton Cove', 'Alexander Island', "Patrick's Buyck Plantation"], county: 'Mecklenburg County' },
-  { slug: 'pest-control-davidson-nc', title: 'Pest Control in Davidson, NC | Selke Pest Control', description: 'Expert pest control in Davidson, NC. Serving River Run, The Woodlands at Davidson, Anniston, The Preserve at River Run, Davidson Hall & all Davidson neighborhoods. Call 704-728-0204.', h1: 'Davidson, NC Pest Control Experts', intro: "Davidson, NC is a charming college town on Lake Norman with significant mosquito and tick pressure driven by Davidson Creek, the lake shoreline, and the natural areas surrounding Davidson College. Selke Pest Control serves all Davidson communities including River Run, The Woodlands at Davidson, Anniston, The Preserve at River Run, and Davidson Hall.", topPests: ['Mosquitoes', 'Ticks', 'Ants', 'Spiders & Seasonal Pests'], neighborhoods: ['River Run', 'The Woodlands at Davidson', 'Anniston', 'The Preserve at River Run', 'Davidson Hall'], county: 'Mecklenburg County' },
-  { slug: 'pest-control-denver-nc', title: 'Pest Control in Denver, NC | Selke Pest Control', description: "Professional pest control in Denver, NC. Serving Verdict Ridge, Sailview, Westport, Pebble Bay, Killian Crossing & all Denver neighborhoods. Mosquito, tick & general pest control on Lake Norman's west shore. Call 704-728-0204.", h1: "Denver, NC Pest Control — Lake Norman's West Shore", intro: "Denver, NC on Lake Norman's west shore is widely recognized as one of the most mosquito-active communities on the entire lake. Selke Pest Control serves all Denver communities including Verdict Ridge, Sailview, Westport, Pebble Bay, and Killian Crossing with professional mosquito barrier treatments, tick control, and general pest services.", topPests: ['Mosquitoes', 'Ticks', 'Fire Ants', 'Stinging Insects & Spiders'], neighborhoods: ['Verdict Ridge', 'Sailview', 'Westport', 'Pebble Bay', 'Killian Crossing'], county: 'Lincoln County' },
-  { slug: 'pest-control-sherrills-ford-nc', title: 'Pest Control in Sherrills Ford, NC | Selke Pest Control', description: 'Expert pest control in Sherrills Ford, NC. Serving Northview Harbour, Catalina Cove, Harbor Ridge, Lakepointe North & all Sherrills Ford communities on Lake Norman. Mosquito & tick specialists. Call 704-728-0204.', h1: 'Sherrills Ford Pest Control Specialists', intro: "Sherrills Ford, NC consistently ranks among the highest-mosquito-pressure residential areas on all of Lake Norman. The Mountain Creek arm's wetland margins and the community's northwest shoreline exposure create near-ideal breeding conditions from April through October. Selke Pest Control serves Northview Harbour, Catalina Cove, Harbor Ridge, Lakepointe North, and all Sherrills Ford communities.", topPests: ['Mosquitoes', 'Ticks', 'Rodents & Wildlife', 'Spiders'], neighborhoods: ['Northview Harbour', 'Catalina Cove', 'Harbor Ridge', 'Lakepointe North', 'Pebble Bay'], county: 'Catawba County' },
-  { slug: 'pest-control-statesville-nc', title: 'Pest Control in Statesville, NC | Selke Pest Control', description: 'Professional pest control in Statesville, NC. Serving Larkin, Buffalo Shoals, River Oaks, Fifth Creek Estates, Falls Cove & all Statesville neighborhoods. General pest, mosquito & tick control. Call 704-728-0204.', h1: 'Statesville, NC Pest Control Experts', intro: "Statesville, NC is the county seat of Iredell County with Fifth Creek, Buffalo Creek, and the South Yadkin River creating persistent mosquito and tick pressure throughout its residential areas. Selke Pest Control serves all Statesville communities including Larkin, Buffalo Shoals, River Oaks, Fifth Creek Estates, and Falls Cove with professional pest management.", topPests: ['Mosquitoes', 'Ants (Carpenter & Fire)', 'Ticks', 'Rodents'], neighborhoods: ['Larkin', 'Buffalo Shoals', 'River Oaks', 'Fifth Creek Estates', 'Falls Cove'], county: 'Iredell County' },
-  { slug: 'pest-control-troutman-nc', title: 'Pest Control in Troutman, NC | Selke Pest Control', description: "Professional pest control in Troutman, NC. Local Iredell County experts serving Troutman and Lake Norman's northern communities. Mosquito, tick & general pest control. Call 704-728-0204.", h1: 'Troutman, NC Pest Control', intro: "Troutman, NC sits between Lake Norman's northern shore and Lake Norman State Park — 1,328 acres of undeveloped woodland that serves as a continuous reservoir for mosquitoes, ticks, and wildlife. Selke Pest Control is based in neighboring Mooresville and serves all Troutman communities with professional pest control, mosquito treatments, and tick control.", topPests: ['Mosquitoes', 'Ticks', 'Fire Ants', 'Rodents & Wildlife'], neighborhoods: ['Lake Norman State Park Area', 'Downtown Troutman', 'Fourth Creek Corridor', 'New Residential Areas', 'Lake Norman Shoreline Communities'], county: 'Iredell County' },
-  { slug: 'pest-control-weddington-nc', title: 'Pest Control in Weddington, NC | Selke Pest Control', description: "Expert pest control in Weddington, NC. Serving Weddington's upscale Union County communities with mosquito, tick & general pest control. Family-owned, local experts. Call 704-728-0204.", h1: 'Weddington, NC Pest Control', intro: "Weddington, NC is one of the most desirable communities in the Charlotte metro — and its large estate lots, wooded lot lines, and equestrian properties create above-average tick, mosquito, and flea pressure. Selke Pest Control serves all Weddington communities with professional pest management tailored to estate properties and the unique Union County pest environment.", topPests: ['Mosquitoes', 'Ticks', 'Fleas', 'Ants & General Pests'], neighborhoods: ['Weddington Estates', 'Equestrian Properties', 'Weddington Creek Corridor', 'New Developments', 'Marvin / Weddington Border Area'], county: 'Union County' },
-  { slug: 'pest-control-waxhaw-nc', title: 'Pest Control in Waxhaw, NC | Selke Pest Control', description: "Professional pest control in Waxhaw, NC. Serving Waxhaw's historic and growing Union County communities with mosquito, tick & general pest control. Family-owned local experts. Call 704-728-0204.", h1: 'Waxhaw, NC Pest Control Experts', intro: "Waxhaw, NC is one of the fastest-growing communities in NC — and its position along Waxhaw Creek, surrounded by Union County woodlands, creates significant mosquito, tick, and fire ant pressure year-round. Selke Pest Control serves all Waxhaw communities including historic downtown, Bridgewater, Millbridge, and all newer subdivisions.", topPests: ['Mosquitoes', 'Ticks', 'Fire Ants', 'Ants, Spiders & General Pests'], neighborhoods: ['Historic Downtown Waxhaw', 'Waxhaw Creek Corridor', 'New Subdivisions', 'Bridgewater', 'Millbridge'], county: 'Union County' },
-  { slug: 'pest-control-matthews-nc', title: 'Pest Control in Matthews, NC | Selke Pest Control', description: 'Professional pest control in Matthews, NC. Serving all Matthews and Stallings neighborhoods with general pest, mosquito & flea/tick control. Family-owned local experts. Call 704-728-0204.', h1: 'Matthews, NC Pest Control', intro: "Matthews, NC is a thriving suburban community on the southeast side of Charlotte in Mecklenburg County. Selke Pest Control serves all Matthews neighborhoods with professional general pest control, mosquito barrier treatments, and flea and tick control. Our family-owned team provides fast, reliable service backed by our 100% satisfaction guarantee.", topPests: ['Mosquitoes', 'Ants', 'Ticks', 'Spiders & General Pests'], neighborhoods: ['Downtown Matthews', 'Stallings', 'Weddington Road Corridor', 'New Subdivisions', 'Established Neighborhoods'], county: 'Mecklenburg County' },
+  {
+    slug: 'pest-control-mooresville-nc',
+    title: 'Pest Control in Mooresville, NC | Selke Pest Control',
+    description: 'Selke Pest Control is based in Mooresville, NC — your local pest control experts. General pest, mosquito & flea/tick control for Lake Norman area homes. 100% guarantee. Call 704-728-0204.',
+    h1: "Mooresville's Home-Town Pest Control",
+    intro: "Selke Pest Control is proud to call Mooresville, North Carolina home. We've served Mooresville families for 15+ years with general pest control, mosquito barrier treatments, and flea and tick control. The Point, The Farms, Morrison Plantation, Beacon Pointe, Harbor at the Pointe — we know every neighborhood and every pest challenge in this city.",
+    topPests: ['Mosquitoes', 'Ticks', 'Fire Ants', 'Rodents'],
+    neighborhoods: ['The Point', 'The Farms', 'Morrison Plantation', 'Beacon Pointe', 'Harbor at the Pointe'],
+    county: 'Iredell County',
+  },
+  {
+    slug: 'pest-control-charlotte-nc',
+    title: 'Pest Control in Charlotte, NC | Selke Pest Control',
+    description: 'Professional pest control in Charlotte, NC. Selke Pest Control serves Myers Park, Eastover, Foxcroft, Quail Hollow & all Charlotte neighborhoods. General pest, mosquito & flea/tick control. Call 704-728-0204.',
+    h1: "Charlotte's Pest Control Experts",
+    intro: "Charlotte, North Carolina is one of the top 10 worst cities for mosquitoes in the US. Selke Pest Control provides expert general pest control, mosquito barrier treatments, and flea and tick control throughout Charlotte and Mecklenburg County. We serve Myers Park, Eastover, Foxcroft, Morrocroft Estates, Quail Hollow, and every Charlotte neighborhood.",
+    topPests: ['Mosquitoes', 'Ants (Fire & Carpenter)', 'Ticks', 'Cockroaches'],
+    neighborhoods: ['Myers Park', 'Eastover', 'Foxcroft', 'Morrocroft Estates', 'Quail Hollow'],
+    county: 'Mecklenburg County',
+  },
+  {
+    slug: 'pest-control-huntersville-nc',
+    title: 'Pest Control in Huntersville, NC | Selke Pest Control',
+    description: 'Expert pest control in Huntersville, NC. Serving Birkdale, Skybrook, Northstone, The Hamptons, Wynfield & all Huntersville neighborhoods. Mosquito, flea/tick & general pest control. Call 704-728-0204.',
+    h1: "Huntersville's Trusted Pest Control",
+    intro: "Huntersville, NC is one of the fastest-growing towns in the US — and its proximity to Lake Norman and Mountain Island Lake creates some of the most intense mosquito pressure in the Charlotte metro. Selke Pest Control serves all Huntersville communities including Birkdale, Skybrook, Northstone, The Hamptons, and Wynfield with professional pest control, mosquito barrier treatments, and tick and flea control.",
+    topPests: ['Mosquitoes', 'Ticks', 'Fire Ants', 'Spiders & General Pests'],
+    neighborhoods: ['Birkdale', 'Skybrook', 'Northstone', 'The Hamptons', 'Wynfield'],
+    county: 'Mecklenburg County',
+  },
+  {
+    slug: 'pest-control-cornelius-nc',
+    title: 'Pest Control in Cornelius, NC | Selke Pest Control',
+    description: "Professional pest control in Cornelius, NC. Serving The Peninsula, Patrick's Purchase, Jetton Cove, Alexander Island & all Cornelius neighborhoods. Mosquito, tick & general pest control. Call 704-728-0204.",
+    h1: 'Cornelius Pest Control on Lake Norman',
+    intro: "Cornelius, NC sits directly on the eastern shore of Lake Norman — and that means mosquito pressure that starts earlier, lasts later, and hits harder than inland communities. Selke Pest Control specializes in the unique pest challenges of Cornelius's lakefront communities. We serve The Peninsula, Patrick's Purchase, Jetton Cove, Alexander Island, and every Cornelius neighborhood.",
+    topPests: ['Mosquitoes', 'Ticks', 'Stinging Insects', 'Ants & General Pests'],
+    neighborhoods: ["The Peninsula", "Patrick's Purchase", 'Jetton Cove', 'Alexander Island', "Patrick's Buyck Plantation"],
+    county: 'Mecklenburg County',
+  },
+  {
+    slug: 'pest-control-davidson-nc',
+    title: 'Pest Control in Davidson, NC | Selke Pest Control',
+    description: 'Expert pest control in Davidson, NC. Serving River Run, The Woodlands at Davidson, Anniston, The Preserve at River Run, Davidson Hall & all Davidson neighborhoods. Call 704-728-0204.',
+    h1: 'Davidson, NC Pest Control Experts',
+    intro: "Davidson, NC is a charming college town on Lake Norman with significant mosquito and tick pressure driven by Davidson Creek, the lake shoreline, and the natural areas surrounding Davidson College. Selke Pest Control serves all Davidson communities including River Run, The Woodlands at Davidson, Anniston, The Preserve at River Run, and Davidson Hall.",
+    topPests: ['Mosquitoes', 'Ticks', 'Ants', 'Spiders & Seasonal Pests'],
+    neighborhoods: ['River Run', 'The Woodlands at Davidson', 'Anniston', 'The Preserve at River Run', 'Davidson Hall'],
+    county: 'Mecklenburg County',
+  },
+  {
+    slug: 'pest-control-denver-nc',
+    title: 'Pest Control in Denver, NC | Selke Pest Control',
+    description: "Professional pest control in Denver, NC. Serving Verdict Ridge, Sailview, Westport, Pebble Bay, Killian Crossing & all Denver neighborhoods. Mosquito, tick & general pest control on Lake Norman's west shore. Call 704-728-0204.",
+    h1: "Denver, NC Pest Control — Lake Norman's West Shore",
+    intro: "Denver, NC on Lake Norman's west shore is widely recognized as one of the most mosquito-active communities on the entire lake. Selke Pest Control serves all Denver communities including Verdict Ridge, Sailview, Westport, Pebble Bay, and Killian Crossing with professional mosquito barrier treatments, tick control, and general pest services.",
+    topPests: ['Mosquitoes', 'Ticks', 'Fire Ants', 'Stinging Insects & Spiders'],
+    neighborhoods: ['Verdict Ridge', 'Sailview', 'Westport', 'Pebble Bay', 'Killian Crossing'],
+    county: 'Lincoln County',
+  },
+  {
+    slug: 'pest-control-sherrills-ford-nc',
+    title: 'Pest Control in Sherrills Ford, NC | Selke Pest Control',
+    description: 'Expert pest control in Sherrills Ford, NC. Serving Northview Harbour, Catalina Cove, Harbor Ridge, Lakepointe North & all Sherrills Ford communities on Lake Norman. Mosquito & tick specialists. Call 704-728-0204.',
+    h1: 'Sherrills Ford Pest Control Specialists',
+    intro: "Sherrills Ford, NC consistently ranks among the highest-mosquito-pressure residential areas on all of Lake Norman. The Mountain Creek arm's wetland margins and the community's northwest shoreline exposure create near-ideal breeding conditions from April through October. Selke Pest Control serves Northview Harbour, Catalina Cove, Harbor Ridge, Lakepointe North, and all Sherrills Ford communities.",
+    topPests: ['Mosquitoes', 'Ticks', 'Rodents & Wildlife', 'Spiders'],
+    neighborhoods: ['Northview Harbour', 'Catalina Cove', 'Harbor Ridge', 'Lakepointe North', 'Pebble Bay'],
+    county: 'Catawba County',
+  },
+  {
+    slug: 'pest-control-statesville-nc',
+    title: 'Pest Control in Statesville, NC | Selke Pest Control',
+    description: 'Professional pest control in Statesville, NC. Serving Larkin, Buffalo Shoals, River Oaks, Fifth Creek Estates, Falls Cove & all Statesville neighborhoods. General pest, mosquito & tick control. Call 704-728-0204.',
+    h1: 'Statesville, NC Pest Control Experts',
+    intro: "Statesville, NC is the county seat of Iredell County with Fifth Creek, Buffalo Creek, and the South Yadkin River creating persistent mosquito and tick pressure throughout its residential areas. Selke Pest Control serves all Statesville communities including Larkin, Buffalo Shoals, River Oaks, Fifth Creek Estates, and Falls Cove with professional pest management.",
+    topPests: ['Mosquitoes', 'Ants (Carpenter & Fire)', 'Ticks', 'Rodents'],
+    neighborhoods: ['Larkin', 'Buffalo Shoals', 'River Oaks', 'Fifth Creek Estates', 'Falls Cove'],
+    county: 'Iredell County',
+  },
+  {
+    slug: 'pest-control-troutman-nc',
+    title: 'Pest Control in Troutman, NC | Selke Pest Control',
+    description: "Professional pest control in Troutman, NC. Local Iredell County experts serving Troutman and Lake Norman's northern communities. Mosquito, tick & general pest control. Call 704-728-0204.",
+    h1: 'Troutman, NC Pest Control',
+    intro: "Troutman, NC sits between Lake Norman's northern shore and Lake Norman State Park — 1,328 acres of undeveloped woodland that serves as a continuous reservoir for mosquitoes, ticks, and wildlife. Selke Pest Control is based in neighboring Mooresville and serves all Troutman communities with professional pest control, mosquito treatments, and tick control.",
+    topPests: ['Mosquitoes', 'Ticks', 'Fire Ants', 'Rodents & Wildlife'],
+    neighborhoods: ['Lake Norman State Park Area', 'Downtown Troutman', 'Fourth Creek Corridor', 'New Residential Areas', 'Lake Norman Shoreline Communities'],
+    county: 'Iredell County',
+  },
+  {
+    slug: 'pest-control-weddington-nc',
+    title: 'Pest Control in Weddington, NC | Selke Pest Control',
+    description: "Expert pest control in Weddington, NC. Serving Weddington's upscale Union County communities with mosquito, tick & general pest control. Family-owned, local experts. Call 704-728-0204.",
+    h1: 'Weddington, NC Pest Control',
+    intro: "Weddington, NC is one of the most desirable communities in the Charlotte metro — and its large estate lots, wooded lot lines, and equestrian properties create above-average tick, mosquito, and flea pressure. Selke Pest Control serves all Weddington communities with professional pest management tailored to estate properties and the unique Union County pest environment.",
+    topPests: ['Mosquitoes', 'Ticks', 'Fleas', 'Ants & General Pests'],
+    neighborhoods: ['Weddington Estates', 'Equestrian Properties', 'Weddington Creek Corridor', 'New Developments', 'Marvin / Weddington Border Area'],
+    county: 'Union County',
+  },
+  {
+    slug: 'pest-control-waxhaw-nc',
+    title: 'Pest Control in Waxhaw, NC | Selke Pest Control',
+    description: "Professional pest control in Waxhaw, NC. Serving Waxhaw's historic and growing Union County communities with mosquito, tick & general pest control. Family-owned local experts. Call 704-728-0204.",
+    h1: 'Waxhaw, NC Pest Control Experts',
+    intro: "Waxhaw, NC is one of the fastest-growing communities in NC — and its position along Waxhaw Creek, surrounded by Union County woodlands, creates significant mosquito, tick, and fire ant pressure year-round. Selke Pest Control serves all Waxhaw communities including historic downtown, Bridgewater, Millbridge, and all newer subdivisions.",
+    topPests: ['Mosquitoes', 'Ticks', 'Fire Ants', 'Ants, Spiders & General Pests'],
+    neighborhoods: ['Historic Downtown Waxhaw', 'Waxhaw Creek Corridor', 'New Subdivisions', 'Bridgewater', 'Millbridge'],
+    county: 'Union County',
+  },
+  {
+    slug: 'pest-control-matthews-nc',
+    title: 'Pest Control in Matthews, NC | Selke Pest Control',
+    description: 'Professional pest control in Matthews, NC. Serving all Matthews and Stallings neighborhoods with general pest, mosquito & flea/tick control. Family-owned local experts. Call 704-728-0204.',
+    h1: 'Matthews, NC Pest Control',
+    intro: "Matthews, NC is a thriving suburban community on the southeast side of Charlotte in Mecklenburg County. Selke Pest Control serves all Matthews neighborhoods with professional general pest control, mosquito barrier treatments, and flea and tick control. Our family-owned team provides fast, reliable service backed by our 100% satisfaction guarantee.",
+    topPests: ['Mosquitoes', 'Ants', 'Ticks', 'Spiders & General Pests'],
+    neighborhoods: ['Downtown Matthews', 'Stallings', 'Weddington Road Corridor', 'New Subdivisions', 'Established Neighborhoods'],
+    county: 'Mecklenburg County',
+  },
 ];
 
+// ─── Pest Pages ───────────────────────────────────────────────────────────────
+
 const pestPages = [
-  { slug: 'mosquito-control-charlotte-nc', title: 'Mosquito Control Charlotte, NC | Selke Pest Control', description: 'Professional mosquito control in Charlotte, NC and the Lake Norman area. Barrier treatments reduce mosquitoes by up to 96%. Monthly seasonal service. $25 off first treatment. Call 704-728-0204.', h1: 'Expert Mosquito Control in Charlotte, NC', pest: 'Mosquito', intro: "Charlotte has been ranked among the top 10 worst US cities for mosquitoes. Selke Pest Control provides professional mosquito barrier treatments that reduce mosquito populations by up to 96% throughout the Charlotte metro and Lake Norman area. We offer monthly seasonal service from April through October with same-week scheduling available.", signs: ['Standing water in yard or gutters', 'Mosquitoes active during daytime hours', 'Bites occurring in your yard or on your porch', 'High mosquito activity near wooded areas or water features'], treatment: ['Barrier spray treatment to all vegetation, shrubs, and harborage areas', 'Treatment of standing water sources with larvicide', 'Perimeter treatment of yard and outdoor living areas', 'Monthly re-treatment for season-long protection'], peakMonths: 'April through October' },
-  { slug: 'ant-control-charlotte-nc', title: 'Ant Control Charlotte, NC | Selke Pest Control', description: 'Professional ant control in Charlotte, NC. Eliminate fire ants, carpenter ants, and all ant species. Interior and exterior treatments. $25 off first treatment. Call 704-728-0204.', h1: 'Ant Control in Charlotte, NC', pest: 'Ant', intro: "Ants are one of the most common pest complaints in Charlotte and the Lake Norman area. Fire ants thrive in Charlotte's warm clay soils and sunny lawns. Carpenter ants target moisture-damaged wood in older homes. Selke Pest Control eliminates all ant species with targeted interior and exterior treatments and quarterly maintenance plans.", signs: ['Ant trails inside the home', 'Fire ant mounds in lawn areas', 'Sawdust-like frass near wood structures (carpenter ants)', 'Ants near food sources in kitchen or pantry'], treatment: ['Interior crack and crevice treatment', 'Exterior foundation spray and perimeter barrier', 'Fire ant mound treatment and broadcast granular application', 'Quarterly maintenance to prevent re-infestation'], peakMonths: 'March through September' },
-  { slug: 'tick-control-charlotte-nc', title: 'Tick Control Charlotte, NC | Selke Pest Control', description: 'Professional tick control in Charlotte, NC and the Lake Norman area. Protect your family and pets from Lyme disease and Rocky Mountain spotted fever. $25 off first treatment. Call 704-728-0204.', h1: 'Tick Control in Charlotte, NC', pest: 'Tick', intro: "Ticks pose serious health risks in Charlotte and the Lake Norman area — black-legged ticks carrying Lyme disease and American dog ticks carrying Rocky Mountain spotted fever are both documented in Mecklenburg and Iredell counties. Selke Pest Control provides professional tick barrier treatments that protect your yard, family, and pets throughout the active tick season.", signs: ['Finding ticks on family members or pets after time outdoors', 'Wooded lot lines or tall grass adjacent to your yard', 'Deer or wildlife activity near your property', 'Previous tick bites or tick-borne illness in the household'], treatment: ['Perimeter barrier treatment targeting tick harborage areas', 'Treatment of wooded edges, shrub beds, and transition zones', 'Yard granular treatment for extended protection', 'Quarterly service for season-long tick control'], peakMonths: 'March through November' },
-  { slug: 'cockroach-control-charlotte-nc', title: 'Cockroach Control Charlotte, NC | Selke Pest Control', description: 'Professional cockroach elimination in Charlotte, NC. We eliminate American, German, and Oriental cockroaches. Interior and exterior treatments. $25 off first treatment. Call 704-728-0204.', h1: 'Cockroach Control in Charlotte, NC', pest: 'Cockroach', intro: "Even well-maintained homes in Charlotte can experience cockroach problems — American and German cockroaches exploit shared infrastructure, sewer systems, and the cracks and crevices common in every home. Selke Pest Control provides thorough cockroach elimination treatments that address infestations at every life stage, followed by maintenance programs to prevent re-infestation.", signs: ['Cockroaches seen during daytime hours', 'Egg cases or shed skins in dark areas', 'Musty odor in kitchen, bathrooms, or utility areas', 'Droppings resembling black pepper or coffee grounds'], treatment: ['Thorough interior inspection and treatment of all harborage areas', 'Gel bait placement in cracks, crevices, and harboring zones', 'Exterior perimeter treatment to block entry', 'Follow-up inspection to confirm elimination'], peakMonths: 'June through September (year-round in Charlotte)' },
-  { slug: 'spider-control-charlotte-nc', title: 'Spider Control Charlotte, NC | Selke Pest Control', description: 'Professional spider control in Charlotte, NC. Eliminate black widows, brown recluses, wolf spiders, and all spider species. $25 off first treatment. Call 704-728-0204.', h1: 'Spider Control in Charlotte, NC', pest: 'Spider', intro: "Charlotte's wooded neighborhoods and warm climate support significant spider populations — including black widows and brown recluses that pose genuine health risks. Selke Pest Control provides thorough spider control including dewebbing, interior treatment, and exterior perimeter barriers that dramatically reduce spider activity in and around your home.", signs: ['Visible spider webs in corners, garage, or exterior eaves', 'Spiders found inside living areas', 'Black widow sightings in garage, shed, or wood piles', 'Brown recluse sightings in closets, basements, or storage areas'], treatment: ['Complete dewebbing of interior and exterior', 'Interior treatment of corners, closets, and harborage areas', 'Exterior perimeter spray targeting entry points', 'Foundation and eave treatment for exterior nesting areas'], peakMonths: 'August through October' },
-  { slug: 'wasp-control-charlotte-nc', title: 'Wasp & Stinging Insect Control Charlotte, NC | Selke Pest Control', description: 'Professional wasp, hornet, and yellow jacket control in Charlotte, NC. Safe nest removal and prevention. $25 off first treatment. Call 704-728-0204.', h1: 'Wasp & Stinging Insect Control in Charlotte, NC', pest: 'Wasp', intro: "Wasps, hornets, and yellow jackets build nests aggressively throughout Charlotte's warm months — targeting eaves, deck structures, trees, and underground voids near your home. Selke Pest Control provides safe, professional nest removal and prevention treatments that protect your family from painful and potentially dangerous stings.", signs: ['Visible nests under eaves, in trees, or on structures', 'High wasp or yellow jacket activity around deck or patio', 'Yellow jackets entering and exiting from ground holes', 'Paper wasp activity around exterior lights or window frames'], treatment: ['Safe professional nest removal and treatment', 'Residual treatment of nesting sites and entry points', 'Perimeter treatment to deter re-nesting', 'Follow-up inspection to confirm nest elimination'], peakMonths: 'June through October' },
-  { slug: 'flea-control-charlotte-nc', title: 'Flea Control Charlotte, NC | Selke Pest Control', description: 'Professional flea control in Charlotte, NC. Indoor and outdoor flea treatments safe for pets and family. Eliminate flea infestations fast. $25 off first treatment. Call 704-728-0204.', h1: 'Flea Control in Charlotte, NC', pest: 'Flea', intro: "Fleas can infest Charlotte homes rapidly once brought in by pets — and outdoor flea populations in Charlotte's warm climate remain active from spring through late fall. Selke Pest Control provides comprehensive indoor and outdoor flea treatments that break the flea life cycle and eliminate infestations, using EPA-approved products that are safe for your pets and family.", signs: ['Pets scratching excessively or biting at skin', 'Seeing small jumping insects in carpet or on furniture', 'Flea dirt (small black specks) in pet bedding or carpet', 'Bites on human ankles or lower legs'], treatment: ['Indoor treatment of all carpeted areas, furniture, and pet resting areas', 'Outdoor yard treatment targeting flea harborage areas', 'Treatment of pet bedding areas and kennels', 'Follow-up treatment to address hatching eggs and larvae'], peakMonths: 'May through September' },
-  { slug: 'rodent-control-charlotte-nc', title: 'Rodent Control Charlotte, NC | Selke Pest Control', description: 'Professional rodent control in Charlotte, NC. Eliminate mice and rats, seal entry points, and prevent re-infestation. $25 off first treatment. Call 704-728-0204.', h1: 'Rodent Control in Charlotte, NC', pest: 'Rodent', intro: "Mice and rats are a year-round concern in Charlotte — fall brings them indoors as temperatures drop, but Charlotte's mild winters mean rodent activity continues in many homes all season. Selke Pest Control provides thorough rodent elimination, entry point identification, and exclusion to stop infestations and prevent them from returning.", signs: ['Droppings in kitchen drawers, cabinets, or along walls', 'Gnaw marks on food packaging, wood, or wires', 'Scratching sounds in walls or ceiling at night', 'Nesting materials found in stored boxes or insulation'], treatment: ['Interior bait station placement and trap deployment', 'Exterior perimeter bait stations for ongoing control', 'Entry point identification and exclusion recommendations', 'Follow-up inspection and re-treatment as needed'], peakMonths: 'September through February' },
+  {
+    slug: 'mosquito-control-charlotte-nc',
+    title: 'Mosquito Control Charlotte, NC | Selke Pest Control',
+    description: 'Professional mosquito control in Charlotte, NC and the Lake Norman area. Barrier treatments reduce mosquitoes by up to 96%. Monthly seasonal service. $25 off first treatment. Call 704-728-0204.',
+    h1: 'Expert Mosquito Control in Charlotte, NC',
+    pest: 'Mosquito',
+    intro: "Charlotte has been ranked among the top 10 worst US cities for mosquitoes. Selke Pest Control provides professional mosquito barrier treatments that reduce mosquito populations by up to 96% throughout the Charlotte metro and Lake Norman area. We offer monthly seasonal service from April through October with same-week scheduling available.",
+    signs: ['Standing water in yard or gutters', 'Mosquitoes active during daytime hours', 'Bites occurring in your yard or on your porch', 'High mosquito activity near wooded areas or water features'],
+    treatment: ['Barrier spray treatment to all vegetation, shrubs, and harborage areas', 'Treatment of standing water sources with larvicide', 'Perimeter treatment of yard and outdoor living areas', 'Monthly re-treatment for season-long protection'],
+    peakMonths: 'April through October',
+  },
+  {
+    slug: 'ant-control-charlotte-nc',
+    title: 'Ant Control Charlotte, NC | Selke Pest Control',
+    description: 'Professional ant control in Charlotte, NC. Eliminate fire ants, carpenter ants, and all ant species. Interior and exterior treatments. $25 off first treatment. Call 704-728-0204.',
+    h1: 'Ant Control in Charlotte, NC',
+    pest: 'Ant',
+    intro: "Ants are one of the most common pest complaints in Charlotte and the Lake Norman area. Fire ants thrive in Charlotte's warm clay soils and sunny lawns. Carpenter ants target moisture-damaged wood in older homes. Selke Pest Control eliminates all ant species with targeted interior and exterior treatments and quarterly maintenance plans.",
+    signs: ['Ant trails inside the home', 'Fire ant mounds in lawn areas', 'Sawdust-like frass near wood structures (carpenter ants)', 'Ants near food sources in kitchen or pantry'],
+    treatment: ['Interior crack and crevice treatment', 'Exterior foundation spray and perimeter barrier', 'Fire ant mound treatment and broadcast granular application', 'Quarterly maintenance to prevent re-infestation'],
+    peakMonths: 'March through September',
+  },
+  {
+    slug: 'tick-control-charlotte-nc',
+    title: 'Tick Control Charlotte, NC | Selke Pest Control',
+    description: 'Professional tick control in Charlotte, NC and the Lake Norman area. Protect your family and pets from Lyme disease and Rocky Mountain spotted fever. $25 off first treatment. Call 704-728-0204.',
+    h1: 'Tick Control in Charlotte, NC',
+    pest: 'Tick',
+    intro: "Ticks pose serious health risks in Charlotte and the Lake Norman area — black-legged ticks carrying Lyme disease and American dog ticks carrying Rocky Mountain spotted fever are both documented in Mecklenburg and Iredell counties. Selke Pest Control provides professional tick barrier treatments that protect your yard, family, and pets throughout the active tick season.",
+    signs: ['Finding ticks on family members or pets after time outdoors', 'Wooded lot lines or tall grass adjacent to your yard', 'Deer or wildlife activity near your property', 'Previous tick bites or tick-borne illness in the household'],
+    treatment: ['Perimeter barrier treatment targeting tick harborage areas', 'Treatment of wooded edges, shrub beds, and transition zones', 'Yard granular treatment for extended protection', 'Quarterly service for season-long tick control'],
+    peakMonths: 'March through November',
+  },
+  {
+    slug: 'cockroach-control-charlotte-nc',
+    title: 'Cockroach Control Charlotte, NC | Selke Pest Control',
+    description: 'Professional cockroach elimination in Charlotte, NC. We eliminate American, German, and Oriental cockroaches. Interior and exterior treatments. $25 off first treatment. Call 704-728-0204.',
+    h1: 'Cockroach Control in Charlotte, NC',
+    pest: 'Cockroach',
+    intro: "Even well-maintained homes in Charlotte can experience cockroach problems — American and German cockroaches exploit shared infrastructure, sewer systems, and the cracks and crevices common in every home. Selke Pest Control provides thorough cockroach elimination treatments that address infestations at every life stage, followed by maintenance programs to prevent re-infestation.",
+    signs: ['Cockroaches seen during daytime hours', 'Egg cases or shed skins in dark areas', 'Musty odor in kitchen, bathrooms, or utility areas', 'Droppings resembling black pepper or coffee grounds'],
+    treatment: ['Thorough interior inspection and treatment of all harborage areas', 'Gel bait placement in cracks, crevices, and harboring zones', 'Exterior perimeter treatment to block entry', 'Follow-up inspection to confirm elimination'],
+    peakMonths: 'June through September (year-round in Charlotte)',
+  },
+  {
+    slug: 'spider-control-charlotte-nc',
+    title: 'Spider Control Charlotte, NC | Selke Pest Control',
+    description: 'Professional spider control in Charlotte, NC. Eliminate black widows, brown recluses, wolf spiders, and all spider species. $25 off first treatment. Call 704-728-0204.',
+    h1: 'Spider Control in Charlotte, NC',
+    pest: 'Spider',
+    intro: "Charlotte's wooded neighborhoods and warm climate support significant spider populations — including black widows and brown recluses that pose genuine health risks. Selke Pest Control provides thorough spider control including dewebbing, interior treatment, and exterior perimeter barriers that dramatically reduce spider activity in and around your home.",
+    signs: ['Visible spider webs in corners, garage, or exterior eaves', 'Spiders found inside living areas', 'Black widow sightings in garage, shed, or wood piles', 'Brown recluse sightings in closets, basements, or storage areas'],
+    treatment: ['Complete dewebbing of interior and exterior', 'Interior treatment of corners, closets, and harborage areas', 'Exterior perimeter spray targeting entry points', 'Foundation and eave treatment for exterior nesting areas'],
+    peakMonths: 'August through October',
+  },
+  {
+    slug: 'wasp-control-charlotte-nc',
+    title: 'Wasp & Stinging Insect Control Charlotte, NC | Selke Pest Control',
+    description: 'Professional wasp, hornet, and yellow jacket control in Charlotte, NC. Safe nest removal and prevention. $25 off first treatment. Call 704-728-0204.',
+    h1: 'Wasp & Stinging Insect Control in Charlotte, NC',
+    pest: 'Wasp',
+    intro: "Wasps, hornets, and yellow jackets build nests aggressively throughout Charlotte's warm months — targeting eaves, deck structures, trees, and underground voids near your home. Selke Pest Control provides safe, professional nest removal and prevention treatments that protect your family from painful and potentially dangerous stings.",
+    signs: ['Visible nests under eaves, in trees, or on structures', 'High wasp or yellow jacket activity around deck or patio', 'Yellow jackets entering and exiting from ground holes', 'Paper wasp activity around exterior lights or window frames'],
+    treatment: ['Safe professional nest removal and treatment', 'Residual treatment of nesting sites and entry points', 'Perimeter treatment to deter re-nesting', 'Follow-up inspection to confirm nest elimination'],
+    peakMonths: 'June through October',
+  },
+  {
+    slug: 'flea-control-charlotte-nc',
+    title: 'Flea Control Charlotte, NC | Selke Pest Control',
+    description: 'Professional flea control in Charlotte, NC. Indoor and outdoor flea treatments safe for pets and family. Eliminate flea infestations fast. $25 off first treatment. Call 704-728-0204.',
+    h1: 'Flea Control in Charlotte, NC',
+    pest: 'Flea',
+    intro: "Fleas can infest Charlotte homes rapidly once brought in by pets — and outdoor flea populations in Charlotte's warm climate remain active from spring through late fall. Selke Pest Control provides comprehensive indoor and outdoor flea treatments that break the flea life cycle and eliminate infestations, using EPA-approved products that are safe for your pets and family.",
+    signs: ['Pets scratching excessively or biting at skin', 'Seeing small jumping insects in carpet or on furniture', 'Flea dirt (small black specks) in pet bedding or carpet', 'Bites on human ankles or lower legs'],
+    treatment: ['Indoor treatment of all carpeted areas, furniture, and pet resting areas', 'Outdoor yard treatment targeting flea harborage areas', 'Treatment of pet bedding areas and kennels', 'Follow-up treatment to address hatching eggs and larvae'],
+    peakMonths: 'May through September',
+  },
+  {
+    slug: 'rodent-control-charlotte-nc',
+    title: 'Rodent Control Charlotte, NC | Selke Pest Control',
+    description: 'Professional rodent control in Charlotte, NC. Eliminate mice and rats, seal entry points, and prevent re-infestation. $25 off first treatment. Call 704-728-0204.',
+    h1: 'Rodent Control in Charlotte, NC',
+    pest: 'Rodent',
+    intro: "Mice and rats are a year-round concern in Charlotte — fall brings them indoors as temperatures drop, but Charlotte's mild winters mean rodent activity continues in many homes all season. Selke Pest Control provides thorough rodent elimination, entry point identification, and exclusion to stop infestations and prevent them from returning.",
+    signs: ['Droppings in kitchen drawers, cabinets, or along walls', 'Gnaw marks on food packaging, wood, or wires', 'Scratching sounds in walls or ceiling at night', 'Nesting materials found in stored boxes or insulation'],
+    treatment: ['Interior bait station placement and trap deployment', 'Exterior perimeter bait stations for ongoing control', 'Entry point identification and exclusion recommendations', 'Follow-up inspection and re-treatment as needed'],
+    peakMonths: 'September through February',
+  },
 ];
+
+// ─── HTML Template ─────────────────────────────────────────────────────────────
 
 function buildCityHTML(templateHTML, page) {
   const canonical = `${baseUrl}/${page.slug}`;
   const topPestsList = page.topPests.map(p => `<li>${p}</li>`).join('');
   const neighborhoodsList = page.neighborhoods.map(n => `<li>${n}</li>`).join('');
+
+  const schema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Selke Pest Control",
+    "description": `Professional pest control services in ${page.h1.replace(/<[^>]+>/g, '')} — general pest, mosquito, and flea/tick control.`,
+    "url": canonical,
+    "telephone": "+1-704-728-0204",
+    "email": "sales@selkepestcontrol.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Mooresville",
+      "addressRegion": "NC",
+      "addressCountry": "US"
+    },
+    "areaServed": { "@type": "State", "name": "North Carolina" },
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "opens": "08:00",
+      "closes": "20:00"
+    }]
+  });
+
   const preRenderedContent = `
 <div id="seo-prerender" style="font-family:sans-serif;max-width:960px;margin:0 auto;padding:20px">
   <h1>${page.h1}</h1>
   <p>${page.intro}</p>
-  <h2>Top Pest Threats</h2>
+  <h2>Top Pest Threats in ${page.slug.split('-control-')[1]?.replace(/-nc$/, '').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) || 'Our Area'}</h2>
   <ul>${topPestsList}</ul>
   <h2>Neighborhoods We Serve</h2>
   <ul>${neighborhoodsList}</ul>
   <h2>Our Services</h2>
   <ul><li>General Pest Control — ants, roaches, spiders, and more</li><li>Mosquito Control — reduce mosquitoes by up to 96%</li><li>Flea and Tick Control — safe for pets and family</li></ul>
   <h2>Why Choose Selke Pest Control?</h2>
-  <p>Family-owned and locally operated with 15+ years of experience serving ${page.county} and the Charlotte Metro area. 100% satisfaction guarantee. Call 704-728-0204 for a free quote.</p>
+  <p>Family-owned and locally operated with 15+ years of experience serving ${page.county} and the Charlotte Metro area. 100% satisfaction guarantee — if pests return between treatments, we return at no charge. Call 704-728-0204 for a free quote.</p>
   <p><strong>Phone:</strong> 704-728-0204 | <strong>Email:</strong> sales@selkepestcontrol.com | <strong>Hours:</strong> Monday–Saturday 8AM–8PM</p>
 </div>
 <script>document.getElementById('seo-prerender') && (document.getElementById('seo-prerender').style.display='none')</script>`;
+
   let html = templateHTML;
-  html = html.replace(/<title>[^<]*<\/title>/, `<title>${page.title}</title>`);
+  html = html.replace(/<title>[^<]*<\/title>/, `<title>${page.title}</title><script type="application/ld+json">${schema}</script>`);
   html = html.replace(/<meta name="description"[^>]*>/, `<meta name="description" content="${page.description}" />`);
   html = html.replace(/<link rel="canonical"[^>]*>/, `<link rel="canonical" href="${canonical}" />`);
   html = html.replace(/<meta property="og:url"[^>]*>/, `<meta property="og:url" content="${canonical}" />`);
@@ -75,6 +294,30 @@ function buildPestHTML(templateHTML, page) {
   const canonical = `${baseUrl}/${page.slug}`;
   const signsList = page.signs.map(s => `<li>${s}</li>`).join('');
   const treatmentList = page.treatment.map(t => `<li>${t}</li>`).join('');
+
+  const schema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Selke Pest Control",
+    "description": `Professional ${page.pest.toLowerCase()} control in Charlotte, NC and the Lake Norman area.`,
+    "url": canonical,
+    "telephone": "+1-704-728-0204",
+    "email": "sales@selkepestcontrol.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Mooresville",
+      "addressRegion": "NC",
+      "addressCountry": "US"
+    },
+    "areaServed": { "@type": "State", "name": "North Carolina" },
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "opens": "08:00",
+      "closes": "20:00"
+    }]
+  });
+
   const preRenderedContent = `
 <div id="seo-prerender" style="font-family:sans-serif;max-width:960px;margin:0 auto;padding:20px">
   <h1>${page.h1}</h1>
@@ -90,8 +333,9 @@ function buildPestHTML(templateHTML, page) {
   <p><strong>Phone:</strong> 704-728-0204 | <strong>Email:</strong> sales@selkepestcontrol.com | <strong>Hours:</strong> Monday–Saturday 8AM–8PM</p>
 </div>
 <script>document.getElementById('seo-prerender') && (document.getElementById('seo-prerender').style.display='none')</script>`;
+
   let html = templateHTML;
-  html = html.replace(/<title>[^<]*<\/title>/, `<title>${page.title}</title>`);
+  html = html.replace(/<title>[^<]*<\/title>/, `<title>${page.title}</title><script type="application/ld+json">${schema}</script>`);
   html = html.replace(/<meta name="description"[^>]*>/, `<meta name="description" content="${page.description}" />`);
   html = html.replace(/<link rel="canonical"[^>]*>/, `<link rel="canonical" href="${canonical}" />`);
   html = html.replace(/<meta property="og:url"[^>]*>/, `<meta property="og:url" content="${canonical}" />`);
@@ -103,13 +347,18 @@ function buildPestHTML(templateHTML, page) {
   return html;
 }
 
+// ─── Main ─────────────────────────────────────────────────────────────────────
+
 const templatePath = path.join(distDir, 'index.html');
+
 if (!fs.existsSync(templatePath)) {
   console.error('Error: dist/index.html not found. Run vite build first.');
   process.exit(1);
 }
+
 const templateHTML = fs.readFileSync(templatePath, 'utf-8');
 let generated = 0;
+
 for (const page of cityPages) {
   const dir = path.join(distDir, page.slug);
   fs.mkdirSync(dir, { recursive: true });
@@ -117,6 +366,7 @@ for (const page of cityPages) {
   console.log(`✓ ${page.slug}`);
   generated++;
 }
+
 for (const page of pestPages) {
   const dir = path.join(distDir, page.slug);
   fs.mkdirSync(dir, { recursive: true });
@@ -124,4 +374,5 @@ for (const page of pestPages) {
   console.log(`✓ ${page.slug}`);
   generated++;
 }
+
 console.log(`\nDone — ${generated} static SEO pages generated in dist/`);
