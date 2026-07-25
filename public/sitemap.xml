@@ -1,112 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://selkepestcontrol.com/</loc>
+    <loc>https://www.selkepestcontrol.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- City Service Area Pages -->
   <url>
-    <loc>https://selkepestcontrol.com/pest-control-mooresville-nc</loc>
+    <loc>https://www.selkepestcontrol.com/pest-control-mooresville-nc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://selkepestcontrol.com/pest-control-charlotte-nc</loc>
+    <loc>https://www.selkepestcontrol.com/pest-control-charlotte-nc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://selkepestcontrol.com/pest-control-huntersville-nc</loc>
+    <loc>https://www.selkepestcontrol.com/pest-control-huntersville-nc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://selkepestcontrol.com/pest-control-cornelius-nc</loc>
+    <loc>https://www.selkepestcontrol.com/pest-control-cornelius-nc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://selkepestcontrol.com/pest-control-davidson-nc</loc>
+    <loc>https://www.selkepestcontrol.com/pest-control-davidson-nc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://selkepestcontrol.com/pest-control-denver-nc</loc>
+    <loc>https://www.selkepestcontrol.com/pest-control-denver-nc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://selkepestcontrol.com/pest-control-sherrills-ford-nc</loc>
+    <loc>https://www.selkepestcontrol.com/pest-control-sherrills-ford-nc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://selkepestcontrol.com/pest-control-statesville-nc</loc>
+    <loc>https://www.selkepestcontrol.com/pest-control-statesville-nc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://selkepestcontrol.com/pest-control-troutman-nc</loc>
+    <loc>https://www.selkepestcontrol.com/pest-control-troutman-nc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://selkepestcontrol.com/pest-control-weddington-nc</loc>
+    <loc>https://www.selkepestcontrol.com/pest-control-weddington-nc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://selkepestcontrol.com/pest-control-waxhaw-nc</loc>
+    <loc>https://www.selkepestcontrol.com/pest-control-waxhaw-nc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://selkepestcontrol.com/pest-control-matthews-nc</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Pest-Specific SEO Pages -->
-  <url>
-    <loc>https://selkepestcontrol.com/mosquito-control-charlotte-nc</loc>
+    <loc>https://www.selkepestcontrol.com/pest-control-matthews-nc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://selkepestcontrol.com/ant-control-charlotte-nc</loc>
+    <loc>https://www.selkepestcontrol.com/mosquito-control-charlotte-nc</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://selkepestcontrol.com/tick-control-charlotte-nc</loc>
+    <loc>https://www.selkepestcontrol.com/ant-control-charlotte-nc</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://selkepestcontrol.com/cockroach-control-charlotte-nc</loc>
+    <loc>https://www.selkepestcontrol.com/tick-control-charlotte-nc</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://selkepestcontrol.com/spider-control-charlotte-nc</loc>
+    <loc>https://www.selkepestcontrol.com/cockroach-control-charlotte-nc</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://selkepestcontrol.com/wasp-control-charlotte-nc</loc>
+    <loc>https://www.selkepestcontrol.com/spider-control-charlotte-nc</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://selkepestcontrol.com/flea-control-charlotte-nc</loc>
+    <loc>https://www.selkepestcontrol.com/wasp-control-charlotte-nc</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://selkepestcontrol.com/rodent-control-charlotte-nc</loc>
+    <loc>https://www.selkepestcontrol.com/flea-control-charlotte-nc</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.selkepestcontrol.com/rodent-control-charlotte-nc</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
