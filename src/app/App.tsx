@@ -1,59 +1,35 @@
-import { Phone, Mail, MapPin, Shield, Clock, Star, Bug, Home, Leaf, Award, Users, ChevronDown, Droplets, Wind, Zap, AlertCircle, CheckCircle, Scissors, TreeDeciduous, Check, X, Menu } from 'lucide-react';
+import { Phone, Mail, MapPin, Shield, Clock, Star, Bug, Home, Leaf, Award, Users, ChevronDown, Droplets, Wind, Zap, AlertCircle, CheckCircle, Scissors, TreeDeciduous, Check, X, Heart, Gift } from 'lucide-react';
 import { useState, useEffect } from 'react';
+
+const BEHOLD_FEED_ID = 'A0kwNTKUAJENXFiJgHlU';
 import { QuoteFormModal } from './components/QuoteFormModal';
 import { BlogArticle } from './components/BlogArticle';
-import { BlogModal } from './components/BlogModal';
+import { ReviewsCarousel } from './components/ReviewsCarousel';
 import { PestLibraryModal } from './components/PestLibraryModal';
 import { LegalModal } from './components/LegalModal';
-import { ReviewsCarousel } from './components/ReviewsCarousel';
 import FooterLogo from './components/FooterLogo';
-import { blogArticles } from './utils/blogContent';
 import newLogo from '../imports/Screenshot_2026-05-18_213802.png';
 import techWalking from '../imports/b492d4f6-f650-412b-b5ac-975c7d404996-1.png';
-
-const PEST_ACTIVITY = [
-  { name: 'Mosquitoes', emoji: '🦟', slug: 'mosquito-control-charlotte-nc', peak: 'May – Oct', months: [1,2,4,6,9,10,10,10,8,6,2,1] },
-  { name: 'Ants', emoji: '🐜', slug: 'ant-control-charlotte-nc', peak: 'Mar – Sep', months: [2,2,6,8,9,10,9,8,7,5,3,2] },
-  { name: 'Ticks', emoji: '🕷️', slug: 'tick-control-charlotte-nc', peak: 'Apr – Aug', months: [1,2,5,8,10,10,10,9,7,4,2,1] },
-  { name: 'Cockroaches', emoji: '🪳', slug: 'cockroach-control-charlotte-nc', peak: 'Jun – Sep', months: [3,3,4,5,7,9,10,10,9,6,4,3] },
-  { name: 'Spiders', emoji: '🕸️', slug: 'spider-control-charlotte-nc', peak: 'Aug – Oct', months: [2,2,3,4,5,6,7,9,10,10,6,3] },
-  { name: 'Wasps', emoji: '🐝', slug: 'wasp-control-charlotte-nc', peak: 'Jun – Oct', months: [1,1,2,4,6,8,9,10,10,8,3,1] },
-  { name: 'Fleas', emoji: '🐛', slug: 'flea-control-charlotte-nc', peak: 'May – Sep', months: [2,2,3,5,8,10,10,10,8,5,3,2] },
-  { name: 'Rodents', emoji: '🐭', slug: 'rodent-control-charlotte-nc', peak: 'Sep – Feb', months: [8,7,5,3,3,2,2,3,6,8,9,10] },
-];
-const ACTIVITY_MONTHS = ['J','F','M','A','M','J','J','A','S','O','N','D'];
 
 export default function App() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [isPestLibraryOpen, setIsPestLibraryOpen] = useState(false);
   const [isGuaranteeModalOpen, setIsGuaranteeModalOpen] = useState(false);
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
-  const [activeBlog, setActiveBlog] = useState<string | null>(null);
   const [openProcessStep, setOpenProcessStep] = useState<number | null>(null);
   const [isLegalModalOpen, setIsLegalModalOpen] = useState(false);
   const [isAreasDropdownOpen, setIsAreasDropdownOpen] = useState(false);
-  const [isPestsDropdownOpen, setIsPestsDropdownOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [mobilePestsOpen, setMobilePestsOpen] = useState(false);
-  const [mobileAreasOpen, setMobileAreasOpen] = useState(false);
-  const [showPromoPopup, setShowPromoPopup] = useState(false);
-  const [promoPopupDismissed, setPromoPopupDismissed] = useState(false);
+  const [urgencyDismissed, setUrgencyDismissed] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowPromoPopup(true), 10000);
-    return () => clearTimeout(timer);
+    if (!BEHOLD_FEED_ID) return;
+    const script = document.createElement('script');
+    script.src = 'https://w.behold.so/widget.js';
+    script.type = 'module';
+    script.async = true;
+    document.head.appendChild(script);
+    return () => { if (document.head.contains(script)) document.head.removeChild(script); };
   }, []);
-
-  const pestLinks = [
-    { name: 'Mosquito Control', slug: 'mosquito-control-charlotte-nc' },
-    { name: 'Ant Control', slug: 'ant-control-charlotte-nc' },
-    { name: 'Tick Control', slug: 'tick-control-charlotte-nc' },
-    { name: 'Cockroach Control', slug: 'cockroach-control-charlotte-nc' },
-    { name: 'Spider Control', slug: 'spider-control-charlotte-nc' },
-    { name: 'Wasp Control', slug: 'wasp-control-charlotte-nc' },
-    { name: 'Flea Control', slug: 'flea-control-charlotte-nc' },
-    { name: 'Rodent Control', slug: 'rodent-control-charlotte-nc' },
-  ];
 
   const serviceAreas = [
     { name: 'Mooresville', slug: 'pest-control-mooresville-nc' },
@@ -71,12 +47,48 @@ export default function App() {
   ];
 
   const blogData = [
-    { id: 'mosquitoSeason', icon: <Wind className="w-7 h-7 text-white" />, title: "Mosquito Season in Charlotte: March to October", excerpt: "Learn when mosquitoes are most active in North Carolina and how to protect your family during peak season.", content: blogArticles.mosquitoSeason },
-    { id: 'tickProtection', icon: <Bug className="w-7 h-7 text-white" />, title: "Ticks in Charlotte: Protecting Your Yard & Pets", excerpt: "Ticks pose serious health risks. Find out how to identify common tick species and keep your property tick-free year-round.", content: blogArticles.tickProtection },
-    { id: 'springAnts', icon: <Zap className="w-7 h-7 text-white" />, title: "Why Ants Explode Every Spring in Charlotte Homes", excerpt: "Discover why ant invasions peak in spring and what actually works to stop them.", content: blogArticles.springAnts },
-    { id: 'cleanHomesRoaches', icon: <AlertCircle className="w-7 h-7 text-white" />, title: "Yes, Clean Homes in Charlotte Get Roaches Too", excerpt: "Understand why even the tidiest homes can face cockroach problems and how to prevent them effectively.", content: blogArticles.cleanHomesRoaches },
-    { id: 'diyVsPro', icon: <Scissors className="w-7 h-7 text-white" />, title: "DIY vs Professional Pest Control: An Honest Comparison", excerpt: "We break down the real costs, effectiveness, and time investment of both approaches in North Carolina.", content: blogArticles.diyVsProfessional },
-    { id: 'fallRodents', icon: <TreeDeciduous className="w-7 h-7 text-white" />, title: "Fall Rodent Prevention Checklist for Charlotte Homes", excerpt: "Follow this comprehensive checklist to rodent-proof your home before winter arrives.", content: blogArticles.fallRodents }
+    {
+      id: 'mosquitoSeason',
+      slug: 'mosquito-season-charlotte-nc',
+      icon: <Wind className="w-7 h-7 text-white" />,
+      title: "Mosquito Season in Charlotte: March to October",
+      excerpt: "Learn when mosquitoes are most active in North Carolina and how to protect your family during peak season.",
+    },
+    {
+      id: 'tickProtection',
+      slug: 'tick-protection-charlotte-nc',
+      icon: <Bug className="w-7 h-7 text-white" />,
+      title: "Ticks in Charlotte: Protecting Your Yard & Pets",
+      excerpt: "Ticks pose serious health risks. Find out how to identify common tick species and keep your property tick-free year-round.",
+    },
+    {
+      id: 'springAnts',
+      slug: 'spring-ants-charlotte-nc',
+      icon: <Zap className="w-7 h-7 text-white" />,
+      title: "Why Ants Explode Every Spring in Charlotte Homes",
+      excerpt: "Discover why ant invasions peak in spring and what actually works to stop them.",
+    },
+    {
+      id: 'cleanHomesRoaches',
+      slug: 'cockroaches-in-clean-homes-charlotte-nc',
+      icon: <AlertCircle className="w-7 h-7 text-white" />,
+      title: "Yes, Clean Homes in Charlotte Get Roaches Too",
+      excerpt: "Understand why even the tidiest homes can face cockroach problems and how to prevent them effectively.",
+    },
+    {
+      id: 'diyVsPro',
+      slug: 'diy-vs-professional-pest-control-nc',
+      icon: <Scissors className="w-7 h-7 text-white" />,
+      title: "DIY vs Professional Pest Control: An Honest Comparison",
+      excerpt: "We break down the real costs, effectiveness, and time investment of both approaches in North Carolina.",
+    },
+    {
+      id: 'fallRodents',
+      slug: 'fall-rodent-prevention-charlotte-nc',
+      icon: <TreeDeciduous className="w-7 h-7 text-white" />,
+      title: "Fall Rodent Prevention Checklist for Charlotte Homes",
+      excerpt: "Follow this comprehensive checklist to rodent-proof your home before winter arrives.",
+    }
   ];
 
   const processSteps = [
@@ -87,26 +99,41 @@ export default function App() {
     { title: "Mosquito", description: "Complete the service with professional mosquito barrier treatment to your entire yard, providing weeks of relief." }
   ];
 
-  const activeBlogData = blogData.find(b => b.id === activeBlog);
-
   return (
     <div className="min-h-screen bg-white">
+      {/* Mobile Sticky Call Bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-cyan-600 shadow-[0_-2px_12px_rgba(0,0,0,0.2)]">
+        <a
+          href="tel:7047280204"
+          className="flex items-center justify-center gap-3 py-4 text-white font-bold text-lg"
+          aria-label="Call Selke Pest Control"
+        >
+          <Phone className="w-5 h-5" />
+          Tap to Call — 704-728-0204
+        </a>
+      </div>
+
       <QuoteFormModal isOpen={isQuoteModalOpen} onClose={() => setIsQuoteModalOpen(false)} />
       <PestLibraryModal isOpen={isPestLibraryOpen} onClose={() => setIsPestLibraryOpen(false)} />
       <LegalModal isOpen={isLegalModalOpen} onClose={() => setIsLegalModalOpen(false)} />
 
+      {/* Guarantee Modal */}
       {isGuaranteeModalOpen && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setIsGuaranteeModalOpen(false)}>
           <div className="bg-white rounded-xl max-w-2xl w-full p-8" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-start justify-between mb-6">
               <div className="flex items-center gap-4">
-                <div className="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full p-4"><Shield className="w-10 h-10 text-white" /></div>
+                <div className="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full p-4">
+                  <Shield className="w-10 h-10 text-white" />
+                </div>
                 <div>
                   <h2 className="text-3xl font-bold bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">100% Satisfaction</h2>
                   <p className="text-xl font-bold text-cyan-600">Selke Guarantee</p>
                 </div>
               </div>
-              <button onClick={() => setIsGuaranteeModalOpen(false)} className="p-2 hover:bg-gray-100 rounded-lg transition-colors"><X className="w-6 h-6 text-gray-500" /></button>
+              <button onClick={() => setIsGuaranteeModalOpen(false)} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                <X className="w-6 h-6 text-gray-500" />
+              </button>
             </div>
             <div className="space-y-4 text-gray-700">
               <p className="text-lg leading-relaxed">At Selke Pest Control, we stand behind our work with an unconditional 100% satisfaction guarantee.</p>
@@ -115,52 +142,61 @@ export default function App() {
                 <p className="text-gray-700 leading-relaxed">If you experience any issues with bugs between your scheduled quarterly general pest control treatments, we will return to re-treat your property at <strong>absolutely no additional charge</strong>.</p>
               </div>
               <div className="space-y-3">
-                {[{t:"No Questions Asked",d:"Simply call us and we'll schedule a free re-treatment visit"},{t:"Fast Response",d:"We typically schedule re-treatments within 2-3 days"},{t:"Complete Coverage",d:"Applies to all pests covered under your quarterly service plan"}].map(({t,d})=>(
-                  <div key={t} className="flex items-start gap-3"><div className="bg-green-100 rounded-full p-1 mt-1"><Check className="w-5 h-5 text-green-600" /></div><div><h4 className="font-semibold text-gray-900">{t}</h4><p className="text-gray-600">{d}</p></div></div>
+                {[["No Questions Asked", "Simply call us and we'll schedule a free re-treatment visit"], ["Fast Response", "We typically schedule re-treatments within 2-3 days"], ["Complete Coverage", "Applies to all pests covered under your quarterly service plan"]].map(([title, desc]) => (
+                  <div key={title} className="flex items-start gap-3">
+                    <div className="bg-green-100 rounded-full p-1 mt-1"><Check className="w-5 h-5 text-green-600" /></div>
+                    <div><h4 className="font-semibold text-gray-900">{title}</h4><p className="text-gray-600">{desc}</p></div>
+                  </div>
                 ))}
               </div>
-              <div className="bg-gray-50 p-6 rounded-lg mt-6"><p className="text-center text-gray-700"><strong>Your satisfaction is our priority.</strong> We're not satisfied until you are.</p></div>
             </div>
           </div>
         </div>
       )}
 
-      {activeBlogData && <BlogModal isOpen={!!activeBlog} onClose={() => setActiveBlog(null)} title={activeBlogData.title} content={activeBlogData.content} icon={activeBlogData.icon} />}
+      {/* Seasonal Urgency Banner */}
+      {!urgencyDismissed && (
+        <div className="bg-amber-500 text-white py-2.5 px-4 relative">
+          <div className="max-w-4xl mx-auto text-center text-sm font-medium pr-8">
+            <span className="font-bold">Peak Mosquito &amp; Tick Season:</span> August is the worst month for biting insects in Lake Norman.{' '}
+            <a href="tel:7047280204" className="underline font-bold hover:no-underline">Call now for same-week service →</a>
+          </div>
+          <button
+            onClick={() => setUrgencyDismissed(true)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:opacity-75 transition-opacity"
+            aria-label="Dismiss banner"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
 
-      <header className="bg-white shadow-md sticky top-0 z-50 relative" role="banner">
+      {/* Header */}
+      <header className="bg-white shadow-md sticky top-0 z-40" role="banner">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center">
-            <a href="/" aria-label="Selke Pest Control - Home"><img src={newLogo} alt="Selke Pest Control logo" className="h-14 md:h-16" /></a>
+            <a href="/" aria-label="Selke Pest Control - Home">
+              <img src={newLogo} alt="Selke Pest Control logo" className="h-14 md:h-16" />
+            </a>
           </div>
-          <nav className="hidden lg:flex items-center gap-4" aria-label="Main navigation">
-            <a href="#services" className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">Services</a>
-            <a href="#why-us" className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">Why Us</a>
-            <button onClick={() => setIsPestLibraryOpen(true)} className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">Pest Library</button>
-            <a href="#tips" className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">Tips</a>
-            <a href="#faq" className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">FAQ</a>
-            <div className="relative" onMouseEnter={() => setIsPestsDropdownOpen(true)} onMouseLeave={() => setIsPestsDropdownOpen(false)}>
-              <button className="flex items-center gap-1 text-sm text-gray-700 hover:text-cyan-500 transition-colors">
-                Pest Control <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isPestsDropdownOpen ? 'rotate-180' : ''}`} />
-              </button>
-              {isPestsDropdownOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50">
-                  <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2 min-w-[220px]">
-                    {pestLinks.map(({ name, slug }) => (
-                      <a key={slug} href={`/${slug}`} className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 transition-colors">{name}</a>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
+          <nav className="hidden lg:flex items-center gap-6" aria-label="Main navigation">
+            <a href="#services" className="text-gray-700 hover:text-cyan-500 transition-colors">Services</a>
+            <a href="#why-us" className="text-gray-700 hover:text-cyan-500 transition-colors">Why Us</a>
+            <button onClick={() => setIsPestLibraryOpen(true)} className="text-gray-700 hover:text-cyan-500 transition-colors">Pest Library</button>
+            <a href="#tips" className="text-gray-700 hover:text-cyan-500 transition-colors">Tips</a>
+            <a href="#faq" className="text-gray-700 hover:text-cyan-500 transition-colors">FAQ</a>
             <div className="relative" onMouseEnter={() => setIsAreasDropdownOpen(true)} onMouseLeave={() => setIsAreasDropdownOpen(false)}>
-              <button className="flex items-center gap-1 text-sm text-gray-700 hover:text-cyan-500 transition-colors">
-                Service Areas <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isAreasDropdownOpen ? 'rotate-180' : ''}`} />
+              <button className="flex items-center gap-1 text-gray-700 hover:text-cyan-500 transition-colors">
+                Service Areas
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isAreasDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
               {isAreasDropdownOpen && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50">
                   <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2 grid grid-cols-2 min-w-[340px]">
                     {serviceAreas.map(({ name, slug }) => (
-                      <a key={slug} href={`/${slug}`} className="px-4 py-2.5 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 transition-colors">{name}, NC</a>
+                      <a key={slug} href={`/${slug}`} className="px-4 py-2.5 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 transition-colors">
+                        {name}, NC
+                      </a>
                     ))}
                   </div>
                 </div>
@@ -168,65 +204,40 @@ export default function App() {
             </div>
           </nav>
           <div className="flex items-center gap-3">
-            <a href="#" className="hidden md:block text-sm text-gray-700 hover:text-cyan-500 transition-colors px-4 py-2 border border-gray-300 rounded-lg hover:border-cyan-500">Customer Portal</a>
             <a href="tel:704-728-0204" className="bg-cyan-500 text-white px-4 md:px-6 py-3 rounded-lg hover:bg-cyan-600 transition-colors flex items-center gap-2 text-sm md:text-base" aria-label="Call Selke Pest Control at 704-728-0204">
-              <Phone className="w-4 h-4" aria-hidden="true" /><span className="hidden sm:inline">704-728-0204</span>
+              <Phone className="w-4 h-4" aria-hidden="true" />
+              <span className="hidden sm:inline">704-728-0204</span>
             </a>
-            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Toggle menu">
-              {isMobileMenuOpen ? <X className="w-6 h-6 text-gray-700" /> : <Menu className="w-6 h-6 text-gray-700" />}
-            </button>
           </div>
         </div>
-        {isMobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-xl border-t border-gray-100 z-50 max-h-[80vh] overflow-y-auto">
-            <div className="container mx-auto px-4 py-3 space-y-1">
-              <a href="#services" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Services</a>
-              <a href="#why-us" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Why Us</a>
-              <button onClick={() => { setIsPestLibraryOpen(true); setIsMobileMenuOpen(false); }} className="w-full text-left px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors">Pest Library</button>
-              <a href="#tips" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Tips</a>
-              <a href="#faq" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
-              <div>
-                <button onClick={() => setMobilePestsOpen(!mobilePestsOpen)} className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-cyan-50 rounded-lg transition-colors">
-                  <span>Pest Control</span><ChevronDown className={`w-4 h-4 transition-transform ${mobilePestsOpen ? 'rotate-180' : ''}`} />
-                </button>
-                {mobilePestsOpen && (
-                  <div className="pl-4 space-y-1 pb-2">
-                    {pestLinks.map(({ name, slug }) => (
-                      <a key={slug} href={`/${slug}`} className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>{name}</a>
-                    ))}
-                  </div>
-                )}
-              </div>
-              <div>
-                <button onClick={() => setMobileAreasOpen(!mobileAreasOpen)} className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-cyan-50 rounded-lg transition-colors">
-                  <span>Service Areas</span><ChevronDown className={`w-4 h-4 transition-transform ${mobileAreasOpen ? 'rotate-180' : ''}`} />
-                </button>
-                {mobileAreasOpen && (
-                  <div className="pl-4 grid grid-cols-2 gap-1 pb-2">
-                    {serviceAreas.map(({ name, slug }) => (
-                      <a key={slug} href={`/${slug}`} className="px-3 py-2 text-sm text-gray-600 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>{name}</a>
-                    ))}
-                  </div>
-                )}
-              </div>
-              <a href="#" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors">Customer Portal</a>
-              <a href="tel:704-728-0204" className="block bg-cyan-500 text-white px-4 py-3 rounded-lg text-center font-semibold hover:bg-cyan-600 transition-colors mt-2">Call 704-728-0204</a>
-            </div>
-          </div>
-        )}
       </header>
 
-      <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-cyan-900 text-white py-24 md:py-40" aria-label="Hero - Charlotte Metro Pest Control">
-        <div className="absolute inset-0 bg-black/60"></div>
-        <div className="absolute inset-0 bg-cover inset-0 bg-cover bg-center opacity-25" style={{ backgroundImage: `url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920)` }}></div>
-        <button onClick={() => setIsGuaranteeModalOpen(true)} className="absolute bottom-8 right-8 hidden md:block cursor-pointer group">
-          <style>{`@keyframes shake{0%,100%{transform:rotate(12deg) translateX(0)}25%{transform:rotate(12deg) translateX(-10px)}75%{transform:rotate(12deg) translateX(10px)}}.animate-shake-4{animation:shake 0.5s ease-in-out 4}`}</style>
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-cyan-900 text-white py-24 md:py-40" aria-label="Hero">
+        <div className="absolute inset-0 bg-black/60" />
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-25"
+          style={{ backgroundImage: `url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920)` }}
+        />
+
+        {/* Guarantee Badge */}
+        <button
+          onClick={() => setIsGuaranteeModalOpen(true)}
+          className="absolute bottom-8 right-8 hidden md:block cursor-pointer group"
+          aria-label="Learn about our 100% Satisfaction Guarantee"
+        >
+          <style>{`
+            @keyframes selke-shake { 0%,100% { transform: rotate(12deg) translateX(0); } 25% { transform: rotate(12deg) translateX(-10px); } 75% { transform: rotate(12deg) translateX(10px); } }
+            .animate-selke-shake { animation: selke-shake 0.5s ease-in-out 4; }
+          `}</style>
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full blur-xl opacity-40"></div>
-            <div className="relative bg-gradient-to-br from-yellow-400 via-amber-500 to-orange-600 rounded-full p-1 shadow-2xl transform rotate-12 group-hover:rotate-0 group-hover:scale-110 transition-all duration-300 animate-shake-4">
+            <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full blur-xl opacity-40" />
+            <div className="relative bg-gradient-to-br from-yellow-400 via-amber-500 to-orange-600 rounded-full p-1 shadow-2xl transform rotate-12 group-hover:rotate-0 group-hover:scale-110 transition-all duration-300 animate-selke-shake">
               <div className="bg-white rounded-full p-6">
                 <div className="text-center">
-                  <div className="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full p-2 mx-auto mb-2 w-16 h-16 flex items-center justify-center"><Shield className="w-8 h-8 text-white drop-shadow-lg" /></div>
+                  <div className="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full p-2 mx-auto mb-2 w-16 h-16 flex items-center justify-center">
+                    <Shield className="w-8 h-8 text-white drop-shadow-lg" />
+                  </div>
                   <p className="font-black text-xl bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">100%</p>
                   <p className="text-[10px] font-bold text-gray-700 tracking-wider">SATISFACTION</p>
                   <p className="font-black text-sm bg-gradient-to-r from-cyan-600 to-cyan-700 bg-clip-text text-transparent mt-0.5">Selke Guarantee</p>
@@ -235,68 +246,406 @@ export default function App() {
             </div>
           </div>
         </button>
+
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-cyan-500/20 border border-cyan-400/30 rounded-full px-4 py-2 mb-6"><Shield className="w-4 h-4 text-cyan-400" /><span className="text-sm text-cyan-100">Family-Owned & Locally Operated</span></div>
-            <h1 className="text-5xl md:text-7xl mb-6 leading-tight"><span className="block">Complete Pest Protection</span><span className="block text-cyan-400">For Your Charlotte Home</span></h1>
-            <p className="text-lg md:text-xl mb-10 text-gray-300">Expert solutions for general pests, mosquitoes, stinging insects, and outdoor threats<br/>Most quotes scheduled within 2-3 days • Same-week service available</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <button onClick={() => setIsQuoteModalOpen(true)} className="bg-cyan-500 text-white px-10 py-5 rounded-xl hover:bg-cyan-600 transition-all text-lg shadow-xl hover:shadow-2xl transform hover:scale-105">Get Free Quote</button>
-              <a href="tel:704-728-0204" className="bg-white text-gray-900 px-10 py-5 rounded-xl hover:bg-gray-100 transition-all text-lg flex items-center justify-center gap-2 shadow-xl"><Phone className="w-5 h-5" />704-728-0204</a>
+            <div className="inline-flex items-center gap-2 bg-cyan-500/20 border border-cyan-400/30 rounded-full px-4 py-2 mb-6">
+              <Shield className="w-4 h-4 text-cyan-400" />
+              <span className="text-sm text-cyan-100">Family-Owned & Locally Operated in Mooresville, NC</span>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
-              {[{i:Shield,l:"Selke Guarantee"},{i:Home,l:"Pet & Family Safe"},{i:Star,l:"Licensed & Insured"},{i:Users,l:"Local Experts"}].map(({i:Icon,l})=>(
-                <div key={l} className="flex flex-col items-center"><div className="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center mb-2"><Icon className="w-6 h-6 text-cyan-400" /></div><span className="text-sm text-gray-300">{l}</span></div>
-              ))}
+            <h1 className="text-4xl md:text-6xl lg:text-7xl mb-6 leading-tight font-bold">
+              <span className="block">Lake Norman's</span>
+              <span className="block text-cyan-400">Hometown Pest Control</span>
+            </h1>
+            <p className="text-lg md:text-xl mb-10 text-gray-300">
+              Expert solutions for general pests, mosquitoes, fleas, ticks &amp; rodents.<br className="hidden sm:block" />
+              Same-week service available &bull; 100% Satisfaction Guarantee
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <button
+                onClick={() => setIsQuoteModalOpen(true)}
+                className="bg-cyan-500 text-white px-10 py-5 rounded-xl hover:bg-cyan-600 transition-all text-lg shadow-xl hover:shadow-2xl hover:scale-105 transform"
+              >
+                Get Free Quote
+              </button>
+              <a href="tel:704-728-0204" className="bg-white text-gray-900 px-10 py-5 rounded-xl hover:bg-gray-100 transition-all text-lg flex items-center justify-center gap-2 shadow-xl">
+                <Phone className="w-5 h-5" />
+                704-728-0204
+              </a>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Trust Bar */}
+      <div className="bg-white border-b border-gray-100 shadow-sm">
+        <div className="max-w-4xl mx-auto px-4 py-4 flex flex-wrap items-center justify-center gap-6 text-sm">
+          <a
+            href="https://share.google/cT2MLnW3U4Dw1kosn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity group"
+            aria-label="Read our 46 Google reviews"
+          >
+            <div className="flex">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+              ))}
+            </div>
+            <span className="font-semibold text-gray-800 group-hover:text-cyan-600 transition-colors">
+              5.0 &bull; 46 Google Reviews
+            </span>
+            <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0" aria-hidden="true">
+              <path fill="#4285F4" d="M17.8 12.2c0-.4 0-.9-.1-1.2H12v2.4h3.3c-.2.7-.6 1.3-1.2 1.7v1.4h1.9c1.1-.9 1.8-2.3 1.8-4.3z"/>
+              <path fill="#34A853" d="M12 18c1.7 0 3.1-.5 4.1-1.5l-1.9-1.4c-.6.4-1.3.6-2.2.6-1.7 0-3.1-1.1-3.6-2.7H6.4v1.5C7.4 16.8 9.5 18 12 18z"/>
+              <path fill="#FBBC04" d="M8.4 13c-.2-.5-.3-1-.3-1.5s.1-1 .3-1.5V8.5H6.4C5.9 9.5 5.6 10.7 5.6 12s.3 2.5.8 3.5l2-1.5z"/>
+              <path fill="#EA4335" d="M12 8.3c1 0 1.9.3 2.6.9l1.9-1.9C15.3 6.3 13.8 6 12 6 9.5 6 7.4 7.2 6.4 9l2 1.5C8.9 9.2 10.3 8.3 12 8.3z"/>
+            </svg>
+          </a>
+          <span className="text-gray-300 hidden sm:inline">|</span>
+          <div className="flex items-center gap-2 text-gray-600">
+            <Shield className="w-4 h-4 text-cyan-500" />
+            <span>Licensed &amp; Insured</span>
+          </div>
+          <span className="text-gray-300 hidden sm:inline">|</span>
+          <div className="flex items-center gap-2 text-gray-600">
+            <Home className="w-4 h-4 text-cyan-500" />
+            <span>Family-Owned, Mooresville NC</span>
+          </div>
+          <span className="text-gray-300 hidden sm:inline">|</span>
+          <div className="flex items-center gap-2 text-gray-600">
+            <CheckCircle className="w-4 h-4 text-green-500" />
+            <span>100% Satisfaction Guarantee</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Services Section */}
       <section id="services" className="py-20 bg-gray-50" aria-label="Our Services">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16"><h2 className="text-3xl md:text-4xl mb-4">Our Services</h2><p className="text-xl text-gray-600 max-w-2xl mx-auto">Comprehensive pest control solutions tailored to protect your home and family</p></div>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl mb-4">Our Services</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Comprehensive pest protection for Lake Norman homes &amp; families
+            </p>
+          </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[{icon:Bug,title:"General Pest Control",desc:"Complete protection against ants, roaches, spiders, and other common household pests. Our proven treatments keep your home pest-free year-round.",items:["Interior & exterior treatment","Quarterly maintenance plans","Safe for pets & children"]},{icon:Leaf,title:"Mosquito Control",desc:"Enjoy your outdoor spaces without the annoyance of mosquitoes. Our targeted treatments reduce mosquito populations by up to 96%.",items:["Yard & perimeter treatment","Monthly seasonal service","Event-based treatments available"]},{icon:Home,title:"Flea & Tick Control",desc:"Protect your pets and family from fleas and ticks. Our comprehensive treatments eliminate existing infestations and prevent future problems.",items:["Indoor & outdoor treatment","Pet-safe formulations","Follow-up inspections included"]}].map(({icon:Icon,title,desc,items})=>(
+            {[
+              {
+                icon: <Bug className="w-8 h-8 text-white" />,
+                title: "General Pest Control",
+                desc: "Complete protection against ants, roaches, spiders, and other common household pests. Proven treatments keep your home pest-free year-round.",
+                features: ["Interior & exterior treatment", "Flexible service plans", "Safe for pets & children"],
+              },
+              {
+                icon: <Leaf className="w-8 h-8 text-white" />,
+                title: "Mosquito Control",
+                desc: "Enjoy your outdoor spaces without the annoyance of mosquitoes. Our targeted barrier treatments reduce mosquito populations by up to 96%.",
+                features: ["Yard & perimeter treatment", "Monthly seasonal service", "Event-based treatments available"],
+              },
+              {
+                icon: <Home className="w-8 h-8 text-white" />,
+                title: "Flea & Tick Control",
+                desc: "Protect your pets and family. Our comprehensive treatments eliminate existing infestations and create a protective barrier around your home.",
+                features: ["Indoor & outdoor treatment", "Pet-safe formulations", "Follow-up inspections included"],
+              },
+            ].map(({ icon, title, desc, features }) => (
               <div key={title} className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow">
-                <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-full flex items-center justify-center mb-6"><Icon className="w-8 h-8 text-white" /></div>
-                <h3 className="text-2xl mb-4">{title}</h3><p className="text-gray-600 mb-6">{desc}</p>
-                <ul className="space-y-2 text-gray-600">{items.map(i=><li key={i} className="flex items-start gap-2"><span className="text-cyan-500 mt-1">✓</span><span>{i}</span></li>)}</ul>
+                <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-full flex items-center justify-center mb-6">
+                  {icon}
+                </div>
+                <h3 className="text-2xl mb-4">{title}</h3>
+                <p className="text-gray-600 mb-6">{desc}</p>
+                <ul className="space-y-2 text-gray-600">
+                  {features.map(f => (
+                    <li key={f} className="flex items-start gap-2">
+                      <span className="text-cyan-500 mt-1">✓</span>
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* Pest Seasonality Section */}
+      <section className="py-20" style={{ background: '#0d1b2a' }}>
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6 border border-slate-600 bg-slate-800/60">
+              <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-cyan-400"><path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" /></svg>
+              <span className="text-sm text-slate-300 font-medium">Charlotte Metro, NC</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-5">When Pests Are Most Active</h2>
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+              Know what's coming before it arrives. Each pest has a season — here's the full year at a glance for the Charlotte area.
+            </p>
+          </div>
+          {(() => {
+            const months = ['J','F','M','A','M','J','J','A','S','O','N','D'];
+            const heights = [12, 28, 58, 100];
+            const pests = [
+              { name: 'Mosquitoes', emoji: '🦟', peak: 'May – Oct', activity: [0,0,1,2,3,3,3,3,3,2,1,0], slug: 'mosquito-control-charlotte-nc' },
+              { name: 'Ants',       emoji: '🐜', peak: 'Mar – Sep', activity: [1,1,2,3,3,3,3,2,2,1,1,1], slug: 'ant-control-charlotte-nc' },
+              { name: 'Ticks',      emoji: '🕷️', peak: 'Apr – Aug', activity: [1,1,2,3,3,2,2,2,1,1,1,1], slug: 'tick-control-charlotte-nc' },
+              { name: 'Cockroaches',emoji: '🪳', peak: 'Jun – Sep', activity: [1,1,1,1,2,3,3,3,3,2,1,1], slug: 'cockroach-control-charlotte-nc' },
+              { name: 'Spiders',    emoji: '🕸️', peak: 'Aug – Oct', activity: [1,1,1,1,2,2,2,3,3,3,2,1], slug: 'spider-control-charlotte-nc' },
+              { name: 'Wasps',      emoji: '🐝', peak: 'Jun – Oct', activity: [0,0,1,1,2,3,3,3,3,2,1,0], slug: 'wasp-control-charlotte-nc' },
+              { name: 'Fleas',      emoji: '🐛', peak: 'May – Sep', activity: [0,0,1,2,3,3,3,3,2,1,0,0], slug: 'flea-control-charlotte-nc' },
+              { name: 'Rodents',    emoji: '🐭', peak: 'Sep – Feb', activity: [3,3,2,1,1,1,1,1,2,3,3,3], slug: 'rodent-control-charlotte-nc' },
+            ];
+            return (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
+                {pests.map(pest => (
+                  <a
+                    key={pest.name}
+                    href={`/${pest.slug}`}
+                    className="rounded-2xl p-5 hover:bg-slate-700/80 transition-all group"
+                    style={{ background: '#152033' }}
+                  >
+                    <div className="flex items-center gap-3 mb-5">
+                      <span className="text-2xl">{pest.emoji}</span>
+                      <div>
+                        <h3 className="font-bold text-white text-base leading-tight">{pest.name}</h3>
+                        <p className="text-xs text-cyan-400 mt-0.5">Peak: {pest.peak}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-end gap-[3px] h-10 mb-2">
+                      {pest.activity.map((level, i) => (
+                        <div
+                          key={i}
+                          className="flex-1 rounded-sm transition-all"
+                          style={{
+                            height: `${heights[level]}%`,
+                            background: level === 3 ? '#22d3ee' : level === 2 ? '#0891b2' : level === 1 ? '#1e3a4a' : '#152033',
+                            minHeight: '3px',
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <div className="flex justify-between mb-3">
+                      {months.map((m, i) => (
+                        <span key={i} className="text-[9px] text-slate-600 flex-1 text-center">{m}</span>
+                      ))}
+                    </div>
+                    <p className="text-slate-400 text-xs group-hover:text-cyan-400 transition-colors">
+                      View treatment options →
+                    </p>
+                  </a>
+                ))}
+              </div>
+            );
+          })()}
+          <div className="text-center mt-12">
+            <button
+              onClick={() => setIsQuoteModalOpen(true)}
+              className="bg-cyan-400 text-slate-900 font-bold px-12 py-4 rounded-xl text-lg hover:bg-cyan-300 transition-colors shadow-lg"
+            >
+              Protect Your Home Year-Round
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Bundle Section */}
       <section className="py-20 bg-gradient-to-br from-cyan-600 to-cyan-700 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <div className="inline-flex items-center gap-2 bg-white/20 rounded-full px-4 py-2 mb-4"><Star className="w-4 h-4" /><span className="text-sm">91% of Customers Bundle</span></div>
-                <h2 className="text-3xl md:text-4xl mb-4">Save More with Our Bundle Package</h2>
-                <p className="text-xl text-cyan-100 mb-6">Combine general pest control with mosquito protection for maximum value and year-round peace of mind.</p>
+                <div className="inline-flex items-center gap-2 bg-white/20 rounded-full px-4 py-2 mb-4">
+                  <Star className="w-4 h-4" />
+                  <span className="text-sm">91% of Our Customers Bundle</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl mb-4">Save More. Protect More.</h2>
+                <p className="text-xl text-cyan-100 mb-2">
+                  Combine general pest control + mosquito protection for maximum coverage and better value.
+                </p>
+                <p className="text-cyan-200 text-sm mb-6 italic">
+                  Every service you schedule is one more step toward our mission to give back to the Lake Norman community.
+                </p>
                 <div className="space-y-4">
-                  {[{t:"Complete Protection",d:"Comprehensive indoor and outdoor pest control plus mosquito treatments"},{t:"Better Value",d:"Save money compared to purchasing services separately"},{t:"Convenient Scheduling",d:"One technician, one visit - get both services at the same time"},{t:"Get Outside Again",d:"Reclaim your outdoor spaces from mosquitoes and other pests"}].map(({t,d})=>(
-                    <div key={t} className="flex items-start gap-3"><div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1"><CheckCircle className="w-4 h-4" /></div><div><h3 className="mb-1">{t}</h3><p className="text-cyan-100 text-sm">{d}</p></div></div>
+                  {[
+                    ["Complete Protection", "Comprehensive indoor + outdoor pest control plus mosquito treatments"],
+                    ["Better Value", "Save money compared to purchasing services separately"],
+                    ["Flexible Plans", "Flexible service contracts — cancel anytime with satisfaction guarantee"],
+                    ["Get Outside Again", "Reclaim your yard from mosquitoes and outdoor pests"],
+                  ].map(([title, desc]) => (
+                    <div key={title} className="flex items-start gap-3">
+                      <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <CheckCircle className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h3 className="mb-1">{title}</h3>
+                        <p className="text-cyan-100 text-sm">{desc}</p>
+                      </div>
+                    </div>
                   ))}
                 </div>
-                <button onClick={() => setIsQuoteModalOpen(true)} className="mt-8 bg-white text-cyan-700 px-8 py-4 rounded-xl hover:bg-gray-100 transition-all shadow-lg">Get Bundle Quote</button>
+                <button
+                  onClick={() => setIsQuoteModalOpen(true)}
+                  className="mt-8 bg-white text-cyan-700 px-8 py-4 rounded-xl hover:bg-gray-100 transition-all shadow-lg font-semibold"
+                >
+                  Get Bundle Quote
+                </button>
               </div>
-              <div className="relative"><img src={techWalking} alt="Selke Pest Control technician performing professional pest control service in Charlotte Metro area" className="rounded-2xl shadow-2xl" width="600" height="500" /></div>
+              <div className="relative">
+                <img
+                  src={techWalking}
+                  alt="Selke Pest Control technician performing professional pest control service in Lake Norman area"
+                  className="rounded-2xl shadow-2xl"
+                  width="600"
+                  height="500"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Community Giving Section */}
+      <section className="py-24 bg-slate-900 text-white" aria-label="Community Giving Mission">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+              <div>
+                <p className="text-cyan-400 text-sm font-semibold tracking-widest uppercase mb-4">The Selke Mission</p>
+                <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
+                  Business That<br />Feeds Neighbors.
+                </h2>
+                <p className="text-slate-300 text-lg leading-relaxed mb-6">
+                  We built Selke around a belief most companies don't bother with: every service call should make the community stronger.
+                </p>
+                <p className="text-slate-400 leading-relaxed mb-8">
+                  Think Bombas socks. Think TOMS shoes. Now think pest control. You already need it — so why not do it with a company that's using every customer to feed families in need right here in the Lake Norman area?
+                </p>
+                <button
+                  onClick={() => setIsQuoteModalOpen(true)}
+                  className="bg-cyan-500 text-white px-8 py-4 rounded-xl hover:bg-cyan-400 transition-colors font-semibold"
+                >
+                  Be Part of the Mission
+                </button>
+              </div>
+              <div className="space-y-px">
+                <div className="bg-slate-800 rounded-t-2xl p-8 border-b border-slate-700">
+                  <p className="text-6xl font-black text-white tracking-tight">250,000</p>
+                  <p className="text-cyan-400 font-semibold mt-1">Meals — Our Community Goal</p>
+                  <p className="text-slate-400 text-sm mt-2">Partnering with local food banks and nonprofits to feed neighbors in need. Every customer moves the number.</p>
+                </div>
+                <div className="grid grid-cols-2 gap-px">
+                  <div className="bg-slate-800 p-6">
+                    <p className="text-slate-300 font-semibold mb-1">Local Partners</p>
+                    <p className="text-slate-500 text-sm">Working with Lake Norman area food banks to get meals where they're needed most.</p>
+                  </div>
+                  <div className="bg-slate-800 p-6">
+                    <p className="text-slate-300 font-semibold mb-1">Long-Term Vision</p>
+                    <p className="text-slate-500 text-sm">A dedicated food truck or nonprofit. School supplies. Something bigger than pest control.</p>
+                  </div>
+                </div>
+                <div className="bg-slate-800 rounded-b-2xl p-6">
+                  <p className="text-slate-400 text-sm italic">"We earn your business every visit — and with every visit, we get closer to 250,000."</p>
+                  <p className="text-slate-500 text-xs mt-2">— The Selke Pest Control Team, Mooresville NC</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us */}
+      <section id="why-us" className="py-20 bg-white" aria-label="Why Choose Selke Pest Control">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl mb-4">Why Lake Norman Chooses Selke</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              We're not a national chain. We're your neighbors — and we operate like it.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
+            {[
+              { icon: <Shield className="w-7 h-7 text-cyan-600" />, title: "100% Guarantee", desc: "If pests return between treatments, we return at no extra cost. No questions asked." },
+              { icon: <Clock className="w-7 h-7 text-cyan-600" />, title: "Same-Week Service", desc: "Urgent situation? We offer same-week — and often same-day — scheduling for Lake Norman homes." },
+              { icon: <Award className="w-7 h-7 text-cyan-600" />, title: "15+ Years Experience", desc: "Backed by over 15 years of pest control expertise serving North Carolina homes and families." },
+              { icon: <Users className="w-7 h-7 text-cyan-600" />, title: "Flexible Plans", desc: "Flexible service agreements — no hard lock-ins. We earn your business every single visit." },
+              { icon: <Heart className="w-7 h-7 text-cyan-600" fill="none" />, title: "Giving Back", desc: "Choosing Selke helps us hit our 250,000-meal community giving goal. Business with purpose." },
+            ].map(({ icon, title, desc }) => (
+              <div key={title} className="text-center">
+                <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  {icon}
+                </div>
+                <h3 className="text-xl mb-3">{title}</h3>
+                <p className="text-gray-600">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Good Neighbor Referral */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="grid md:grid-cols-2">
+              <div className="p-10 flex flex-col justify-center">
+                <p className="text-cyan-500 text-sm font-semibold tracking-widest uppercase mb-3">Good Neighbor Program</p>
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                  $25 Off for You.<br />$25 Off for Them.
+                </h2>
+                <p className="text-gray-500 mb-8">
+                  Refer a neighbor, friend, or family member — you both receive <strong className="text-gray-700">$25 off</strong> your next service. No catch. Good neighbors share good things.
+                </p>
+                <a
+                  href="tel:7047280204"
+                  className="inline-flex items-center gap-2 bg-cyan-500 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-cyan-600 transition-colors w-fit"
+                >
+                  <Phone className="w-4 h-4" />
+                  Call to Refer a Neighbor
+                </a>
+              </div>
+              <div className="bg-gray-50 p-10 flex flex-col justify-center border-l border-gray-100">
+                <div className="space-y-6">
+                  {[
+                    { n: "01", label: "Refer a neighbor", desc: "Tell them about Selke Pest Control" },
+                    { n: "02", label: "They book & mention your name", desc: "They call us and give your name" },
+                    { n: "03", label: "You both save $25", desc: "$25 off their first service, $25 off yours" },
+                  ].map(({ n, label, desc }) => (
+                    <div key={n} className="flex items-start gap-4">
+                      <span className="text-2xl font-black text-cyan-200 leading-none w-8 shrink-0">{n}</span>
+                      <div>
+                        <p className="font-semibold text-gray-800">{label}</p>
+                        <p className="text-gray-400 text-sm">{desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Process */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16"><h2 className="text-3xl md:text-4xl mb-4">Our Service Process</h2><p className="text-xl text-gray-600 max-w-2xl mx-auto">Click each step to learn more</p></div>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl mb-4">Our Service Process</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Click each step to learn more</p>
+          </div>
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
               {processSteps.map((step, index) => (
-                <button key={index} onClick={() => setOpenProcessStep(openProcessStep === index ? null : index)} className={`p-4 rounded-xl border-2 transition-all text-left relative group ${openProcessStep === index ? 'border-cyan-500 bg-cyan-50 shadow-lg' : 'border-gray-200 bg-white hover:border-cyan-300 hover:shadow-md'}`}>
-                  <div className="flex flex-col items-center"><h3 className="text-center text-sm font-semibold mb-2">{step.title}</h3><ChevronDown className={`w-5 h-5 text-cyan-600 transition-transform ${openProcessStep === index ? 'rotate-180' : 'group-hover:translate-y-1'}`} /></div>
+                <button
+                  key={index}
+                  onClick={() => setOpenProcessStep(openProcessStep === index ? null : index)}
+                  className={`p-4 rounded-xl border-2 transition-all text-left relative group ${openProcessStep === index ? 'border-cyan-500 bg-cyan-50 shadow-lg' : 'border-gray-200 bg-white hover:border-cyan-300 hover:shadow-md'}`}
+                >
+                  <div className="flex flex-col items-center">
+                    <h3 className="text-center text-sm font-semibold mb-2">{step.title}</h3>
+                    <ChevronDown className={`w-5 h-5 text-cyan-600 transition-transform ${openProcessStep === index ? 'rotate-180' : 'group-hover:translate-y-1'}`} />
+                  </div>
                 </button>
               ))}
             </div>
@@ -310,149 +659,216 @@ export default function App() {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16"><h2 className="text-3xl md:text-4xl mb-4">Homeowner Essentials</h2><p className="text-xl text-gray-600 max-w-2xl mx-auto">Simple steps to protect your home between treatments</p></div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {[{icon:Shield,title:"Prevention",sub:"Seal Entry Points",desc:"Check windows, doors, and foundation for gaps. Seal cracks and crevices where pests can enter your home."},{icon:Droplets,title:"Mosquitoes",sub:"Eliminate Standing Water",desc:"Empty flower pots, birdbaths, and gutters regularly. Mosquitoes breed in standing water."},{icon:Home,title:"Kitchen Pests",sub:"Store Food Properly",desc:"Keep food in sealed containers, clean up spills immediately, and take out trash regularly."}].map(({icon:Icon,title,sub,desc})=>(
-              <div key={title} className="bg-white rounded-xl p-6 shadow-lg"><div className="w-14 h-14 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-lg flex items-center justify-center mb-4"><Icon className="w-7 h-7 text-white" /></div><h3 className="text-xl mb-3">{title}</h3><p className="text-gray-600 mb-2">{sub}</p><p className="text-sm text-gray-500">{desc}</p></div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="why-us" className="py-20 bg-white" aria-label="Why Choose Selke Pest Control">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16"><h2 className="text-3xl md:text-4xl mb-4">Why Choose Selke Pest Control?</h2><p className="text-xl text-gray-600 max-w-2xl mx-auto">We're not just pest control experts – we're your neighbors committed to protecting Charlotte Metro homes</p></div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
-            {[{icon:Shield,title:"100% Guarantee",desc:"If pests return between treatments, we return at no extra cost. Your complete satisfaction is our priority."},{icon:Award,title:"15+ Years Experience",desc:"Backed by over 15 years of pest control expertise serving North Carolina homes and families."},{icon:Home,title:"Pet & Family Safe",desc:"EPA-approved products that are tough on pests but safe for your loved ones and pets."},{icon:Users,title:"Personalized Service",desc:"You'll work directly with our local team, not a call center."},{icon:Clock,title:"Fast Response",desc:"Most quotes scheduled within 2-3 days. Same-week service available for urgent situations."}].map(({icon:Icon,title,desc})=>(
-              <div key={title} className="text-center"><div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-6"><Icon className="w-7 h-7 text-cyan-600" /></div><h3 className="text-xl mb-3">{title}</h3><p className="text-gray-600">{desc}</p></div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      {/* Customer Reviews */}
       <section className="py-20 bg-gray-50" aria-label="Customer Reviews">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl mb-4">What Our Customers Say</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Real reviews from real Charlotte Metro homeowners</p>
+            <a
+              href="https://share.google/cT2MLnW3U4Dw1kosn"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-cyan-600 hover:text-cyan-700 font-semibold"
+            >
+              <div className="flex">
+                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />)}
+              </div>
+              46 Reviews on Google &rarr;
+            </a>
           </div>
           <ReviewsCarousel />
         </div>
       </section>
 
-      <section id="areas" className="py-16 bg-white" aria-label="Service Areas - Charlotte Metro">
+      {/* Service Areas */}
+      <section id="areas" className="py-16 bg-white" aria-label="Service Areas">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12"><h2 className="text-3xl md:text-4xl mb-4">Serving the Charlotte Metro Area</h2><p className="text-gray-600 max-w-2xl mx-auto">Pest control services in Mooresville, NC and surrounding Charlotte Metro communities</p></div>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl mb-4">Serving the Lake Norman Area</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">Pest control for Mooresville, NC and the Charlotte Metro communities we call home</p>
+          </div>
           <div className="max-w-4xl mx-auto">
             <div className="flex flex-wrap justify-center gap-3">
               {serviceAreas.map(({ name, slug }) => (
-                <a key={slug} href={`/${slug}`} className="bg-gray-100 px-5 py-3 rounded-full hover:bg-cyan-500 hover:text-white transition-colors"><p className="text-sm font-medium">{name}</p></a>
+                <a key={slug} href={`/${slug}`} className="bg-gray-100 px-5 py-3 rounded-full hover:bg-cyan-500 hover:text-white transition-colors">
+                  <p className="text-sm font-medium">{name}</p>
+                </a>
               ))}
             </div>
-            <div className="text-center mt-8"><p className="text-gray-600">Don't see your city? <a href="tel:704-728-0204" className="text-cyan-600 hover:text-cyan-700 font-semibold">Call us at 704-728-0204</a></p></div>
+            <div className="text-center mt-8">
+              <p className="text-gray-600">
+                Don't see your city?{' '}
+                <a href="tel:704-728-0204" className="text-cyan-600 hover:text-cyan-700 font-semibold">Call us at 704-728-0204</a>
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Pest Activity Calendar */}
-      <section className="py-20 bg-gray-900 text-white">
+      {/* Homeowner Tips */}
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-cyan-500/20 border border-cyan-500/30 rounded-full px-4 py-2 mb-4">
-              <Bug className="w-4 h-4 text-cyan-400" /><span className="text-sm text-cyan-300">Charlotte Metro, NC</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl mb-4">When Pests Are Most Active</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto text-lg">Know what's coming before it arrives. Each pest has a season — here's the full year at a glance for the Charlotte area.</p>
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 max-w-xl mx-auto">Simple steps to protect your home between treatments</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
-            {PEST_ACTIVITY.map(({ name, emoji, slug, peak, months }) => (
-              <a key={slug} href={`/${slug}`} className="bg-gray-800 rounded-2xl p-5 hover:bg-gray-750 hover:ring-2 hover:ring-cyan-500/50 transition-all group block">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-3xl">{emoji}</span>
-                  <div>
-                    <p className="font-bold text-white group-hover:text-cyan-400 transition-colors">{name}</p>
-                    <p className="text-xs text-cyan-400">Peak: {peak}</p>
-                  </div>
-                </div>
-                <div className="flex items-end gap-0.5" style={{ height: '48px' }}>
-                  {months.map((level, i) => {
-                    const barPx = Math.max(3, Math.round((level / 10) * 44));
-                    const isPeak = level >= 7;
-                    return (
-                      <div
-                        key={i}
-                        className={`flex-1 rounded-sm ${isPeak ? 'bg-cyan-400' : level >= 4 ? 'bg-cyan-700' : 'bg-gray-600'}`}
-                        style={{ height: `${barPx}px` }}
-                        title={`${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][i]}: ${level}/10`}
-                      />
-                    );
-                  })}
-                </div>
-                <div className="flex gap-0.5 mt-1">
-                  {ACTIVITY_MONTHS.map(m => (
-                    <div key={m} className="flex-1 text-center">
-                      <span className="text-gray-600 text-[9px]">{m}</span>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-xs text-gray-500 mt-3 group-hover:text-cyan-400 transition-colors">View treatment options →</p>
-              </a>
-            ))}
-          </div>
-          <div className="text-center mt-10">
-            <button onClick={() => setIsQuoteModalOpen(true)} className="bg-cyan-500 text-white px-10 py-4 rounded-xl hover:bg-cyan-600 transition-all text-lg shadow-xl">
-              Protect Your Home Year-Round
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section id="tips" className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16"><h2 className="text-3xl md:text-4xl mb-4">Pest Control Tips & Insights</h2><p className="text-xl text-gray-600 max-w-2xl mx-auto">Expert advice to help you understand and prevent pest problems</p></div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">{blogData.map((blog) => <BlogArticle key={blog.id} icon={blog.icon} title={blog.title} excerpt={blog.excerpt} onClick={() => setActiveBlog(blog.id)} />)}</div>
-        </div>
-      </section>
-
-      <section id="faq" className="py-20 bg-white" aria-label="Frequently Asked Questions">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16"><h2 className="text-3xl md:text-4xl mb-4">Frequently Asked Questions</h2><p className="text-xl text-gray-600 max-w-2xl mx-auto">Get answers to common questions about our services</p></div>
-          <div className="max-w-3xl mx-auto space-y-4">
-            {[{question:"What areas do you service?",answer:"We proudly serve the entire Charlotte Metro area including Mooresville, Charlotte, Cornelius, Huntersville, Davidson, Troutman, Denver, Weddington, Waxhaw, Matthews, Indian Trail, and the Lake Norman region. If you don't see your city listed, give us a call at 704-728-0204 to check if we cover your area."},{question:"Are your treatments safe for kids and pets?",answer:"Absolutely! We use EPA-approved products that are tough on pests but safe for your family and pets. Our treatments are designed with your loved ones' safety as our top priority. We'll provide specific instructions if any temporary precautions are needed, but generally, treated areas are safe once dry."},{question:"How fast can you come out?",answer:"Most quotes are scheduled within 2-3 days of your initial contact. For urgent situations, we offer same-week service and can often accommodate same-day appointments depending on availability. We understand pest problems can't wait, so we work hard to respond quickly."},{question:"What if pests come back between scheduled visits?",answer:"That's covered by our Selke Guarantee! If pests return between your scheduled treatments, we'll come back and retreat at no additional charge. Your complete satisfaction is our priority, and we stand behind our work 100%."},{question:"What are your business hours?",answer:"We're available Monday through Saturday, 8:00 AM to 8:00 PM Eastern Standard Time. This gives you flexibility to schedule service at a time that works best for your schedule."},{question:"Do you offer bundled services?",answer:"Yes! In fact, 91% of our customers bundle mosquito control with general pest control because it saves money and provides comprehensive protection. Bundling services is more convenient (one visit for multiple treatments) and gives you better value than purchasing services separately."}].map((faq, index) => (
-              <div key={index} className="bg-gray-50 rounded-xl shadow-lg overflow-hidden">
-                <button onClick={() => setOpenFAQ(openFAQ === index ? null : index)} className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
-                  <span className="text-lg pr-8">{faq.question}</span><ChevronDown className={`w-5 h-5 text-cyan-600 flex-shrink-0 transition-transform ${openFAQ === index ? 'rotate-180' : ''}`} />
-                </button>
-                {openFAQ === index && <div className="px-6 pb-5 text-gray-600">{faq.answer}</div>}
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {[
+              { icon: <Shield className="w-7 h-7 text-white" />, title: "Prevention", sub: "Seal Entry Points", desc: "Check windows, doors, and foundation for gaps. Seal cracks and crevices where pests can enter." },
+              { icon: <Droplets className="w-7 h-7 text-white" />, title: "Mosquitoes", sub: "Eliminate Standing Water", desc: "Empty flower pots, birdbaths, and gutters regularly. Mosquitoes breed in standing water — even a bottle cap's worth." },
+              { icon: <Home className="w-7 h-7 text-white" />, title: "Kitchen Pests", sub: "Store Food Properly", desc: "Keep food in sealed containers, clean up spills immediately, and take out trash regularly." },
+            ].map(({ icon, title, sub, desc }) => (
+              <div key={title} className="bg-white rounded-xl p-6 shadow-lg">
+                <div className="w-14 h-14 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-lg flex items-center justify-center mb-4">{icon}</div>
+                <h3 className="text-xl mb-1">{title}</h3>
+                <p className="text-gray-700 font-medium mb-2">{sub}</p>
+                <p className="text-sm text-gray-500">{desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* Blog / Tips Section */}
+      <section id="tips" className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl mb-4">Pest Control Tips &amp; Insights</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Expert articles to help you understand and prevent pest problems in the Lake Norman area
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {blogData.map((blog) => (
+              <BlogArticle
+                key={blog.id}
+                icon={blog.icon}
+                title={blog.title}
+                excerpt={blog.excerpt}
+                href={`/blog/${blog.slug}`}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Instagram Feed */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl mb-3">Recent Work</h2>
+            <p className="text-gray-500 mb-5">Follow us on Instagram — real jobs across the Charlotte Metro</p>
+            <a
+              href="https://www.instagram.com/selkepestcontrol"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-white font-semibold px-6 py-3 rounded-full text-sm"
+              style={{ background: 'linear-gradient(135deg, #F58529, #DD2A7B 50%, #8134AF)' }}
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="white" aria-hidden="true">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+              @selkepestcontrol
+            </a>
+          </div>
+
+          {BEHOLD_FEED_ID ? (
+            <div className="max-w-4xl mx-auto">
+              {/* @ts-ignore */}
+              <behold-widget feed-id={BEHOLD_FEED_ID} />
+            </div>
+          ) : (
+            <div className="max-w-4xl mx-auto">
+              <div className="grid grid-cols-3 gap-2 md:gap-3">
+                {[...Array(6)].map((_, i) => (
+                  <a
+                    key={i}
+                    href="https://www.instagram.com/selkepestcontrol"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="aspect-square rounded-lg overflow-hidden flex items-center justify-center hover:opacity-80 transition-opacity"
+                    style={{ background: 'linear-gradient(135deg, #1a1a2e, #16213e, #0f3460)' }}
+                    aria-label="View on Instagram"
+                  >
+                    <svg viewBox="0 0 24 24" fill="white" opacity="0.15" className="w-10 h-10">
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="py-20 bg-white" aria-label="Frequently Asked Questions">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl mb-4">Frequently Asked Questions</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Get answers to common questions about our services</p>
+          </div>
+          <div className="max-w-3xl mx-auto space-y-4">
+            {[
+              { q: "What areas do you service?", a: "We proudly serve the entire Charlotte Metro and Lake Norman area including Mooresville, Charlotte, Cornelius, Huntersville, Davidson, Troutman, Denver, Sherrills Ford, Statesville, Weddington, Waxhaw, Matthews, and more. Don't see your city? Call us at 704-728-0204." },
+              { q: "Are your treatments safe for kids and pets?", a: "Absolutely. We use EPA-approved products that are tough on pests but safe for your family and pets. Treated areas are safe once dry, and we'll give you specific guidance for each treatment." },
+              { q: "How fast can you come out?", a: "We offer same-week service for most requests, and same-day service is available for urgent situations depending on schedule. Most standard quotes are set up within 1-2 days of your first call." },
+              { q: "What if pests come back between scheduled visits?", a: "That's covered by the Selke Guarantee. If pests return between your scheduled treatments, we come back and retreat at no additional charge — no questions asked." },
+              { q: "Do you require contracts?", a: "We offer flexible service plans. You're not locked into hard long-term contracts — we earn your business every visit with our 100% satisfaction guarantee." },
+              { q: "Do you offer bundled services?", a: "Yes! 91% of our customers bundle mosquito control with general pest control. It saves money and gives you complete indoor and outdoor protection in one visit." },
+              { q: "What is the Good Neighbor Referral Program?", a: "Refer a friend, neighbor, or family member to Selke and you both receive $25 off your next service. Just have them mention your name when they call." },
+            ].map((faq, index) => (
+              <div key={index} className="bg-gray-50 rounded-xl shadow-sm overflow-hidden">
+                <button
+                  onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
+                  className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-100 transition-colors"
+                >
+                  <span className="text-lg pr-8">{faq.q}</span>
+                  <ChevronDown className={`w-5 h-5 text-cyan-600 flex-shrink-0 transition-transform ${openFAQ === index ? 'rotate-180' : ''}`} />
+                </button>
+                {openFAQ === index && (
+                  <div className="px-6 pb-5 text-gray-600">{faq.a}</div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
       <section className="py-20 bg-gradient-to-r from-cyan-600 to-cyan-700 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-5xl mb-6">Ready to Get Outside Again?</h2>
-            <p className="text-xl mb-8 text-cyan-100">Contact us today for your free quote and experience the Selke difference</p>
-            <p className="text-lg mb-10">Monday - Saturday: 8:00 AM - 8:00 PM EST</p>
+            <h2 className="text-3xl md:text-5xl mb-4 font-bold">Ready to Get Outside Again?</h2>
+            <p className="text-xl mb-2 text-cyan-100">
+              Lake Norman's hometown pest control — backed by a 100% guarantee and a mission to give back.
+            </p>
+            <p className="text-cyan-200 text-sm mb-8">Monday–Saturday &bull; 8:00 AM – 8:00 PM EST</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:704-728-0204" className="bg-white text-cyan-700 px-10 py-5 rounded-xl hover:bg-gray-100 transition-all flex items-center justify-center gap-2 text-lg shadow-xl"><Phone className="w-5 h-5" />704-728-0204</a>
-              <button onClick={() => setIsQuoteModalOpen(true)} className="bg-cyan-800 text-white px-10 py-5 rounded-xl hover:bg-cyan-900 transition-all text-lg border-2 border-white shadow-xl">Get Free Quote</button>
+              <a href="tel:704-728-0204" className="bg-white text-cyan-700 px-10 py-5 rounded-xl hover:bg-gray-100 transition-all flex items-center justify-center gap-2 text-lg shadow-xl font-semibold">
+                <Phone className="w-5 h-5" />
+                704-728-0204
+              </a>
+              <button onClick={() => setIsQuoteModalOpen(true)} className="bg-cyan-800 text-white px-10 py-5 rounded-xl hover:bg-cyan-900 transition-all text-lg border-2 border-white shadow-xl">
+                Get Free Quote
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      <footer className="bg-gray-900 text-white py-12" role="contentinfo" aria-label="Site footer">
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12 pb-20 md:pb-12" role="contentinfo" aria-label="Site footer">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
               <FooterLogo className="h-20 mb-4" />
-              <p className="text-gray-400 mb-3">Family-owned and locally operated. Protecting Charlotte Metro homes with professional, reliable pest control services.</p>
-              <address className="text-gray-400 not-italic" itemScope itemType="https://schema.org/PostalAddress"><MapPin className="w-4 h-4 inline mr-2" aria-hidden="true" />Based out of <span itemProp="addressLocality">Mooresville</span>, <span itemProp="addressRegion">North Carolina</span></address>
+              <p className="text-gray-400 mb-3">
+                Family-owned pest control for the Lake Norman area. Every customer helps us reach our 250,000-meal community giving goal.
+              </p>
+              <address className="text-gray-400 not-italic" itemScope itemType="https://schema.org/PostalAddress">
+                <MapPin className="w-4 h-4 inline mr-2" aria-hidden="true" />
+                Based in <span itemProp="addressLocality">Mooresville</span>, <span itemProp="addressRegion">NC</span>
+              </address>
             </div>
             <div>
               <h3 className="text-lg mb-4">Quick Links</h3>
@@ -460,56 +876,65 @@ export default function App() {
                 <li><a href="#services" className="hover:text-cyan-400 transition-colors">Services</a></li>
                 <li><a href="#why-us" className="hover:text-cyan-400 transition-colors">Why Choose Us</a></li>
                 <li><button onClick={() => setIsPestLibraryOpen(true)} className="hover:text-cyan-400 transition-colors">Pest Library</button></li>
-                <li><a href="#tips" className="hover:text-cyan-400 transition-colors">Tips & Resources</a></li>
+                <li><a href="#tips" className="hover:text-cyan-400 transition-colors">Tips &amp; Resources</a></li>
                 <li><a href="#faq" className="hover:text-cyan-400 transition-colors">FAQ</a></li>
-                <li><button onClick={() => setIsLegalModalOpen(true)} className="hover:text-cyan-400 transition-colors">Privacy Policy & Terms</button></li>
+                <li><button onClick={() => setIsLegalModalOpen(true)} className="hover:text-cyan-400 transition-colors">Privacy Policy &amp; Terms</button></li>
               </ul>
             </div>
             <div>
               <h3 className="text-lg mb-4">Contact Info</h3>
               <ul className="space-y-3 text-gray-400">
-                <li className="flex items-center gap-2"><Phone className="w-4 h-4" /><a href="tel:704-728-0204" className="hover:text-cyan-400 transition-colors">704-728-0204</a></li>
-                <li className="flex items-center gap-2"><Mail className="w-4 h-4" /><a href="mailto:sales@selkepestcontrol.com" className="hover:text-cyan-400 transition-colors">sales@selkepestcontrol.com</a></li>
+                <li className="flex items-center gap-2">
+                  <Phone className="w-4 h-4" />
+                  <a href="tel:704-728-0204" className="hover:text-cyan-400 transition-colors">704-728-0204</a>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Mail className="w-4 h-4" />
+                  <a href="mailto:sales@selkepestcontrol.com" className="hover:text-cyan-400 transition-colors">sales@selkepestcontrol.com</a>
+                </li>
               </ul>
+              <div className="mt-5">
+                <p className="text-gray-500 text-sm mb-3">Follow Us</p>
+                <div className="flex items-center gap-3">
+                  <a href="https://www.facebook.com/selkepestcontrol" target="_blank" rel="noopener noreferrer" aria-label="Selke Pest Control on Facebook" className="hover:opacity-75 transition-opacity">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="24" height="24" rx="5" fill="#1877F2"/>
+                      <path d="M15 4h-1.5C11.6 4 10 5.6 10 7.5V9H8v3h2v8h3v-8h2.5L16 9h-3V7.5c0-.3.2-.5.5-.5H16V4h-1z" fill="white"/>
+                    </svg>
+                  </a>
+                  <a href="https://www.instagram.com/selkepestcontrol" target="_blank" rel="noopener noreferrer" aria-label="Selke Pest Control on Instagram" className="hover:opacity-75 transition-opacity">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="igFooter2" x1="0" y1="24" x2="24" y2="0" gradientUnits="userSpaceOnUse">
+                          <stop stopColor="#F58529"/>
+                          <stop offset="0.5" stopColor="#DD2A7B"/>
+                          <stop offset="1" stopColor="#8134AF"/>
+                        </linearGradient>
+                      </defs>
+                      <rect width="24" height="24" rx="5" fill="url(#igFooter2)"/>
+                      <rect x="5" y="5" width="14" height="14" rx="4" stroke="white" strokeWidth="1.5" fill="none"/>
+                      <circle cx="12" cy="12" r="3.5" stroke="white" strokeWidth="1.5" fill="none"/>
+                      <circle cx="17" cy="7" r="1" fill="white"/>
+                    </svg>
+                  </a>
+                  <a href="https://share.google/cT2MLnW3U4Dw1kosn" target="_blank" rel="noopener noreferrer" aria-label="Selke Pest Control on Google" className="hover:opacity-75 transition-opacity">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="24" height="24" rx="5" fill="white" stroke="#DADCE0" strokeWidth="1"/>
+                      <path fill="#4285F4" d="M17.8 12.2c0-.4 0-.9-.1-1.2H12v2.4h3.3c-.2.7-.6 1.3-1.2 1.7v1.4h1.9c1.1-.9 1.8-2.3 1.8-4.3z"/>
+                      <path fill="#34A853" d="M12 18c1.7 0 3.1-.5 4.1-1.5l-1.9-1.4c-.6.4-1.3.6-2.2.6-1.7 0-3.1-1.1-3.6-2.7H6.4v1.5C7.4 16.8 9.5 18 12 18z"/>
+                      <path fill="#FBBC04" d="M8.4 13c-.2-.5-.3-1-.3-1.5s.1-1 .3-1.5V8.5H6.4C5.9 9.5 5.6 10.7 5.6 12s.3 2.5.8 3.5l2-1.5z"/>
+                      <path fill="#EA4335" d="M12 8.3c1 0 1.9.3 2.6.9l1.9-1.9C15.3 6.3 13.8 6 12 6 9.5 6 7.4 7.2 6.4 9l2 1.5C8.9 9.2 10.3 8.3 12 8.3z"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>&copy; {new Date().getFullYear()} Selke Pest Control. All rights reserved. Licensed & Insured.</p>
+            <p>&copy; {new Date().getFullYear()} Selke Pest Control. All rights reserved. Licensed &amp; Insured.</p>
           </div>
         </div>
       </footer>
-
-      {/* $25 Promo Popup — appears after 10 seconds */}
-      {showPromoPopup && !promoPopupDismissed && (
-        <div className="fixed bottom-6 right-6 z-50 w-full max-w-sm">
-          <style>{`@keyframes slideUpPop{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}.promo-popup{animation:slideUpPop 0.45s cubic-bezier(0.16,1,0.3,1) forwards}`}</style>
-          <div className="promo-popup bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden">
-            <div className="bg-gradient-to-r from-cyan-500 to-cyan-600 px-5 py-4 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="text-2xl">🎉</span>
-                <p className="text-white font-bold text-lg">New Customer Special</p>
-              </div>
-              <button onClick={() => setPromoPopupDismissed(true)} className="text-white/70 hover:text-white transition-colors p-1">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <div className="p-5">
-              <p className="text-4xl font-black text-gray-900 mb-1">$25 Off</p>
-              <p className="text-gray-500 text-sm mb-1">Your first pest control treatment</p>
-              <p className="text-gray-700 font-medium mb-5">No hassle. Get outside again!</p>
-              <button
-                onClick={() => { setIsQuoteModalOpen(true); setPromoPopupDismissed(true); }}
-                className="w-full bg-cyan-500 text-white py-3.5 rounded-xl font-semibold hover:bg-cyan-600 transition-colors text-lg"
-              >
-                Claim My $25 Off →
-              </button>
-              <button onClick={() => setPromoPopupDismissed(true)} className="w-full text-gray-400 text-sm mt-2.5 py-1 hover:text-gray-600 transition-colors">
-                No thanks, I'll pay full price
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
