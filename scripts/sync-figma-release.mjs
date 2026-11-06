@@ -7,9 +7,29 @@ const releaseCommit = '8c2ff94640fb64f3e876f11428d45cceb98ba381'
 const releaseRepository = 'https://api.figma.com/git/make/file/2355034718140475824/public/code/migrated/58196bc9-d5af-4508-bc96-0af6203def03.git'
 const releaseDirectory = join(tmpdir(), `selke-release-${releaseCommit.slice(0, 8)}`)
 
-rmSync(releaseDirectory, { recursive: true, force: true })
-execFileSync('git', ['clone', '--quiet', '--no-checkout', releaseRepository, releaseDirectory], { stdio: 'inherit' })
-execFileSync('git', ['-C', releaseDirectory, 'checkout', '--quiet', releaseCommit], { stdio: 'inherit' })
+let cloneError
+for (let attempt = 1; attempt <= 3; attempt += 1) {
+  rmSync(releaseDirectory, { recursive: true, force: true })
+  try {
+    console.log(`Fetching verified Selke release (attempt ${attempt}/3)`)
+    execFileSync('git', ['clone', '--quiet', '--no-checkout', releaseRepository, releaseDirectory], {
+      stdio: 'inherit',
+      timeout: 120_000,
+    })
+    cloneError = undefined
+    break
+  } catch (error) {
+    cloneError = error
+  }
+}
+if (cloneError || !existsSync(join(releaseDirectory, '.git'))) {
+  throw cloneError ?? new Error('Verified release clone did not produce a Git repository')
+}
+
+execFileSync('git', ['-C', releaseDirectory, 'checkout', '--quiet', releaseCommit], {
+  stdio: 'inherit',
+  timeout: 120_000,
+})
 
 function replaceDirectory(relativePath) {
   rmSync(relativePath, { recursive: true, force: true })
