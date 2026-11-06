@@ -5,7 +5,6 @@
   "packageManager": "pnpm@10.34.3",
   "type": "module",
   "scripts": {
-    "prebuild": "node scripts/sync-figma-release.mjs",
     "build": "vite build && node scripts/generate-seo-pages.mjs"
   },
   "dependencies": {
