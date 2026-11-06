@@ -3,7 +3,7 @@ import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } fr
 import { join } from 'node:path'
 import { tmpdir } from 'node:os'
 
-const releaseCommit = 'e279f67d4a055c7e84134163ad12bf66461f4d12'
+const releaseCommit = '8c2ff94640fb64f3e876f11428d45cceb98ba381'
 const releaseRepository = 'https://api.figma.com/git/make/file/2355034718140475824/public/code/migrated/58196bc9-d5af-4508-bc96-0af6203def03.git'
 const releaseDirectory = join(tmpdir(), `selke-release-${releaseCommit.slice(0, 8)}`)
 
