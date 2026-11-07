@@ -1,13 +1,13 @@
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-[#121719] text-white" aria-label="Hero">
-        <div className="grid lg:min-h-[680px] lg:grid-cols-[56%_44%]">
-          <div className="relative flex items-center overflow-hidden px-5 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-20 xl:px-16">
+      <section className="relative overflow-hidden bg-[#1a2428] text-white" aria-label="Hero">
+        <div className="relative flex min-h-[560px] items-center overflow-hidden px-5 py-12 sm:min-h-[620px] sm:px-8 sm:py-16 lg:min-h-[680px] lg:px-10 lg:py-20 xl:px-16">
             <div
               className="absolute inset-0"
               style={{
                 backgroundImage: `
-                  radial-gradient(circle at 82% 18%, rgba(46, 82, 91, 0.22), transparent 31%),
-                  linear-gradient(120deg, #151b1e 0%, #101517 54%, #192125 100%)
+                  radial-gradient(circle at 82% 18%, rgba(75, 125, 138, 0.28), transparent 34%),
+                  radial-gradient(circle at 12% 88%, rgba(47, 92, 103, 0.2), transparent 30%),
+                  linear-gradient(120deg, #202b30 0%, #182125 54%, #263238 100%)
                 `,
               }}
               aria-hidden="true"
@@ -61,11 +61,11 @@
                   </g>
                 </pattern>
               </defs>
-              <rect width="100%" height="100%" fill="url(#selke-hero-honeycomb)" opacity="0.82" />
+              <rect width="100%" height="100%" fill="url(#selke-hero-honeycomb)" opacity="0.94" />
             </svg>
-            <div className="absolute inset-0 bg-black/50" aria-hidden="true" />
+            <div className="absolute inset-0 bg-black/25" aria-hidden="true" />
 
-            <div className="relative z-10 mx-auto w-full max-w-2xl lg:ml-auto lg:mr-10 xl:mr-14">
+            <div className="relative z-10 mx-auto w-full max-w-7xl">
               <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-400/25 bg-cyan-500/10 px-3.5 py-2 backdrop-blur-sm sm:mb-6 sm:px-4">
                 <Shield className="h-4 w-4 text-cyan-400" />
                 <span className="text-sm font-medium text-cyan-50">Local Family-Owned &amp; Operated</span>
@@ -99,17 +99,5 @@
                 Learn about the Selke Guarantee
               </button>
             </div>
-          </div>
-
-          <div className="relative overflow-hidden bg-[#050708] lg:min-h-0">
-            <img
-              src={heroTreatmentImage}
-              alt="Selke Pest Control technician removing spider webs from a Charlotte-area home"
-              width="1800"
-              height="2700"
-              {...{ fetchpriority: 'high' }}
-              className="relative block h-80 w-full object-cover object-[50%_48%] sm:h-96 lg:absolute lg:inset-0 lg:h-full"
-            />
-          </div>
         </div>
       </section>
