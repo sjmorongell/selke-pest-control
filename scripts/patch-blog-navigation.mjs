@@ -10,13 +10,25 @@ const replacements = [
     '<a href="/blog" className="text-gray-700 hover:text-cyan-500 transition-colors">Blog</a>',
   ],
   ["['Pest Tips', '#tips']", "['Blog', '/blog']"],
+  [
+    '<li><a href="#tips" className="hover:text-cyan-400 transition-colors">Tips &amp; Resources</a></li>',
+    '<li><a href="/blog" className="hover:text-cyan-400 transition-colors">Pest Control Blog</a></li>',
+  ],
 ];
 
 for (const [search, replacement] of replacements) {
-  if (!source.includes(replacement) && source.includes(search)) {
-    source = source.replace(search, replacement);
+  if (source.includes(search)) {
+    source = source.replaceAll(search, replacement);
     changed = true;
   }
+}
+
+if (!source.includes('<a href="/blog" className="text-gray-700 hover:text-cyan-500 transition-colors">Blog</a>')) {
+  throw new Error('Desktop Blog navigation link was not found after patching.');
+}
+
+if (!source.includes("['Blog', '/blog']")) {
+  throw new Error('Mobile Blog navigation link was not found after patching.');
 }
 
 if (changed) {
