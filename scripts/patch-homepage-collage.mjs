@@ -4,6 +4,10 @@ const path = 'src/app/App.tsx';
 let source = readFileSync(path, 'utf8');
 let changed = false;
 
+const heroImagePath = 'src/imports/selke-home-treatment-hero.webp';
+const heroImageBase64 = readFileSync('scripts/hero/selke-home-treatment-hero.webp.b64', 'utf8');
+writeFileSync(heroImagePath, Buffer.from(heroImageBase64, 'base64'));
+
 if (source.trim() === 'PLACEHOLDER') {
   const recoveryUrl = 'https://raw.githubusercontent.com/sjmorongell/selke-pest-control/8b45e1f/src/app/App.tsx';
   const response = await fetch(recoveryUrl);
@@ -15,6 +19,38 @@ if (source.trim() === 'PLACEHOLDER') {
   source = await response.text();
   changed = true;
   console.log('Restored homepage source before applying release updates.');
+}
+
+const heroImageImport = "import heroTreatmentImage from '../imports/selke-home-treatment-hero.webp';";
+if (!source.includes(heroImageImport)) {
+  const previousHeroImageImport = "import heroBackgroundImage from '../imports/b492d4f6-f650-412b-b5ac-975c7d404996.png';";
+  if (source.includes(previousHeroImageImport)) {
+    source = source.replace(previousHeroImageImport, heroImageImport);
+    changed = true;
+    console.log('Applied optimized homepage hero image import.');
+  } else {
+    const logoImport = "import newLogo from '../imports/Screenshot_2026-05-18_213802.png';";
+    if (source.includes(logoImport)) {
+      source = source.replace(logoImport, `${logoImport}\n${heroImageImport}`);
+      changed = true;
+      console.log('Inserted optimized homepage hero image import.');
+    } else {
+      console.warn('Skipped homepage hero image import: expected import location was not found.');
+    }
+  }
+}
+
+if (!source.includes('selke-pattern-hex')) {
+  const heroSectionPattern = /      \{\/\* Hero Section \*\/\}[\s\S]*?(?=      \{\/\* Trust Bar \*\/\})/;
+  const heroSection = readFileSync('scripts/hero/homepage-hero.tsx.txt', 'utf8');
+
+  if (heroSectionPattern.test(source)) {
+    source = source.replace(heroSectionPattern, heroSection);
+    changed = true;
+    console.log('Applied split homepage hero.');
+  } else {
+    console.warn('Skipped split homepage hero: expected section was not found.');
+  }
 }
 
 const replaceOnce = (search, replacement, label) => {
