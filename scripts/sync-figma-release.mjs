@@ -5,10 +5,11 @@ import path from 'node:path';
 
 const source =
   'https://api.figma.com/git/make/file/2355034718140475824/public/code/migrated/58196bc9-d5af-4508-bc96-0af6203def03.git';
-const release = '33513f5490f93264a920e3dcf1eeb9009bb1de56';
+const release = '1d8a5bf9cc9bde655c0087afb64bd816e66dd1f6';
 const files = [
   'src/app/App.tsx',
   'src/app/utils/blogContent.ts',
+  'src/app/components/QuoteFormModal.tsx',
   'scripts/generate-seo-pages.mjs',
 ];
 
