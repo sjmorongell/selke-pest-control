@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --config vite.figma.config.ts",
-    "build": "vite build && node scripts/generate-seo-pages.mjs"
+    "build": "node scripts/sync-figma-release.mjs && vite build && node scripts/generate-seo-pages.mjs && node scripts/ensure-agentic-schema.mjs && node scripts/verify-agentic-readiness.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
