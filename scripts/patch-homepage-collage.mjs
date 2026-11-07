@@ -5,8 +5,6 @@ let source = readFileSync(path, 'utf8');
 let changed = false;
 
 const heroImagePath = 'src/imports/selke-home-treatment-hero.webp';
-const heroImageBase64 = readFileSync('scripts/hero/selke-home-treatment-hero.webp.b64', 'utf8');
-writeFileSync(heroImagePath, Buffer.from(heroImageBase64, 'base64'));
 
 if (source.trim() === 'PLACEHOLDER') {
   const recoveryUrl = 'https://raw.githubusercontent.com/sjmorongell/selke-pest-control/8b45e1f/src/app/App.tsx';

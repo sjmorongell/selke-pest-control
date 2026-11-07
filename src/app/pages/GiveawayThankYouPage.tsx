@@ -1,5 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
-import { ArrowRight, CalendarCheck, CheckCircle, Phone, Shield, Trophy } from 'lucide-react';
+import { ArrowRight, CalendarCheck, CheckCircle, Phone, Shield, Star, Trophy } from 'lucide-react';
+import { InstagramFeedSection } from '../components/InstagramFeedSection';
+import { ReviewsCarousel } from '../components/ReviewsCarousel';
 import newLogo from '../../imports/Screenshot_2026-05-18_213802.png';
 
 const QuoteFormModal = lazy(() =>
@@ -138,6 +140,30 @@ export default function GiveawayThankYouPage() {
             </p>
           </div>
         </section>
+
+        <section className="border-b border-slate-200 bg-slate-50 px-4 py-14 text-slate-950 sm:px-6 md:py-20" aria-label="Google reviews">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-10 text-center">
+              <div className="flex justify-center gap-1" aria-label="Five out of five stars">
+                {[...Array(5)].map((_, index) => (
+                  <Star key={index} className="size-6 fill-amber-400 text-amber-400" aria-hidden="true" />
+                ))}
+              </div>
+              <p className="mt-4 text-sm font-bold uppercase tracking-[0.18em] text-cyan-700">
+                Trusted Across Lake Norman
+              </p>
+              <h2 className="mt-2 text-3xl font-black sm:text-4xl">
+                75+ Five-Star Reviews on Google
+              </h2>
+              <p className="mx-auto mt-3 max-w-2xl text-slate-600">
+                See why homeowners across Mooresville, Charlotte, and Lake Norman trust Selke with their homes.
+              </p>
+            </div>
+            <ReviewsCarousel />
+          </div>
+        </section>
+
+        <InstagramFeedSection />
       </main>
 
       <footer className="px-4 py-9 text-center text-sm text-slate-500">
