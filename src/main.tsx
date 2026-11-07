@@ -1,40 +1,42 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
-import App from './app/App'
-import CityPage from './app/pages/CityPage'
-import PestPage from './app/pages/PestPage'
-import BlogPage from './app/pages/BlogPage'
-import GiveawayPage from './app/pages/GiveawayPage'
-import GiveawayThankYouPage from './app/pages/GiveawayThankYouPage'
-import { cityData } from './app/data/cityData'
-import { pestPages } from './app/data/pestData'
-import './styles/index.css'
+import React, { lazy, Suspense } from "react"
+import ReactDOM from "react-dom/client"
+import "./styles/index.css"
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const App = lazy(() => import("./app/App"))
+const BlogIndexPage = lazy(() => import("./app/pages/BlogIndexPage"))
+const BlogPage = lazy(() => import("./app/pages/BlogPage"))
+const SeoLandingRoute = lazy(() => import("./app/pages/SeoLandingRoute"))
+const GiveawayPage = lazy(() => import("./app/pages/GiveawayPage"))
+const GiveawayThankYouPage = lazy(
+  () => import("./app/pages/GiveawayThankYouPage"),
+)
+
+function SiteRouter() {
+  const path = window.location.pathname.replace(/\/+$/, "") || "/"
+
+  if (path === "/") return <App />
+  if (path === "/giveaway") return <GiveawayPage />
+  if (path === "/giveaway-thank-you") return <GiveawayThankYouPage />
+  if (path === "/blog") return <BlogIndexPage />
+  if (path.startsWith("/blog/")) {
+    return <BlogPage slug={decodeURIComponent(path.slice("/blog/".length))} />
+  }
+
+  return <SeoLandingRoute slug={decodeURIComponent(path.slice(1))} />
+}
+
+const rootContainer = document.getElementById("root")
+
+if (!rootContainer) {
+  throw new Error("React root container was not found")
+}
+
+ReactDOM.createRoot(rootContainer).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/giveaway" element={<GiveawayPage />} />
-        <Route path="/giveaway-thank-you" element={<GiveawayThankYouPage />} />
-        <Route path="/blog" element={<Navigate to="/#tips" replace />} />
-        <Route path="/blog/:slug" element={<BlogPage />} />
-        {cityData.map((city) => (
-          <Route
-            key={city.slug}
-            path={`/${city.slug}`}
-            element={<CityPage city={city} />}
-          />
-        ))}
-        {pestPages.map((pest) => (
-          <Route
-            key={pest.slug}
-            path={`/${pest.slug}`}
-            element={<PestPage pest={pest} />}
-          />
-        ))}
-      </Routes>
-    </BrowserRouter>
+    <Suspense
+      fallback={<div className="min-h-screen bg-white" aria-busy="true" />}
+    >
+      <SiteRouter />
+    </Suspense>
   </React.StrictMode>,
 )
