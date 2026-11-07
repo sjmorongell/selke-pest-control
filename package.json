@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --config vite.figma.config.ts",
-    "build": "node scripts/sync-homepage-collage.mjs && node scripts/apply-final-release.mjs && vite build && node scripts/generate-seo-pages.mjs && node scripts/generate-current-pages.mjs && node scripts/generate-premium-service-page.mjs"
+    "build": "node scripts/patch-homepage-collage.mjs && node scripts/write-collage-photos.mjs && vite build && node scripts/generate-seo-pages.mjs && node scripts/generate-current-pages.mjs && node scripts/generate-premium-service-page.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
