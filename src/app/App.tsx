@@ -1,15 +1,22 @@
-import { Phone, Mail, MapPin, Shield, Clock, Star, Bug, Home, Leaf, Award, Users, ChevronDown, Droplets, Wind, Zap, AlertCircle, CheckCircle, Scissors, TreeDeciduous, Check, X, Heart, Gift, Menu } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { Phone, Mail, MapPin, Shield, Clock, Star, Bug, Home, Leaf, Award, Users, ChevronDown, Droplets, Wind, Zap, AlertCircle, CheckCircle, Scissors, TreeDeciduous, Check, X, Heart, Menu } from 'lucide-react';
+import { lazy, Suspense, useState, useEffect } from 'react';
 
-const BEHOLD_FEED_ID = 'A0kwNTKUAJENXFiJgHlU';
-import { QuoteFormModal } from './components/QuoteFormModal';
 import { BlogArticle } from './components/BlogArticle';
+import { InstagramFeedSection } from './components/InstagramFeedSection';
 import { ReviewsCarousel } from './components/ReviewsCarousel';
-import { PestLibraryModal } from './components/PestLibraryModal';
-import { LegalModal } from './components/LegalModal';
 import FooterLogo from './components/FooterLogo';
 import newLogo from '../imports/Screenshot_2026-05-18_213802.png';
-import techWalking from '../imports/b492d4f6-f650-412b-b5ac-975c7d404996-1.png';
+import techWalking from '../imports/b492d4f6-f650-412b-b5ac-975c7d404996.png';
+
+const QuoteFormModal = lazy(() =>
+  import('./components/QuoteFormModal').then(module => ({ default: module.QuoteFormModal }))
+);
+const PestLibraryModal = lazy(() =>
+  import('./components/PestLibraryModal').then(module => ({ default: module.PestLibraryModal }))
+);
+const LegalModal = lazy(() =>
+  import('./components/LegalModal').then(module => ({ default: module.LegalModal }))
+);
 
 export default function App() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -19,19 +26,8 @@ export default function App() {
   const [openProcessStep, setOpenProcessStep] = useState<number | null>(null);
   const [isLegalModalOpen, setIsLegalModalOpen] = useState(false);
   const [isAreasDropdownOpen, setIsAreasDropdownOpen] = useState(false);
-  const [urgencyDismissed, setUrgencyDismissed] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    if (!BEHOLD_FEED_ID) return;
-    const script = document.createElement('script');
-    script.src = 'https://w.behold.so/widget.js';
-    script.type = 'module';
-    script.async = true;
-    document.head.appendChild(script);
-    return () => { if (document.head.contains(script)) document.head.removeChild(script); };
-  }, []);
-
+  const [urgencyDismissed, setUrgencyDismissed] = useState(false);
   const serviceAreas = [
     { name: 'Mooresville', slug: 'pest-control-mooresville-nc' },
     { name: 'Charlotte', slug: 'pest-control-charlotte-nc' },
@@ -89,6 +85,41 @@ export default function App() {
       icon: <TreeDeciduous className="w-7 h-7 text-white" />,
       title: "Fall Rodent Prevention Checklist for Charlotte Homes",
       excerpt: "Follow this comprehensive checklist to rodent-proof your home before winter arrives.",
+    },
+    {
+      id: 'summerMosquitoes',
+      slug: 'summer-mosquito-control-lake-norman-nc',
+      icon: <Wind className="w-7 h-7 text-white" />,
+      title: "Summer Mosquito Control Around Lake Norman",
+      excerpt: "A practical summer plan for reducing mosquito breeding sites and protecting your yard between professional treatments.",
+    },
+    {
+      id: 'fireAntAeration',
+      slug: 'fire-ants-after-lawn-aeration-nc',
+      icon: <Bug className="w-7 h-7 text-white" />,
+      title: "Fire Ants After Lawn Aeration: What NC Homeowners Should Know",
+      excerpt: "Learn why fire ant activity can become more visible after aeration and how to protect newly treated lawns.",
+    },
+    {
+      id: 'rainTreatments',
+      slug: 'does-rain-wash-away-pest-control-treatment',
+      icon: <Droplets className="w-7 h-7 text-white" />,
+      title: "Does Rain Wash Away Pest Control Treatment?",
+      excerpt: "Find out when rain affects exterior pest treatments, when it does not, and whether your home needs another application.",
+    },
+    {
+      id: 'stormMosquitoes',
+      slug: 'mosquitoes-after-summer-rain-charlotte-nc',
+      icon: <Droplets className="w-7 h-7 text-white" />,
+      title: "Why Mosquitoes Surge After Summer Rain in Charlotte",
+      excerpt: "Summer storms can trigger a mosquito boom in days. Here is what happens and the yard checks that make the biggest difference.",
+    },
+    {
+      id: 'outdoorEntertaining',
+      slug: 'pest-free-backyard-party-charlotte-nc',
+      icon: <Leaf className="w-7 h-7 text-white" />,
+      title: "How to Prepare a Pest-Free Yard for Summer Entertaining",
+      excerpt: "Use this one-week checklist to reduce mosquitoes, ants, ticks, and stinging insects before guests arrive.",
     }
   ];
 
@@ -102,6 +133,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-slate-950 focus:px-4 focus:py-3 focus:text-white">Skip to main content</a>
       {/* Mobile Sticky Call Bar */}
       <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-cyan-600 shadow-[0_-2px_12px_rgba(0,0,0,0.2)]">
         <a
@@ -114,9 +146,21 @@ export default function App() {
         </a>
       </div>
 
-      <QuoteFormModal isOpen={isQuoteModalOpen} onClose={() => setIsQuoteModalOpen(false)} />
-      <PestLibraryModal isOpen={isPestLibraryOpen} onClose={() => setIsPestLibraryOpen(false)} />
-      <LegalModal isOpen={isLegalModalOpen} onClose={() => setIsLegalModalOpen(false)} />
+      {isQuoteModalOpen && (
+        <Suspense fallback={null}>
+          <QuoteFormModal isOpen={isQuoteModalOpen} onClose={() => setIsQuoteModalOpen(false)} />
+        </Suspense>
+      )}
+      {isPestLibraryOpen && (
+        <Suspense fallback={null}>
+          <PestLibraryModal isOpen={isPestLibraryOpen} onClose={() => setIsPestLibraryOpen(false)} />
+        </Suspense>
+      )}
+      {isLegalModalOpen && (
+        <Suspense fallback={null}>
+          <LegalModal isOpen={isLegalModalOpen} onClose={() => setIsLegalModalOpen(false)} />
+        </Suspense>
+      )}
 
       {/* Guarantee Modal */}
       {isGuaranteeModalOpen && (
@@ -157,10 +201,10 @@ export default function App() {
 
       {/* Seasonal Urgency Banner */}
       {!urgencyDismissed && (
-        <div className="bg-amber-500 text-white py-2.5 px-4 relative">
+        <div className="bg-slate-900 text-white py-2.5 px-4 relative">
           <div className="max-w-4xl mx-auto text-center text-sm font-medium pr-8">
-            <span className="font-bold">Peak Mosquito &amp; Tick Season:</span> August is the worst month for biting insects in Lake Norman.{' '}
-            <a href="tel:7047280204" className="underline font-bold hover:no-underline">Call now for same-week service →</a>
+            <span className="font-bold text-cyan-300">Hearing scratching at night?</span> Mice can enter through a dime-sized gap.{' '}
+            <a href="/rodent-control-charlotte-nc" className="underline font-bold hover:no-underline">See our rodent control service →</a>
           </div>
           <button
             onClick={() => setUrgencyDismissed(true)}
@@ -177,7 +221,7 @@ export default function App() {
         <div className="container mx-auto px-4 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center">
             <a href="/" aria-label="Selke Pest Control - Home">
-              <img src={newLogo} alt="Selke Pest Control logo" className="h-14 md:h-16" />
+              <img src={newLogo} alt="Selke Pest Control logo" className="h-14 w-auto md:h-16" width="1656" height="382" />
             </a>
           </div>
           <nav className="hidden lg:flex items-center gap-6" aria-label="Main navigation">
@@ -204,59 +248,52 @@ export default function App() {
               )}
             </div>
           </nav>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 sm:gap-3">
             <a href="tel:704-728-0204" className="bg-cyan-500 text-white px-4 md:px-6 py-3 rounded-lg hover:bg-cyan-600 transition-colors flex items-center gap-2 text-sm md:text-base" aria-label="Call Selke Pest Control at 704-728-0204">
               <Phone className="w-4 h-4" aria-hidden="true" />
               <span className="hidden sm:inline">704-728-0204</span>
             </a>
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2.5 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
-              aria-label="Open navigation menu"
+              type="button"
+              onClick={() => setIsMobileMenuOpen(open => !open)}
+              className="lg:hidden inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50"
+              aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
-
-        {/* Mobile Menu Panel */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden border-t border-gray-100 bg-white shadow-xl max-h-[80vh] overflow-y-auto">
-            <nav className="px-4 py-3 space-y-1">
-              <a href="#services" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center py-3 px-4 text-gray-800 hover:bg-cyan-50 hover:text-cyan-600 rounded-xl text-base font-medium transition-colors">Services</a>
-              <a href="#why-us" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center py-3 px-4 text-gray-800 hover:bg-cyan-50 hover:text-cyan-600 rounded-xl text-base font-medium transition-colors">Why Us</a>
-              <button onClick={() => { setIsPestLibraryOpen(true); setIsMobileMenuOpen(false); }} className="w-full text-left flex items-center py-3 px-4 text-gray-800 hover:bg-cyan-50 hover:text-cyan-600 rounded-xl text-base font-medium transition-colors">Pest Library</button>
-              <a href="#tips" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center py-3 px-4 text-gray-800 hover:bg-cyan-50 hover:text-cyan-600 rounded-xl text-base font-medium transition-colors">Tips &amp; Blog</a>
-              <a href="#faq" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center py-3 px-4 text-gray-800 hover:bg-cyan-50 hover:text-cyan-600 rounded-xl text-base font-medium transition-colors">FAQ</a>
-            </nav>
-            <div className="px-4 pb-4 pt-1">
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest px-4 mb-2">Service Areas</p>
-              <div className="grid grid-cols-2 gap-1">
-                {serviceAreas.map(({ name, slug }) => (
-                  <a key={slug} href={`/${slug}`} onClick={() => setIsMobileMenuOpen(false)} className="py-2.5 px-4 text-sm text-gray-600 hover:text-cyan-600 hover:bg-cyan-50 rounded-xl transition-colors">
-                    {name}, NC
-                  </a>
-                ))}
-              </div>
+          <nav id="mobile-navigation" className="lg:hidden border-t border-gray-100 bg-white px-4 py-4 shadow-lg" aria-label="Mobile navigation">
+            <div className="grid gap-1">
+              {[
+                ['Services', '#services'],
+                ['Why Selke', '#why-us'],
+                ['Pest Tips', '#tips'],
+                ['Service Areas', '#areas'],
+                ['Frequently Asked Questions', '#faq'],
+              ].map(([label, href]) => (
+                <a key={href} href={href} onClick={() => setIsMobileMenuOpen(false)} className="rounded-lg px-4 py-3 font-medium text-gray-700 hover:bg-cyan-50 hover:text-cyan-700">{label}</a>
+              ))}
+              <button onClick={() => { setIsPestLibraryOpen(true); setIsMobileMenuOpen(false); }} className="rounded-lg px-4 py-3 text-left font-medium text-gray-700 hover:bg-cyan-50 hover:text-cyan-700">Pest Library</button>
             </div>
-            <div className="px-4 pb-5">
-              <button
-                onClick={() => { setIsQuoteModalOpen(true); setIsMobileMenuOpen(false); }}
-                className="w-full bg-cyan-500 text-white py-4 rounded-xl font-bold text-base hover:bg-cyan-600 transition-colors"
-              >
-                Get Free Quote
-              </button>
-            </div>
-          </div>
+          </nav>
         )}
       </header>
 
+      <main id="main-content">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-cyan-900 text-white py-20 md:py-40" aria-label="Hero">
+      <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-cyan-900 text-white py-16 md:py-40" aria-label="Hero">
         <div className="absolute inset-0 bg-black/60" />
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-25"
-          style={{ backgroundImage: `url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920)` }}
+        <img
+          src={techWalking}
+          alt=""
+          width="1280"
+          height="720"
+          {...{ fetchpriority: 'high' }}
+          className="absolute inset-0 h-full w-full object-cover opacity-25"
         />
 
         {/* Guarantee Badge */}
@@ -318,13 +355,13 @@ export default function App() {
 
       {/* Trust Bar */}
       <div className="bg-white border-b border-gray-100 shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex flex-wrap items-center justify-center gap-4 md:gap-6 text-sm">
+        <div className="max-w-4xl mx-auto px-4 py-4 flex flex-wrap items-center justify-center gap-6 text-sm">
           <a
             href="https://share.google/cT2MLnW3U4Dw1kosn"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 hover:opacity-80 transition-opacity group"
-            aria-label="Read our 46 Google reviews"
+            aria-label="Read our 75 plus five-star Google reviews"
           >
             <div className="flex">
               {[...Array(5)].map((_, i) => (
@@ -332,7 +369,7 @@ export default function App() {
               ))}
             </div>
             <span className="font-semibold text-gray-800 group-hover:text-cyan-600 transition-colors">
-              5.0 &bull; 46 Google Reviews
+              75+ Five-Star Google Reviews
             </span>
             <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0" aria-hidden="true">
               <path fill="#4285F4" d="M17.8 12.2c0-.4 0-.9-.1-1.2H12v2.4h3.3c-.2.7-.6 1.3-1.2 1.7v1.4h1.9c1.1-.9 1.8-2.3 1.8-4.3z"/>
@@ -360,9 +397,9 @@ export default function App() {
       </div>
 
       {/* Services Section */}
-      <section id="services" className="py-12 md:py-20 bg-gray-50" aria-label="Our Services">
+      <section id="services" className="py-14 md:py-20 bg-gray-50" aria-label="Our Services">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-10 md:mb-16">
+          <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl mb-4">Our Services</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Comprehensive pest protection for Lake Norman homes &amp; families
@@ -410,9 +447,9 @@ export default function App() {
       </section>
 
       {/* Pest Seasonality Section */}
-      <section className="py-12 md:py-20" style={{ background: '#0d1b2a' }}>
+      <section className="py-20" style={{ background: '#0d1b2a' }}>
         <div className="container mx-auto px-4">
-          <div className="text-center mb-10 md:mb-14">
+          <div className="text-center mb-14">
             <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6 border border-slate-600 bg-slate-800/60">
               <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-cyan-400"><path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" /></svg>
               <span className="text-sm text-slate-300 font-medium">Charlotte Metro, NC</span>
@@ -426,32 +463,32 @@ export default function App() {
             const months = ['J','F','M','A','M','J','J','A','S','O','N','D'];
             const heights = [12, 28, 58, 100];
             const pests = [
-              { name: 'Mosquitoes', emoji: '🦟', peak: 'May – Oct', activity: [0,0,1,2,3,3,3,3,3,2,1,0], slug: 'mosquito-control-charlotte-nc' },
-              { name: 'Ants',       emoji: '🐜', peak: 'Mar – Sep', activity: [1,1,2,3,3,3,3,2,2,1,1,1], slug: 'ant-control-charlotte-nc' },
-              { name: 'Ticks',      emoji: '🕷️', peak: 'Apr – Aug', activity: [1,1,2,3,3,2,2,2,1,1,1,1], slug: 'tick-control-charlotte-nc' },
-              { name: 'Cockroaches',emoji: '🪳', peak: 'Jun – Sep', activity: [1,1,1,1,2,3,3,3,3,2,1,1], slug: 'cockroach-control-charlotte-nc' },
-              { name: 'Spiders',    emoji: '🕸️', peak: 'Aug – Oct', activity: [1,1,1,1,2,2,2,3,3,3,2,1], slug: 'spider-control-charlotte-nc' },
-              { name: 'Wasps',      emoji: '🐝', peak: 'Jun – Oct', activity: [0,0,1,1,2,3,3,3,3,2,1,0], slug: 'wasp-control-charlotte-nc' },
-              { name: 'Fleas',      emoji: '🐛', peak: 'May – Sep', activity: [0,0,1,2,3,3,3,3,2,1,0,0], slug: 'flea-control-charlotte-nc' },
-              { name: 'Rodents',    emoji: '🐭', peak: 'Sep – Feb', activity: [3,3,2,1,1,1,1,1,2,3,3,3], slug: 'rodent-control-charlotte-nc' },
+              { name: 'Mosquitoes', peak: 'May – Oct', activity: [0,0,1,2,3,3,3,3,3,2,1,0], slug: 'mosquito-control-charlotte-nc' },
+              { name: 'Ants', peak: 'Mar – Sep', activity: [1,1,2,3,3,3,3,2,2,1,1,1], slug: 'ant-control-charlotte-nc' },
+              { name: 'Ticks', peak: 'Apr – Aug', activity: [1,1,2,3,3,2,2,2,1,1,1,1], slug: 'tick-control-charlotte-nc' },
+              { name: 'Cockroaches', peak: 'Jun – Sep', activity: [1,1,1,1,2,3,3,3,3,2,1,1], slug: 'cockroach-control-charlotte-nc' },
+              { name: 'Spiders', peak: 'Aug – Oct', activity: [1,1,1,1,2,2,2,3,3,3,2,1], slug: 'spider-control-charlotte-nc' },
+              { name: 'Wasps', peak: 'Jun – Oct', activity: [0,0,1,1,2,3,3,3,3,2,1,0], slug: 'wasp-control-charlotte-nc' },
+              { name: 'Fleas', peak: 'May – Sep', activity: [0,0,1,2,3,3,3,3,2,1,0,0], slug: 'flea-control-charlotte-nc' },
+              { name: 'Rodents', peak: 'Sep – Feb', activity: [3,3,2,1,1,1,1,1,2,3,3,3], slug: 'rodent-control-charlotte-nc' },
             ];
             return (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-6xl mx-auto">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
                 {pests.map(pest => (
                   <a
                     key={pest.name}
                     href={`/${pest.slug}`}
-                    className="rounded-2xl p-4 md:p-5 hover:bg-slate-700/80 transition-all group"
+                    className="rounded-2xl p-5 hover:bg-slate-700/80 transition-all group"
                     style={{ background: '#152033' }}
                   >
-                    <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-5">
-                      <span className="text-xl md:text-2xl">{pest.emoji}</span>
+                    <div className="flex items-center gap-3 mb-5">
+                      <Bug className="w-6 h-6 text-cyan-400" aria-hidden="true" />
                       <div>
-                        <h3 className="font-bold text-white text-sm md:text-base leading-tight">{pest.name}</h3>
+                        <h3 className="font-bold text-white text-base leading-tight">{pest.name}</h3>
                         <p className="text-xs text-cyan-400 mt-0.5">Peak: {pest.peak}</p>
                       </div>
                     </div>
-                    <div className="flex items-end gap-[2px] md:gap-[3px] h-10 mb-2">
+                    <div className="flex items-end gap-[3px] h-10 mb-2">
                       {pest.activity.map((level, i) => (
                         <div
                           key={i}
@@ -466,21 +503,21 @@ export default function App() {
                     </div>
                     <div className="flex justify-between mb-3">
                       {months.map((m, i) => (
-                        <span key={i} className="text-[8px] md:text-[9px] text-slate-600 flex-1 text-center">{m}</span>
+                        <span key={i} className="text-[9px] text-slate-600 flex-1 text-center">{m}</span>
                       ))}
                     </div>
                     <p className="text-slate-400 text-xs group-hover:text-cyan-400 transition-colors">
-                      View treatment →
+                      View treatment options →
                     </p>
                   </a>
                 ))}
               </div>
             );
           })()}
-          <div className="text-center mt-10 md:mt-12">
+          <div className="text-center mt-12">
             <button
               onClick={() => setIsQuoteModalOpen(true)}
-              className="bg-cyan-400 text-slate-900 font-bold px-10 md:px-12 py-4 rounded-xl text-lg hover:bg-cyan-300 transition-colors shadow-lg w-full sm:w-auto"
+              className="bg-cyan-400 text-slate-900 font-bold px-12 py-4 rounded-xl text-lg hover:bg-cyan-300 transition-colors shadow-lg"
             >
               Protect Your Home Year-Round
             </button>
@@ -489,10 +526,10 @@ export default function App() {
       </section>
 
       {/* Bundle Section */}
-      <section className="py-12 md:py-20 bg-gradient-to-br from-cyan-600 to-cyan-700 text-white">
+      <section className="py-20 bg-gradient-to-br from-cyan-600 to-cyan-700 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <div className="inline-flex items-center gap-2 bg-white/20 rounded-full px-4 py-2 mb-4">
                   <Star className="w-4 h-4" />
@@ -525,7 +562,7 @@ export default function App() {
                 </div>
                 <button
                   onClick={() => setIsQuoteModalOpen(true)}
-                  className="mt-8 bg-white text-cyan-700 px-8 py-4 rounded-xl hover:bg-gray-100 transition-all shadow-lg font-semibold w-full sm:w-auto"
+                  className="mt-8 bg-white text-cyan-700 px-8 py-4 rounded-xl hover:bg-gray-100 transition-all shadow-lg font-semibold"
                 >
                   Get Bundle Quote
                 </button>
@@ -535,8 +572,8 @@ export default function App() {
                   src={techWalking}
                   alt="Selke Pest Control technician performing professional pest control service in Lake Norman area"
                   className="rounded-2xl shadow-2xl"
-                  width="600"
-                  height="500"
+                  width="900"
+                  height="675"
                   loading="lazy"
                 />
               </div>
@@ -546,10 +583,10 @@ export default function App() {
       </section>
 
       {/* Community Giving Section */}
-      <section className="py-14 md:py-24 bg-slate-900 text-white" aria-label="Community Giving Mission">
+      <section className="py-24 bg-slate-900 text-white" aria-label="Community Giving Mission">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <div className="grid md:grid-cols-2 gap-16 items-center">
               <div>
                 <p className="text-cyan-400 text-sm font-semibold tracking-widest uppercase mb-4">The Selke Mission</p>
                 <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
@@ -563,28 +600,28 @@ export default function App() {
                 </p>
                 <button
                   onClick={() => setIsQuoteModalOpen(true)}
-                  className="bg-cyan-500 text-white px-8 py-4 rounded-xl hover:bg-cyan-400 transition-colors font-semibold w-full sm:w-auto"
+                  className="bg-cyan-500 text-white px-8 py-4 rounded-xl hover:bg-cyan-400 transition-colors font-semibold"
                 >
                   Be Part of the Mission
                 </button>
               </div>
               <div className="space-y-px">
-                <div className="bg-slate-800 rounded-t-2xl p-6 md:p-8 border-b border-slate-700">
-                  <p className="text-5xl md:text-6xl font-black text-white tracking-tight">250,000</p>
+                <div className="bg-slate-800 rounded-t-2xl p-8 border-b border-slate-700">
+                  <p className="text-6xl font-black text-white tracking-tight">250,000</p>
                   <p className="text-cyan-400 font-semibold mt-1">Meals — Our Community Goal</p>
                   <p className="text-slate-400 text-sm mt-2">Partnering with local food banks and nonprofits to feed neighbors in need. Every customer moves the number.</p>
                 </div>
                 <div className="grid grid-cols-2 gap-px">
-                  <div className="bg-slate-800 p-5 md:p-6">
+                  <div className="bg-slate-800 p-6">
                     <p className="text-slate-300 font-semibold mb-1">Local Partners</p>
                     <p className="text-slate-500 text-sm">Working with Lake Norman area food banks to get meals where they're needed most.</p>
                   </div>
-                  <div className="bg-slate-800 p-5 md:p-6">
+                  <div className="bg-slate-800 p-6">
                     <p className="text-slate-300 font-semibold mb-1">Long-Term Vision</p>
                     <p className="text-slate-500 text-sm">A dedicated food truck or nonprofit. School supplies. Something bigger than pest control.</p>
                   </div>
                 </div>
-                <div className="bg-slate-800 rounded-b-2xl p-5 md:p-6">
+                <div className="bg-slate-800 rounded-b-2xl p-6">
                   <p className="text-slate-400 text-sm italic">"We earn your business every visit — and with every visit, we get closer to 250,000."</p>
                   <p className="text-slate-500 text-xs mt-2">— The Selke Pest Control Team, Mooresville NC</p>
                 </div>
@@ -595,15 +632,15 @@ export default function App() {
       </section>
 
       {/* Why Choose Us */}
-      <section id="why-us" className="py-12 md:py-20 bg-white" aria-label="Why Choose Selke Pest Control">
+      <section id="why-us" className="py-20 bg-white" aria-label="Why Choose Selke Pest Control">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-10 md:mb-16">
+          <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl mb-4">Why Lake Norman Chooses Selke</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               We're not a national chain. We're your neighbors — and we operate like it.
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
             {[
               { icon: <Shield className="w-7 h-7 text-cyan-600" />, title: "100% Guarantee", desc: "If pests return between treatments, we return at no extra cost. No questions asked." },
               { icon: <Clock className="w-7 h-7 text-cyan-600" />, title: "Same-Week Service", desc: "Urgent situation? We offer same-week — and often same-day — scheduling for Lake Norman homes." },
@@ -611,12 +648,12 @@ export default function App() {
               { icon: <Users className="w-7 h-7 text-cyan-600" />, title: "Flexible Plans", desc: "Flexible service agreements — no hard lock-ins. We earn your business every single visit." },
               { icon: <Heart className="w-7 h-7 text-cyan-600" fill="none" />, title: "Giving Back", desc: "Choosing Selke helps us hit our 250,000-meal community giving goal. Business with purpose." },
             ].map(({ icon, title, desc }) => (
-              <div key={title} className="text-center col-span-1">
-                <div className="w-14 h-14 md:w-16 md:h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+              <div key={title} className="text-center">
+                <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   {icon}
                 </div>
-                <h3 className="text-base md:text-xl mb-2 md:mb-3 font-semibold">{title}</h3>
-                <p className="text-gray-600 text-sm md:text-base">{desc}</p>
+                <h3 className="text-xl mb-3">{title}</h3>
+                <p className="text-gray-600">{desc}</p>
               </div>
             ))}
           </div>
@@ -624,11 +661,11 @@ export default function App() {
       </section>
 
       {/* Good Neighbor Referral */}
-      <section className="py-12 md:py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <div className="grid md:grid-cols-2">
-              <div className="p-6 md:p-10 flex flex-col justify-center">
+              <div className="p-10 flex flex-col justify-center">
                 <p className="text-cyan-500 text-sm font-semibold tracking-widest uppercase mb-3">Good Neighbor Program</p>
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">
                   $25 Off for You.<br />$25 Off for Them.
@@ -638,13 +675,13 @@ export default function App() {
                 </p>
                 <a
                   href="tel:7047280204"
-                  className="inline-flex items-center justify-center gap-2 bg-cyan-500 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-cyan-600 transition-colors w-full sm:w-fit"
+                  className="inline-flex items-center gap-2 bg-cyan-500 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-cyan-600 transition-colors w-fit"
                 >
                   <Phone className="w-4 h-4" />
                   Call to Refer a Neighbor
                 </a>
               </div>
-              <div className="bg-gray-50 p-6 md:p-10 flex flex-col justify-center border-t md:border-t-0 md:border-l border-gray-100">
+              <div className="bg-gray-50 p-10 flex flex-col justify-center border-l border-gray-100">
                 <div className="space-y-6">
                   {[
                     { n: "01", label: "Refer a neighbor", desc: "Tell them about Selke Pest Control" },
@@ -667,14 +704,14 @@ export default function App() {
       </section>
 
       {/* Our Process */}
-      <section className="py-12 md:py-20 bg-white">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-10 md:mb-16">
+          <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl mb-4">Our Service Process</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">Click each step to learn more</p>
           </div>
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4 mb-6">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
               {processSteps.map((step, index) => (
                 <button
                   key={index}
@@ -689,7 +726,7 @@ export default function App() {
               ))}
             </div>
             {openProcessStep !== null && (
-              <div className="bg-gray-50 rounded-xl p-6 md:p-8 border-2 border-cyan-500">
+              <div className="bg-gray-50 rounded-xl p-8 border-2 border-cyan-500">
                 <h3 className="text-2xl mb-4 text-cyan-700">{processSteps[openProcessStep].title}</h3>
                 <p className="text-gray-700 text-lg">{processSteps[openProcessStep].description}</p>
               </div>
@@ -699,7 +736,7 @@ export default function App() {
       </section>
 
       {/* Customer Reviews */}
-      <section className="py-12 md:py-20 bg-gray-50" aria-label="Customer Reviews">
+      <section className="py-20 bg-gray-50" aria-label="Customer Reviews">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl mb-4">What Our Customers Say</h2>
@@ -712,7 +749,7 @@ export default function App() {
               <div className="flex">
                 {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />)}
               </div>
-              46 Reviews on Google &rarr;
+              75+ Five-Star Reviews on Google &rarr;
             </a>
           </div>
           <ReviewsCarousel />
@@ -720,9 +757,9 @@ export default function App() {
       </section>
 
       {/* Service Areas */}
-      <section id="areas" className="py-12 md:py-16 bg-white" aria-label="Service Areas">
+      <section id="areas" className="py-16 bg-white" aria-label="Service Areas">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-10 md:mb-12">
+          <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl mb-4">Serving the Lake Norman Area</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">Pest control for Mooresville, NC and the Charlotte Metro communities we call home</p>
           </div>
@@ -745,12 +782,12 @@ export default function App() {
       </section>
 
       {/* Homeowner Tips */}
-      <section className="py-12 md:py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-10 md:mb-12">
+          <div className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 max-w-xl mx-auto">Simple steps to protect your home between treatments</h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
               { icon: <Shield className="w-7 h-7 text-white" />, title: "Prevention", sub: "Seal Entry Points", desc: "Check windows, doors, and foundation for gaps. Seal cracks and crevices where pests can enter." },
               { icon: <Droplets className="w-7 h-7 text-white" />, title: "Mosquitoes", sub: "Eliminate Standing Water", desc: "Empty flower pots, birdbaths, and gutters regularly. Mosquitoes breed in standing water — even a bottle cap's worth." },
@@ -768,9 +805,9 @@ export default function App() {
       </section>
 
       {/* Blog / Tips Section */}
-      <section id="tips" className="py-12 md:py-20 bg-white">
+      <section id="tips" className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-10 md:mb-16">
+          <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl mb-4">Pest Control Tips &amp; Insights</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Expert articles to help you understand and prevent pest problems in the Lake Norman area
@@ -790,59 +827,12 @@ export default function App() {
         </div>
       </section>
 
-      {/* Instagram Feed */}
-      <section className="py-12 md:py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl mb-3">Recent Work</h2>
-            <p className="text-gray-500 mb-5">Follow us on Instagram — real jobs across the Charlotte Metro</p>
-            <a
-              href="https://www.instagram.com/selkepestcontrol"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-white font-semibold px-6 py-3 rounded-full text-sm"
-              style={{ background: 'linear-gradient(135deg, #F58529, #DD2A7B 50%, #8134AF)' }}
-            >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="white" aria-hidden="true">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-              @selkepestcontrol
-            </a>
-          </div>
-
-          {BEHOLD_FEED_ID ? (
-            <div className="max-w-4xl mx-auto">
-              {/* @ts-ignore */}
-              <behold-widget feed-id={BEHOLD_FEED_ID} />
-            </div>
-          ) : (
-            <div className="max-w-4xl mx-auto">
-              <div className="grid grid-cols-3 gap-2 md:gap-3">
-                {[...Array(6)].map((_, i) => (
-                  <a
-                    key={i}
-                    href="https://www.instagram.com/selkepestcontrol"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="aspect-square rounded-lg overflow-hidden flex items-center justify-center hover:opacity-80 transition-opacity"
-                    style={{ background: 'linear-gradient(135deg, #1a1a2e, #16213e, #0f3460)' }}
-                    aria-label="View on Instagram"
-                  >
-                    <svg viewBox="0 0 24 24" fill="white" opacity="0.15" className="w-10 h-10">
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                    </svg>
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
+      <InstagramFeedSection />
 
       {/* FAQ */}
-      <section id="faq" className="py-12 md:py-20 bg-white" aria-label="Frequently Asked Questions">
+      <section id="faq" className="py-20 bg-white" aria-label="Frequently Asked Questions">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-10 md:mb-16">
+          <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl mb-4">Frequently Asked Questions</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">Get answers to common questions about our services</p>
           </div>
@@ -861,7 +851,7 @@ export default function App() {
                   onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
                   className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-100 transition-colors"
                 >
-                  <span className="text-base md:text-lg pr-8">{faq.q}</span>
+                  <span className="text-lg pr-8">{faq.q}</span>
                   <ChevronDown className={`w-5 h-5 text-cyan-600 flex-shrink-0 transition-transform ${openFAQ === index ? 'rotate-180' : ''}`} />
                 </button>
                 {openFAQ === index && (
@@ -874,7 +864,7 @@ export default function App() {
       </section>
 
       {/* CTA */}
-      <section className="py-14 md:py-20 bg-gradient-to-r from-cyan-600 to-cyan-700 text-white">
+      <section className="py-20 bg-gradient-to-r from-cyan-600 to-cyan-700 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-5xl mb-4 font-bold">Ready to Get Outside Again?</h2>
@@ -894,9 +884,10 @@ export default function App() {
           </div>
         </div>
       </section>
+      </main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 pb-24 md:pb-12" role="contentinfo" aria-label="Site footer">
+      <footer className="bg-gray-900 text-white py-12 pb-20 md:pb-12" role="contentinfo" aria-label="Site footer">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
