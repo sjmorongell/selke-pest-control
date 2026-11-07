@@ -399,5 +399,211 @@ Contact us immediately if you:
 • See rodents during daylight (indicates large population)
 • Have tried DIY methods without success
 
-Fall prevention is the most cost-effective rodent control strategy. An ounce of prevention in September beats a pound of cure in January.`
+Fall prevention is the most cost-effective rodent control strategy. An ounce of prevention in September beats a pound of cure in January.`,
+
+  summerMosquitoes: `Summer around Lake Norman should mean evenings on the deck, not a rush indoors at dusk. Warm temperatures, frequent storms, wooded shorelines, and hundreds of small coves give local mosquitoes everything they need. A reliable control plan combines source reduction at home with targeted professional treatment.
+
+**Why Lake Norman Yards See Heavy Pressure**
+
+Mosquitoes do not breed in the lake's open water. They develop in still or slow-moving water around homes. Shaded vegetation near the shoreline then gives adults a cool, humid place to rest during the day.
+
+Common sources include:
+
+• Clogged gutters and downspout extensions
+• Plant saucers, children's toys, and folded tarps
+• Birdbaths and pet bowls
+• Low spots that remain wet after irrigation
+• Drainage basins and neglected water features
+
+**The Weekly Five-Minute Yard Check**
+
+Walk the property once each week and after every major storm. Tip out containers, flush birdbaths, clear gutters, and store anything that can catch rain upside down. Water in a container for only several days can be enough for mosquito development during hot weather.
+
+**Make the Yard Less Inviting**
+
+Trim dense shrubs, remove leaf litter, and keep grass at a reasonable height. These steps do not eliminate mosquitoes, but they reduce the humid resting areas where adults wait between blood meals. Repair window screens and check that doors close tightly so outdoor activity does not become an indoor problem.
+
+**Use Repellents Correctly**
+
+For time outdoors, use an EPA-registered repellent according to its label. Long sleeves and light-colored clothing can also help. Fans are useful on porches because mosquitoes are weak fliers and have difficulty landing in moving air.
+
+**How Professional Barrier Treatments Help**
+
+A mosquito service targets the shaded foliage and resting zones that a simple yard spray may miss. It can also address non-drainable standing water with a product labeled for mosquito larvae. Treatments are typically repeated during the active season because vegetation grows, new adults emerge, and weather conditions change.
+
+**When to Start**
+
+The best time to begin is before the population reaches its summer peak. Around Lake Norman, that generally means spring treatments followed by consistent service through early fall. Starting in midsummer can still produce a meaningful reduction, but source control at the home remains essential.
+
+**What Results to Expect**
+
+No outdoor mosquito program can create a permanent zero-mosquito bubble. Adults can fly in from neighboring properties, wooded land, and shoreline habitat. The practical goal is a major, sustained reduction in activity so your family can comfortably use the yard.
+
+Selke Pest Control provides mosquito control throughout Mooresville, Cornelius, Davidson, Huntersville, Denver, Sherrills Ford, and the greater Lake Norman area. Our team can identify the pressure points on your property and build a treatment schedule around how you use your outdoor space.`,
+
+  fireAntAeration: `Lawn aeration is good for compacted North Carolina soil, but homeowners sometimes notice fresh fire ant mounds soon afterward. Aeration does not create fire ants. It can make existing activity easier to see while soil disturbance, moisture, and warmer temperatures encourage colonies to rebuild visible mounds.
+
+**Why Activity Appears After Aeration**
+
+Core aeration removes small plugs of soil and opens the turf. Existing fire ant colonies may relocate tunnels or move workers closer to the surface after that disruption. Aeration is also often followed by watering, fertilizing, or rain—all conditions that make mound building more noticeable.
+
+The timing matters too. Most Lake Norman lawns are aerated when fire ants are naturally active. A mound that appears after service may have been developing below the turf long before the aerator arrived.
+
+**Does the Aerator Spread Fire Ants?**
+
+In most residential situations, an aerator is not the primary reason fire ants spread across a property. New colonies commonly begin when winged queens mate and establish nests, and mature colonies can relocate when conditions become unfavorable. Equipment should still be cleaned between heavily infested sites as a sound lawn-care practice.
+
+**Inspect Before Lawn Work**
+
+Walk the yard before aeration, seeding, or major landscaping. Mark active mounds so lawn crews and family members can avoid them. Pay special attention to sunny turf, driveway edges, utility boxes, and disturbed soil.
+
+**Do Not Disturb Mounds by Hand**
+
+Raking or kicking a mound does not eliminate the colony and creates an immediate sting risk. Fire ants respond rapidly when their nest is disturbed. Keep children and pets away from active areas until they have been properly treated.
+
+**Mound Treatment vs. Broadcast Treatment**
+
+Individual mound treatments are useful when only one or two nests are present. Properties with repeated activity often benefit from a broader treatment strategy that targets foraging workers across the lawn. The correct method depends on colony density, lawn conditions, weather, and the product label.
+
+**Coordinate Treatment and Aeration**
+
+Tell both your pest professional and lawn-care provider about the planned schedule. Some products need time on undisturbed turf, while others require specific watering or rain-free windows. Product labels—not a universal rule—determine the correct order and interval.
+
+**Aftercare for a Newly Aerated Lawn**
+
+Continue the watering plan recommended for the turf, but avoid unnecessary saturation. Check for mound activity for the next two weeks, especially after warm rain. Do not apply several fire ant products at once; overlapping treatments can waste money and stress the lawn without improving control.
+
+**When Professional Help Makes Sense**
+
+Call a professional when mounds keep returning, colonies are near play areas, or anyone in the home has a history of serious sting reactions. A technician can distinguish fire ants from harmless mound-building ants and select a treatment appropriate for the site.
+
+Selke Pest Control treats fire ants and other ant species across the Charlotte Metro and Lake Norman area. We can coordinate with your lawn schedule and help protect the areas your family uses most.`,
+
+  rainTreatments: `A common question after an exterior pest service is, “Did that rain wash everything away?” Usually, the answer is no. Modern professional treatments are selected and applied with local weather in mind, but the exact answer depends on the product, the treated surface, how long it had to dry, and how hard it rained.
+
+**Drying Time Matters Most**
+
+Many liquid exterior products bind to a surface after they dry. Once dry, normal rain is far less likely to remove the treatment than homeowners expect. A sudden downpour immediately after application can have more effect than rain later that evening or the next day.
+
+Your technician follows the product label, which specifies application conditions and any required rain-free period. The label is the authority for each treatment.
+
+**Where the Product Was Applied**
+
+Rain affects different treatment areas differently:
+
+• Protected cracks, crevices, eaves, and entry points receive little direct rain
+• Foundation surfaces may remain effective after ordinary rainfall once dry
+• Granular products may be designed to activate when watered
+• Heavy runoff can move products from saturated soil or sloped hard surfaces
+
+This is why professional service is not simply a broad spray around the house. Placement is part of the treatment strategy.
+
+**Light Rain Can Sometimes Be Helpful**
+
+Some granular applications need water to release the active ingredient into the upper soil or mulch layer. Light rain or planned irrigation can help activate those products. That does not mean every pest product should be watered; always follow the instructions provided for your specific service.
+
+**When Heavy Rain Is a Concern**
+
+Contact your pest company if a severe storm begins before the application dries, if floodwater crosses treated areas, or if visible runoff occurs. The technician can review what was applied and decide whether an inspection or targeted re-treatment is appropriate.
+
+**Why Pests May Appear After Rain**
+
+Seeing ants, roaches, or other pests after a storm does not automatically mean the treatment failed. Saturated soil pushes many pests toward dry shelter. Ant colonies may move brood, cockroaches may leave drains or mulch, and mosquitoes can emerge from newly filled containers.
+
+Some treatments also increase visible activity briefly as pests leave their hiding places and contact treated zones.
+
+**Do You Need Another Application?**
+
+Do not reapply a consumer product on top of a professional treatment without asking. More is not necessarily better, and mixing products can interfere with the original plan. If covered pest activity continues, document where and when you see it and contact the technician.
+
+**Before Your Next Service**
+
+Clear clogged gutters, correct drainage problems, and move items away from the foundation where practical. These steps reduce runoff and pest-friendly moisture while giving the technician better access to protected treatment areas.
+
+Selke Pest Control plans exterior services around Charlotte and Lake Norman weather and backs qualifying recurring services with our satisfaction guarantee. If covered pests return between scheduled visits, call us so we can assess the situation rather than guess.`,
+
+  stormMosquitoes: `A Charlotte summer storm can cool the air for an evening and create a mosquito problem for the following weeks. The rain itself does not produce mosquitoes overnight. It fills hidden breeding sites, triggers dormant eggs in some species, and creates humid resting conditions for adults already nearby.
+
+**The Mosquito Timeline After Rain**
+
+Mosquito eggs and larvae develop faster in warm water. During peak summer heat, adults can emerge from small containers in roughly a week, depending on species and conditions. That is why a yard may feel manageable immediately after a storm and much worse several days later.
+
+**Container Mosquitoes Are the Main Backyard Problem**
+
+Asian tiger mosquitoes are common daytime biters in North Carolina. They often use artificial containers rather than ponds or lakes. Their eggs can survive dry periods on the sides of a container and hatch when the water level rises.
+
+Check these places first:
+
+• Corrugated drain extensions
+• Wheelbarrows and yard carts
+• Toy bins and play equipment
+• Grill and furniture covers
+• Buckets, cans, and recycling
+• Flowerpot saucers and decorative planters
+
+**A 48-Hour Post-Storm Routine**
+
+Within two days of significant rain, walk the yard and empty anything holding water. Flush birdbaths, unclog gutters, and inspect low spots near irrigation heads. Cover rain barrels tightly with intact screening.
+
+For water that cannot be drained, ask a professional about a larvicide labeled for that site. Never add household chemicals, bleach, or pesticides to water without label directions.
+
+**Why the Lake Is Not the Main Culprit**
+
+Lake Norman's open water has waves, predators, and movement that make it different from a small stagnant container. The greater problem is the collection of sheltered pockets around shoreline homes: clogged drains, dock accessories, boat covers, dense landscaping, and shaded containers.
+
+**Reduce Adult Resting Areas**
+
+Mosquitoes rest in cool, shaded foliage during the day. Thin overgrown shrubs, remove leaf debris, and improve airflow around patios. Outdoor fans can provide immediate relief in seating areas while broader control measures take effect.
+
+**Treatment Timing After Storms**
+
+Professional mosquito applications depend on wind, active rain, and the product label. A technician may adjust timing around a severe storm, but ordinary summer weather does not make seasonal control pointless. Consistency is important because new mosquitoes continually emerge and move between properties.
+
+**Protecting Your Family**
+
+Use an EPA-registered repellent, wear long sleeves when practical, and repair screens. Mosquito control is also a public-health measure: mosquitoes in North Carolina can transmit illnesses including West Nile virus, although individual risk varies.
+
+If mosquito pressure spikes after rain, Selke Pest Control can inspect the property for overlooked breeding and resting areas and provide targeted service throughout Charlotte, Mooresville, and Lake Norman.`,
+
+  outdoorEntertaining: `Planning a graduation party, cookout, or neighborhood gathering? Start pest preparation before the day guests arrive. A one-week plan gives you time to address mosquito water sources, ant trails, ticks, and stinging-insect nests without last-minute overapplication.
+
+**Seven Days Before: Inspect the Property**
+
+Walk the areas guests will use. Look under eaves, railings, playsets, and deck furniture for wasp activity. Check lawn edges and sunny soil for fire ant mounds. Note standing water, dense vegetation, and any ant trails leading toward food-preparation areas.
+
+Do not attempt to knock down an active wasp or hornet nest. Disturbing a nest can trigger defensive swarming, and nests in wall voids require a different approach than exposed paper nests.
+
+**Five Days Before: Remove Water and Debris**
+
+Empty containers, clean gutters, refresh birdbaths, and store toys that collect rain. Mow the lawn and clear leaf litter from patio edges. Keep grass clippings and yard waste away from gathering areas.
+
+Move firewood, stacked pots, and unused materials away from seating. These items create shelter for spiders, ants, and occasional rodents.
+
+**Three to Five Days Before: Schedule Treatment**
+
+If you need professional mosquito or general pest service, do not wait until guests are parking in the driveway. Earlier scheduling provides flexibility for weather and gives treatments time to dry according to the product label.
+
+Tell the technician about play zones, pet areas, vegetable gardens, water features, and the event schedule. Accurate site information helps the technician choose where and how to treat.
+
+**The Day Before: Prepare Food and Trash Areas**
+
+Wash outdoor trash and recycling bins, then make sure the lids close. Clean sticky residue from tables and beverage stations. Store sweet drinks and fruit indoors until needed, because wasps and ants quickly find exposed sugar.
+
+Place serving tables away from trash cans and dense shrubs. Keep pet food indoors, and clean grease or food debris from around the grill.
+
+**Event Day: Use Simple Physical Controls**
+
+Run fans near seating and food areas to discourage mosquitoes. Provide an EPA-registered repellent for guests and follow its label. Keep food covered, wipe spills quickly, and use containers with fitted lids.
+
+Avoid decorative bowls or buckets of water. If children use a splash table or small pool, empty it after the event.
+
+**Tick-Smart Yard Setup**
+
+Keep chairs, blankets, and play areas away from wooded edges, tall grass, and leaf litter. These transition zones are where people and pets are most likely to encounter ticks. Check children and pets after the event if they spent time near brush.
+
+**After Guests Leave**
+
+Bring food indoors, seal trash, drain temporary water features, and inspect for spills. A quick cleanup prevents the party from becoming a food source for ants, flies, roaches, and rodents overnight.
+
+Selke Pest Control offers event-focused and seasonal pest services across the Charlotte Metro and Lake Norman area. Contact us early so weather, property conditions, and your event date can all be considered.`
 };
