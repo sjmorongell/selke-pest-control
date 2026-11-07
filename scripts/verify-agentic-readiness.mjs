@@ -28,6 +28,26 @@ const requiredAgents = [
 const errors = [];
 const read = file => fs.readFileSync(file, 'utf8');
 
+const vercelConfigPath = path.join(rootDir, 'vercel.json');
+if (fs.existsSync(vercelConfigPath)) {
+  try {
+    const vercelConfig = JSON.parse(read(vercelConfigPath));
+    const homepageFallback = vercelConfig.rewrites?.some(
+      rewrite =>
+        rewrite?.destination === '/index.html' &&
+        ['/((.*))', '/(.*)', '/:path*', '/**'].includes(rewrite?.source),
+    );
+
+    if (homepageFallback) {
+      errors.push(
+        'vercel.json rewrites every URL to /index.html, shadowing the pre-rendered route HTML',
+      );
+    }
+  } catch {
+    errors.push('vercel.json is not valid JSON');
+  }
+}
+
 function match(html, pattern) {
   return html.match(pattern)?.[1]?.trim() ?? '';
 }
