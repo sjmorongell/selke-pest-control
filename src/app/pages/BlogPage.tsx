@@ -1,6 +1,6 @@
-import { useParams, Link } from 'react-router';
 import { ArrowLeft, Phone, CheckSquare, Minus } from 'lucide-react';
 import { blogArticles } from '../utils/blogContent';
+import { useEffect } from 'react';
 
 interface BlogMeta {
   title: string;
@@ -53,6 +53,41 @@ const blogMeta: Record<string, BlogMeta> = {
     publishDate: 'September 2025',
     readTime: '6 min read',
   },
+  'summer-mosquito-control-lake-norman-nc': {
+    title: 'Summer Mosquito Control Around Lake Norman: A Homeowner Guide',
+    metaDescription: 'Reduce summer mosquitoes around Lake Norman with a practical weekly yard checklist, source control tips, and professional treatment guidance.',
+    contentKey: 'summerMosquitoes',
+    publishDate: 'June 2026',
+    readTime: '6 min read',
+  },
+  'fire-ants-after-lawn-aeration-nc': {
+    title: 'Fire Ants After Lawn Aeration: What NC Homeowners Should Know',
+    metaDescription: 'Why do fire ant mounds appear after lawn aeration in NC? Learn what causes visible activity and how to coordinate safe lawn treatment.',
+    contentKey: 'fireAntAeration',
+    publishDate: 'June 2026',
+    readTime: '6 min read',
+  },
+  'does-rain-wash-away-pest-control-treatment': {
+    title: 'Does Rain Wash Away Pest Control Treatment?',
+    metaDescription: 'Does rain make exterior pest control stop working? Learn how drying time, application area, granules, and heavy storms affect treatment.',
+    contentKey: 'rainTreatments',
+    publishDate: 'July 2026',
+    readTime: '6 min read',
+  },
+  'mosquitoes-after-summer-rain-charlotte-nc': {
+    title: 'Why Mosquitoes Surge After Summer Rain in Charlotte',
+    metaDescription: 'Learn why Charlotte mosquitoes increase after summer storms, how quickly they develop, and what to check in your yard within 48 hours.',
+    contentKey: 'stormMosquitoes',
+    publishDate: 'July 2026',
+    readTime: '6 min read',
+  },
+  'pest-free-backyard-party-charlotte-nc': {
+    title: 'How to Prepare a Pest-Free Yard for Summer Entertaining',
+    metaDescription: 'Use this one-week Charlotte backyard checklist to reduce mosquitoes, ants, ticks, and wasps before a cookout or outdoor party.',
+    contentKey: 'outdoorEntertaining',
+    publishDate: 'July 2026',
+    readTime: '6 min read',
+  },
 };
 
 function renderContent(text: string) {
@@ -62,11 +97,7 @@ function renderContent(text: string) {
 
     if (para.startsWith('**') && para.endsWith('**') && !para.slice(2).includes('**')) {
       const heading = para.slice(2, -2);
-      return (
-        <h2 key={i} className="text-xl font-bold text-gray-900 mt-8 mb-3">
-          {heading}
-        </h2>
-      );
+      return <h2 key={i} className="text-xl font-bold text-gray-900 mt-8 mb-3">{heading}</h2>;
     }
 
     if (para.split('\n').every(line => line.trim().startsWith('•') || line.trim() === '')) {
@@ -102,27 +133,19 @@ function renderContent(text: string) {
       <div key={i} className="my-4">
         {lines.map((line, j) => {
           if (!line.trim()) return null;
-
           if (/^\d+\.\s/.test(line)) {
             const parts = line.replace(/^\d+\.\s/, '').split(/\*\*(.+?)\*\*/);
             return (
               <div key={j} className="flex items-start gap-2 text-gray-700 mb-2">
                 <span className="font-bold text-cyan-600 shrink-0">{line.match(/^\d+/)![0]}.</span>
-                <span>
-                  {parts.map((part, k) =>
-                    k % 2 === 1 ? <strong key={k}>{part}</strong> : part
-                  )}
-                </span>
+                <span>{parts.map((part, k) => k % 2 === 1 ? <strong key={k}>{part}</strong> : part)}</span>
               </div>
             );
           }
-
           const parts = line.split(/\*\*(.+?)\*\*/);
           return (
             <p key={j} className="text-gray-700 leading-relaxed">
-              {parts.map((part, k) =>
-                k % 2 === 1 ? <strong key={k}>{part}</strong> : part
-              )}
+              {parts.map((part, k) => k % 2 === 1 ? <strong key={k}>{part}</strong> : part)}
             </p>
           );
         })}
@@ -131,18 +154,25 @@ function renderContent(text: string) {
   });
 }
 
-export default function BlogPage() {
-  const { slug } = useParams<{ slug: string }>();
-  const meta = slug ? blogMeta[slug] : undefined;
+export default function BlogPage({ slug }: { slug: string }) {
+  const meta = blogMeta[slug];
+
+  useEffect(() => {
+    if (!meta) return;
+    document.title = `${meta.title} | Selke Pest Control`;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', meta.metaDescription);
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://www.selkepestcontrol.com/blog/${slug}`);
+    window.scrollTo(0, 0);
+  }, [meta, slug]);
 
   if (!meta) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-gray-800 mb-4">Article Not Found</h1>
-          <Link to="/" className="text-cyan-600 hover:underline flex items-center gap-2 justify-center">
+          <a href="/" className="text-cyan-600 hover:underline flex items-center gap-2 justify-center">
             <ArrowLeft className="w-4 h-4" /> Back to Home
-          </Link>
+          </a>
         </div>
       </div>
     );
@@ -152,80 +182,46 @@ export default function BlogPage() {
 
   return (
     <>
-      <title>{meta.title} | Selke Pest Control</title>
-      <meta name="description" content={meta.metaDescription} />
-      <link rel="canonical" href={`https://www.selkepestcontrol.com/blog/${slug}`} />
-
       <div className="min-h-screen bg-gray-50">
-        {/* Header */}
         <header className="bg-white shadow-sm">
           <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-2 text-gray-600 hover:text-cyan-600 transition-colors">
+            <a href="/" className="flex items-center gap-2 text-gray-600 hover:text-cyan-600 transition-colors">
               <ArrowLeft className="w-4 h-4" />
               <span className="text-sm font-medium">Back to Home</span>
-            </Link>
-            <a
-              href="tel:7047280204"
-              className="flex items-center gap-2 bg-cyan-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-cyan-700 transition-colors"
-            >
-              <Phone className="w-4 h-4" />
-              704-728-0204
+            </a>
+            <a href="tel:7047280204" className="flex items-center gap-2 bg-cyan-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-cyan-700 transition-colors">
+              <Phone className="w-4 h-4" />704-728-0204
             </a>
           </div>
         </header>
 
-        {/* Hero */}
         <div className="bg-gradient-to-br from-cyan-700 to-cyan-900 text-white py-12 px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="text-cyan-300 text-sm font-medium mb-3">
-              Selke Pest Control Blog &bull; {meta.publishDate} &bull; {meta.readTime}
-            </div>
-            <h1 className="text-3xl md:text-4xl font-bold leading-tight mb-4">
-              {meta.title}
-            </h1>
+            <div className="text-cyan-300 text-sm font-medium mb-3">Selke Pest Control Blog &bull; {meta.publishDate} &bull; {meta.readTime}</div>
+            <h1 className="text-3xl md:text-4xl font-bold leading-tight mb-4">{meta.title}</h1>
             <p className="text-cyan-100 text-lg max-w-2xl">{meta.metaDescription}</p>
           </div>
         </div>
 
-        {/* Article */}
         <main className="max-w-4xl mx-auto px-4 py-10">
-          <div className="bg-white rounded-2xl shadow-sm p-6 md:p-10">
-            {renderContent(content)}
-          </div>
-
-          {/* CTA */}
+          <div className="bg-white rounded-2xl shadow-sm p-6 md:p-10">{renderContent(content)}</div>
           <div className="mt-10 bg-gradient-to-br from-cyan-600 to-cyan-800 rounded-2xl p-8 text-white text-center">
             <h2 className="text-2xl font-bold mb-2">Ready to Protect Your Home?</h2>
-            <p className="text-cyan-100 mb-6">
-              Lake Norman&apos;s hometown pest control team. Family-owned, locally operated, 100% guaranteed.
-            </p>
+            <p className="text-cyan-100 mb-6">Lake Norman&apos;s hometown pest control team. Family-owned, locally operated, 100% guaranteed.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="tel:7047280204"
-                className="bg-white text-cyan-700 font-bold px-8 py-3 rounded-xl hover:bg-cyan-50 transition-colors flex items-center justify-center gap-2"
-              >
-                <Phone className="w-5 h-5" />
-                Call 704-728-0204
+              <a href="tel:7047280204" className="bg-white text-cyan-700 font-bold px-8 py-3 rounded-xl hover:bg-cyan-50 transition-colors flex items-center justify-center gap-2">
+                <Phone className="w-5 h-5" />Call 704-728-0204
               </a>
-              <a
-                href="mailto:sales@selkepestcontrol.com"
-                className="border-2 border-white text-white font-bold px-8 py-3 rounded-xl hover:bg-white/10 transition-colors"
-              >
-                Email Us
-              </a>
+              <a href="mailto:sales@selkepestcontrol.com" className="border-2 border-white text-white font-bold px-8 py-3 rounded-xl hover:bg-white/10 transition-colors">Email Us</a>
             </div>
           </div>
-
-          {/* Back link */}
           <div className="mt-8 text-center">
-            <Link to="/" className="text-cyan-600 hover:text-cyan-700 font-medium flex items-center gap-2 justify-center">
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </Link>
+            <a href="/" className="text-cyan-600 hover:text-cyan-700 font-medium flex items-center gap-2 justify-center">
+              <ArrowLeft className="w-4 h-4" />Back to Home
+            </a>
           </div>
         </main>
 
-        {/* Footer */}
         <footer className="bg-gray-800 text-gray-400 text-sm py-6 text-center mt-10">
           <p>&copy; {new Date().getFullYear()} Selke Pest Control &mdash; Mooresville, NC &mdash; 704-728-0204</p>
           <p className="mt-1">Serving the Lake Norman area &bull; Licensed &amp; Insured &bull; 100% Satisfaction Guarantee</p>
