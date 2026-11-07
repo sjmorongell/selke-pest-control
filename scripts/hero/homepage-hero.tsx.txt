@@ -105,10 +105,10 @@
             <img
               src={heroTreatmentImage}
               alt="Selke Pest Control technician removing spider webs from a Charlotte-area home"
-              width="640"
-              height="1124"
+              width="1800"
+              height="2700"
               {...{ fetchpriority: 'high' }}
-              className="relative block h-auto w-full lg:absolute lg:inset-0 lg:h-full lg:object-cover lg:object-[50%_27%]"
+              className="relative block h-80 w-full object-cover object-[50%_48%] sm:h-96 lg:absolute lg:inset-0 lg:h-full"
             />
           </div>
         </div>
