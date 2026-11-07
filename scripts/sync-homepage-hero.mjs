@@ -4,16 +4,9 @@ import { dirname } from 'node:path';
 
 const payloadPath = 'scripts/hero/selke-home-treatment-hero.webp.b64';
 const targetPath = 'src/imports/selke-home-treatment-hero.webp';
-const expectedPayloadHash = '84ca3ffd476fb0d1699793e022deba936ecc2346ca1c3f8fd8ed8198094f289c';
 const expectedImageHash = '246d3e856d32cd0b77130e0a6a1f9f899b3eae677eeac32e0df9d5075a773d4c';
 
 const payload = readFileSync(payloadPath, 'utf8');
-const payloadHash = createHash('sha256').update(payload).digest('hex');
-
-if (payloadHash !== expectedPayloadHash) {
-  throw new Error('Homepage hero payload failed its integrity check.');
-}
-
 const image = Buffer.from(payload.trim(), 'base64');
 const imageHash = createHash('sha256').update(image).digest('hex');
 
