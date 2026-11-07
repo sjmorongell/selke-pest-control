@@ -16,7 +16,23 @@ const repository = mkdtempSync(join(tmpdir(), 'selke-figma-release-'));
 
 try {
   execFileSync('git', ['init', '--bare', repository], { stdio: 'ignore' });
-  execFileSync('git', ['--git-dir', repository, 'fetch', '--depth=1', figmaRepository, 'main'], { stdio: 'inherit' });
+
+  let lastError;
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    try {
+      execFileSync(
+        'git',
+        ['--git-dir', repository, 'fetch', '--depth=1', '--no-tags', figmaRepository, 'main'],
+        { stdio: 'inherit' },
+      );
+      lastError = undefined;
+      break;
+    } catch (error) {
+      lastError = error;
+      console.warn(`Homepage collage sync attempt ${attempt} failed.`);
+    }
+  }
+  if (lastError) throw lastError;
 
   for (const path of files) {
     const content = execFileSync('git', ['--git-dir', repository, 'show', `FETCH_HEAD:${path}`], {
