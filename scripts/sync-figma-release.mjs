@@ -5,22 +5,9 @@ import path from 'node:path';
 
 const source =
   'https://api.figma.com/git/make/file/2355034718140475824/public/code/migrated/58196bc9-d5af-4508-bc96-0af6203def03.git';
-const release = '6864460d73d2037453257a4a40c247e40d872d7f';
+const release = '76e22930125eac5f268c45b6034dcf6a2f8d9592';
 const files = [
-  'src/main.tsx',
-  'src/app/App.tsx',
-  'src/app/utils/blogContent.ts',
   'src/app/components/QuoteFormModal.tsx',
-  'src/app/data/blogIndexData.ts',
-  'src/app/data/serviceAreaSchema.ts',
-  'src/app/pages/BlogIndexPage.tsx',
-  'src/app/pages/BlogPage.tsx',
-  'src/app/pages/CityPage.tsx',
-  'src/app/pages/PestPage.tsx',
-  'src/app/pages/GiveawayThankYouPage.tsx',
-  'scripts/generate-seo-pages.mjs',
-  'public/llms.txt',
-  'public/sitemap.xml',
   'public/service-collage/community-family.webp',
   'public/service-collage/entry-treatment.webp',
   'public/service-collage/perimeter-treatment.webp',
@@ -31,23 +18,9 @@ const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'selke-release-'));
 
 try {
   execFileSync('git', ['init', '--quiet', tempDir], { stdio: 'inherit' });
-
-  let fetched = false;
-  for (let attempt = 1; attempt <= 18; attempt++) {
-    try {
-      execFileSync('git', ['-C', tempDir, 'fetch', '--quiet', '--depth=1', source, release], {
-        stdio: 'inherit',
-      });
-      fetched = true;
-      break;
-    } catch (error) {
-      if (attempt === 18) throw error;
-      console.log(`Verified release is publishing; retrying (${attempt}/18)...`);
-      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 10000);
-    }
-  }
-
-  if (!fetched) throw new Error('Verified release could not be fetched');
+  execFileSync('git', ['-C', tempDir, 'fetch', '--quiet', '--depth=1', source, release], {
+    stdio: 'inherit',
+  });
 
   for (const file of files) {
     const content = execFileSync('git', ['-C', tempDir, 'show', `FETCH_HEAD:${file}`]);

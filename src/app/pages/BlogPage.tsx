@@ -1,11 +1,17 @@
-import { ArrowLeft, Phone, CheckSquare, Minus } from 'lucide-react';
+import { ArrowLeft, Phone, CheckSquare, Minus, BookOpen } from 'lucide-react';
 import { blogArticles } from '../utils/blogContent';
+import { premiumServiceArticle } from '../utils/premiumServiceArticle';
 import { useEffect } from 'react';
+
+const articleContent = {
+  ...blogArticles,
+  premiumServiceTime: premiumServiceArticle,
+};
 
 interface BlogMeta {
   title: string;
   metaDescription: string;
-  contentKey: keyof typeof blogArticles;
+  contentKey: keyof typeof articleContent;
   publishDate: string;
   readTime: string;
 }
@@ -57,36 +63,43 @@ const blogMeta: Record<string, BlogMeta> = {
     title: 'Summer Mosquito Control Around Lake Norman: A Homeowner Guide',
     metaDescription: 'Reduce summer mosquitoes around Lake Norman with a practical weekly yard checklist, source control tips, and professional treatment guidance.',
     contentKey: 'summerMosquitoes',
-    publishDate: 'June 2026',
+    publishDate: 'October 29, 2026',
     readTime: '6 min read',
   },
   'fire-ants-after-lawn-aeration-nc': {
     title: 'Fire Ants After Lawn Aeration: What NC Homeowners Should Know',
     metaDescription: 'Why do fire ant mounds appear after lawn aeration in NC? Learn what causes visible activity and how to coordinate safe lawn treatment.',
     contentKey: 'fireAntAeration',
-    publishDate: 'June 2026',
+    publishDate: 'October 31, 2026',
     readTime: '6 min read',
   },
   'does-rain-wash-away-pest-control-treatment': {
     title: 'Does Rain Wash Away Pest Control Treatment?',
     metaDescription: 'Does rain make exterior pest control stop working? Learn how drying time, application area, granules, and heavy storms affect treatment.',
     contentKey: 'rainTreatments',
-    publishDate: 'July 2026',
+    publishDate: 'November 2, 2026',
     readTime: '6 min read',
   },
   'mosquitoes-after-summer-rain-charlotte-nc': {
     title: 'Why Mosquitoes Surge After Summer Rain in Charlotte',
     metaDescription: 'Learn why Charlotte mosquitoes increase after summer storms, how quickly they develop, and what to check in your yard within 48 hours.',
     contentKey: 'stormMosquitoes',
-    publishDate: 'July 2026',
+    publishDate: 'November 4, 2026',
     readTime: '6 min read',
   },
   'pest-free-backyard-party-charlotte-nc': {
     title: 'How to Prepare a Pest-Free Yard for Summer Entertaining',
     metaDescription: 'Use this one-week Charlotte backyard checklist to reduce mosquitoes, ants, ticks, and wasps before a cookout or outdoor party.',
     contentKey: 'outdoorEntertaining',
-    publishDate: 'July 2026',
+    publishDate: 'November 6, 2026',
     readTime: '6 min read',
+  },
+  'why-our-pest-control-service-takes-56-minutes': {
+    title: 'Why Our Average Pest Control Service Takes More Than 56 Minutes',
+    metaDescription: 'See the six-pass process behind Selke Pest Control’s 56-minute average service for Charlotte Metro and Lake Norman homes—about 211% longer than an 18-minute benchmark.',
+    contentKey: 'premiumServiceTime',
+    publishDate: 'November 7, 2026',
+    readTime: '8 min read',
   },
 };
 
@@ -97,7 +110,11 @@ function renderContent(text: string) {
 
     if (para.startsWith('**') && para.endsWith('**') && !para.slice(2).includes('**')) {
       const heading = para.slice(2, -2);
-      return <h2 key={i} className="text-xl font-bold text-gray-900 mt-8 mb-3">{heading}</h2>;
+      return (
+        <h2 key={i} className="text-xl font-bold text-gray-900 mt-8 mb-3">
+          {heading}
+        </h2>
+      );
     }
 
     if (para.split('\n').every(line => line.trim().startsWith('•') || line.trim() === '')) {
@@ -133,19 +150,27 @@ function renderContent(text: string) {
       <div key={i} className="my-4">
         {lines.map((line, j) => {
           if (!line.trim()) return null;
+
           if (/^\d+\.\s/.test(line)) {
             const parts = line.replace(/^\d+\.\s/, '').split(/\*\*(.+?)\*\*/);
             return (
               <div key={j} className="flex items-start gap-2 text-gray-700 mb-2">
                 <span className="font-bold text-cyan-600 shrink-0">{line.match(/^\d+/)![0]}.</span>
-                <span>{parts.map((part, k) => k % 2 === 1 ? <strong key={k}>{part}</strong> : part)}</span>
+                <span>
+                  {parts.map((part, k) =>
+                    k % 2 === 1 ? <strong key={k}>{part}</strong> : part
+                  )}
+                </span>
               </div>
             );
           }
+
           const parts = line.split(/\*\*(.+?)\*\*/);
           return (
             <p key={j} className="text-gray-700 leading-relaxed">
-              {parts.map((part, k) => k % 2 === 1 ? <strong key={k}>{part}</strong> : part)}
+              {parts.map((part, k) =>
+                k % 2 === 1 ? <strong key={k}>{part}</strong> : part
+              )}
             </p>
           );
         })}
@@ -178,20 +203,25 @@ export default function BlogPage({ slug }: { slug: string }) {
     );
   }
 
-  const content = blogArticles[meta.contentKey];
+  const content = articleContent[meta.contentKey];
 
   return (
     <>
       <div className="min-h-screen bg-gray-50">
         <header className="bg-white shadow-sm">
           <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="/" className="flex items-center gap-2 text-gray-600 hover:text-cyan-600 transition-colors">
+            <a href="/blog" className="flex items-center gap-2 text-gray-600 hover:text-cyan-600 transition-colors">
               <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm font-medium">Back to Home</span>
+              <span className="text-sm font-medium">All Articles</span>
             </a>
-            <a href="tel:7047280204" className="flex items-center gap-2 bg-cyan-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-cyan-700 transition-colors">
-              <Phone className="w-4 h-4" />704-728-0204
-            </a>
+            <div className="flex items-center gap-2">
+              <a href="/" className="hidden items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600 hover:text-cyan-600 sm:flex">Home</a>
+              <a href="tel:7047280204" className="flex items-center gap-2 bg-cyan-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-cyan-700 transition-colors">
+                <Phone className="w-4 h-4" />
+                <span className="hidden sm:inline">704-728-0204</span>
+                <span className="sm:hidden">Call</span>
+              </a>
+            </div>
           </div>
         </header>
 
@@ -210,14 +240,14 @@ export default function BlogPage({ slug }: { slug: string }) {
             <p className="text-cyan-100 mb-6">Lake Norman&apos;s hometown pest control team. Family-owned, locally operated, 100% guaranteed.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="tel:7047280204" className="bg-white text-cyan-700 font-bold px-8 py-3 rounded-xl hover:bg-cyan-50 transition-colors flex items-center justify-center gap-2">
-                <Phone className="w-5 h-5" />Call 704-728-0204
+                <Phone className="w-5 h-5" /> Call 704-728-0204
               </a>
               <a href="mailto:sales@selkepestcontrol.com" className="border-2 border-white text-white font-bold px-8 py-3 rounded-xl hover:bg-white/10 transition-colors">Email Us</a>
             </div>
           </div>
           <div className="mt-8 text-center">
-            <a href="/" className="text-cyan-600 hover:text-cyan-700 font-medium flex items-center gap-2 justify-center">
-              <ArrowLeft className="w-4 h-4" />Back to Home
+            <a href="/blog" className="text-cyan-600 hover:text-cyan-700 font-medium flex items-center gap-2 justify-center">
+              <BookOpen className="w-4 h-4" /> Browse All Pest Control Articles
             </a>
           </div>
         </main>

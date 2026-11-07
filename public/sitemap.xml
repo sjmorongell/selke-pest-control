@@ -111,6 +111,11 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://www.selkepestcontrol.com/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.selkepestcontrol.com/blog/mosquito-season-charlotte-nc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -142,31 +147,37 @@
   </url>
   <url>
     <loc>https://www.selkepestcontrol.com/blog/summer-mosquito-control-lake-norman-nc</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.selkepestcontrol.com/blog/fire-ants-after-lawn-aeration-nc</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-10-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.selkepestcontrol.com/blog/does-rain-wash-away-pest-control-treatment</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.selkepestcontrol.com/blog/mosquitoes-after-summer-rain-charlotte-nc</loc>
-    <lastmod>2026-07-12</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.selkepestcontrol.com/blog/pest-free-backyard-party-charlotte-nc</loc>
-    <lastmod>2026-07-22</lastmod>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.selkepestcontrol.com/blog/why-our-pest-control-service-takes-56-minutes</loc>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
