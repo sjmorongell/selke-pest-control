@@ -5,19 +5,21 @@ import path from 'node:path';
 
 const source =
   'https://api.figma.com/git/make/file/2355034718140475824/public/code/migrated/58196bc9-d5af-4508-bc96-0af6203def03.git';
-const release = 'af08bd8096b8f4d6508b3578755a286fedbf12e0';
+const release = '6864460d73d2037453257a4a40c247e40d872d7f';
 const files = [
   'src/main.tsx',
   'src/app/App.tsx',
   'src/app/utils/blogContent.ts',
   'src/app/components/QuoteFormModal.tsx',
   'src/app/data/blogIndexData.ts',
+  'src/app/data/serviceAreaSchema.ts',
   'src/app/pages/BlogIndexPage.tsx',
   'src/app/pages/BlogPage.tsx',
   'src/app/pages/CityPage.tsx',
   'src/app/pages/PestPage.tsx',
   'src/app/pages/GiveawayThankYouPage.tsx',
   'scripts/generate-seo-pages.mjs',
+  'public/llms.txt',
   'public/sitemap.xml',
   'public/service-collage/community-family.webp',
   'public/service-collage/entry-treatment.webp',
