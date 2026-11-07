@@ -1,10 +1,27 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import {
+  existsSync,
+  readFileSync,
+  writeFileSync,
+} from 'node:fs';
 
-const path = 'src/app/App.tsx';
-let source = readFileSync(path, 'utf8');
+const appPath = 'src/app/App.tsx';
+let source = readFileSync(appPath, 'utf8');
 let changed = false;
 
 const heroImagePath = 'src/imports/selke-home-treatment-hero.webp';
+const heroImageSourcePath = 'scripts/hero/selke-home-treatment-hero.webp.b64';
+const heroHeader = existsSync(heroImagePath)
+  ? readFileSync(heroImagePath).subarray(0, 12)
+  : Buffer.alloc(0);
+const hasValidHeroImage =
+  heroHeader.subarray(0, 4).toString() === 'RIFF' &&
+  heroHeader.subarray(8, 12).toString() === 'WEBP';
+
+if (!hasValidHeroImage) {
+  const encodedHeroImage = readFileSync(heroImageSourcePath, 'utf8').trim();
+  writeFileSync(heroImagePath, Buffer.from(encodedHeroImage, 'base64'));
+  console.log('Restored the homepage hero image from the release asset.');
+}
 
 if (source.trim() === 'PLACEHOLDER') {
   const recoveryUrl = 'https://raw.githubusercontent.com/sjmorongell/selke-pest-control/8b45e1f/src/app/App.tsx';
@@ -234,7 +251,7 @@ if (source.includes('{blogData.map((blog) => (')) {
 }
 
 if (changed) {
-  writeFileSync(path, source);
+  writeFileSync(appPath, source);
   console.log('Homepage release updates applied.');
 } else {
   console.log('Homepage release updates already present.');
