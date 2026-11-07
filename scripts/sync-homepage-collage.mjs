@@ -20,7 +20,7 @@ try {
 
   for (const path of files) {
     const content = execFileSync('git', ['--git-dir', repository, 'show', `FETCH_HEAD:${path}`], {
-      encoding: path.endsWith('.tsx') ? 'utf8' : 'buffer',
+      encoding: path.endsWith('.tsx') ? 'utf8' : null,
       maxBuffer: 10 * 1024 * 1024,
     });
     mkdirSync(dirname(path), { recursive: true });
