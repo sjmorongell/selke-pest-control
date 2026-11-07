@@ -1,13 +1,13 @@
 import CityPage from './CityPage';
 import PestPage from './PestPage';
 import { cityData } from '../data/cityData';
-import { pestData } from '../data/pestData';
+import { pestPages } from '../data/pestData';
 
 export default function SeoLandingRoute({ slug }: { slug: string }) {
   const city = cityData.find(item => item.slug === slug);
   if (city) return <CityPage city={city} />;
 
-  const pest = pestData.find(item => item.slug === slug);
+  const pest = pestPages.find(item => item.slug === slug);
   if (pest) return <PestPage pest={pest} />;
 
   return (
