@@ -2,7 +2,7 @@
 
 > Selke Pest Control is a family-owned pest control company based in Mooresville, North Carolina, serving Lake Norman and the Charlotte Metro area.
 
-Selke Pest Control provides general household pest control, mosquito control, flea and tick control, ant control, cockroach control, spider control, stinging-insect control, and mice and rodent control. Service is backed by a 100% satisfaction guarantee. Same-day service is available.
+Selke Pest Control provides six residential services: general pest control, mosquito control, flea and tick control, rodent control, exclusion work, and carpenter ant, fire ant, and carpenter bee control. It also treats ants, cockroaches, spiders, and stinging insects. Service is backed by a 100% satisfaction guarantee. Same-day service is available.
 
 ## Primary facts
 
@@ -18,7 +18,18 @@ Selke Pest Control provides general household pest control, mosquito control, fl
 - Website: https://www.selkepestcontrol.com/
 - Google Business Profile: https://share.google/cT2MLnW3U4Dw1kosn
 
-## Service pages
+## Services
+
+- [General Pest Control](https://www.selkepestcontrol.com/services/general-pest-control): Year-round protection against ants, roaches, spiders, and the everyday pests that find their way into Charlotte-area homes.
+- [Mosquito Control](https://www.selkepestcontrol.com/services/mosquito-control): Targeted barrier treatments that reduce mosquito populations by up to 96%, so you can get back to enjoying your yard.
+- [Flea & Tick Control](https://www.selkepestcontrol.com/services/flea-tick-control): Protect your pets and family from fleas and ticks with yard, shade, and pet-area treatments that break the life cycle.
+- [Rodent Control](https://www.selkepestcontrol.com/services/rodent-control): Get mice and rats out of your home with a full inspection, targeted trapping and baiting, and ongoing monitoring.
+- [Exclusion Work](https://www.selkepestcontrol.com/services/exclusion): Seal the gaps, vents, and openings pests use to get inside, so rodents and insects stay out for good.
+- [Carpenter Ant, Fire Ant & Carpenter Bee Control](https://www.selkepestcontrol.com/services/carpenter-ant-fire-ant-carpenter-bee-control): Stop wood-damaging carpenter ants and bees and painful fire ant mounds before they damage your home or yard.
+- [All services](https://www.selkepestcontrol.com/services)
+- [Frequently asked questions](https://www.selkepestcontrol.com/faq)
+
+## Pest pages
 
 - [Mice and rodent control](https://www.selkepestcontrol.com/rodent-control-charlotte-nc)
 - [Mosquito control](https://www.selkepestcontrol.com/mosquito-control-charlotte-nc)

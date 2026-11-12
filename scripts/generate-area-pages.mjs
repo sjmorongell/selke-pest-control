@@ -28,28 +28,26 @@ const homeTemplate = fs.readFileSync(templatePath, 'utf8');
 const esc = value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 const ldBlocks = /<script type="application\/ld\+json">[\s\S]*?<\/script>\s*/g;
 
-// The homepage graph includes the homepage FAQ. Other pages keep only the
-// business and website entities so their FAQ markup matches their own content.
+// Business schema repeated on every generated page. Supports both a standalone
+// LocalBusiness block and an @graph containing #business / #website nodes.
 const businessGraph = (() => {
-  const match = homeTemplate.match(/<script type="application\/ld\+json">([\s\S]*?#business[\s\S]*?)<\/script>/);
-  if (!match) return null;
-  try {
-    const parsed = JSON.parse(match[1]);
-    parsed['@graph'] = parsed['@graph'].filter(node => ['#business', '#website'].some(id => String(node['@id'] ?? '').endsWith(id)));
-    return parsed;
-  } catch {
-    return null;
+  for (const [, json] of homeTemplate.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+    try {
+      const parsed = JSON.parse(json);
+      if (Array.isArray(parsed['@graph'])) {
+        parsed['@graph'] = parsed['@graph'].filter(node => ['#business', '#website'].some(id => String(node['@id'] ?? '').endsWith(id)));
+        if (parsed['@graph'].length) return parsed;
+      } else if (String(parsed['@type']).includes('LocalBusiness')) {
+        return parsed;
+      }
+    } catch {}
   }
+  return null;
 })();
+const businessId = businessGraph?.['@id'] ?? `${base}/#business`;
 
-const servicesList = `<ul>
-    <li><a href="/mosquito-control-charlotte-nc">Mosquito control</a> &mdash; monthly seasonal barrier treatments</li>
-    <li><a href="/tick-control-charlotte-nc">Tick control</a> and <a href="/flea-control-charlotte-nc">flea control</a> &mdash; yard, shade, and pet-area treatments</li>
-    <li><a href="/ant-control-charlotte-nc">Ant and fire ant control</a> &mdash; property-wide treatment</li>
-    <li><a href="/cockroach-control-charlotte-nc">Cockroach control</a> and <a href="/spider-control-charlotte-nc">spider control</a></li>
-    <li><a href="/wasp-control-charlotte-nc">Wasp and stinging-insect control</a></li>
-    <li><a href="/rodent-control-charlotte-nc">Mice and rodent control</a> &mdash; inspection, exclusion, and monitoring</li>
-  </ul>`;
+const services = JSON.parse(fs.readFileSync(path.join(rootDir, 'src/app/data/services.json'), 'utf8'));
+const servicesList = `<ul>${services.map(service => `<li><a href="/services/${service.slug}">${esc(service.name)}</a> &mdash; ${esc(service.summary)}</li>`).join('')}</ul>`;
 
 const nap = `<p><strong>Selke Pest Control</strong> &middot; Based in Mooresville, NC &middot; <a href="tel:704-728-0204">704-728-0204</a> &middot; <a href="mailto:sales@selkepestcontrol.com">sales@selkepestcontrol.com</a> &middot; Monday&ndash;Saturday 8:00 AM&ndash;8:00 PM Eastern &middot; NC License# 2215P &middot; 75+ five-star Google reviews</p>`;
 
@@ -105,7 +103,7 @@ const breadcrumb = items => ({
 });
 const faqHtml = faqs => `<h2>Frequently asked questions</h2>${faqs.map(({ q, a }) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join('')}`;
 
-// ─── New city pages ──────────────────────────────────────────────────────────────────────────
+// ─── New city pages ──────────────────────────────────────────────────────────
 for (const city of newCities) {
   const area = cities.find(item => item.slug === city.slug);
   const county = counties.find(item => item.id === area?.county);
@@ -124,7 +122,7 @@ for (const city of newCities) {
       serviceType: 'Residential pest control',
       url: canonical,
       description: city.metaDescription,
-      provider: { '@id': `${base}/#business` },
+      provider: { '@id': businessId },
       areaServed: {
         '@type': 'City',
         name: `${city.name}, NC`,
@@ -164,7 +162,7 @@ for (const city of newCities) {
   write(city.slug, html);
 }
 
-// ─── County hub pages ────────────────────────────────────────────────────────────────────────
+// ─── County hub pages ────────────────────────────────────────────────────────
 for (const county of counties) {
   const canonical = `${base}/${county.slug}`;
   const countyCities = cities.filter(city => city.county === county.id);
@@ -178,7 +176,7 @@ for (const county of counties) {
       serviceType: 'Residential pest control',
       url: canonical,
       description: county.summary,
-      provider: { '@id': `${base}/#business` },
+      provider: { '@id': businessId },
       areaServed: {
         '@type': 'AdministrativeArea',
         name: `${county.name}, North Carolina`,
@@ -215,6 +213,13 @@ for (const county of counties) {
 }
 
 // ─── Sitewide: keep homepage FAQ schema on the homepage only ────────────────
+// Earlier generators copy the template's standalone FAQPage block onto every page;
+// remove those exact copies so each page only carries its own FAQ markup.
+const homeFaqBlocks = new Set(
+  [...homeTemplate.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .map(([, json]) => json.trim())
+    .filter(json => { try { return JSON.parse(json)['@type'] === 'FAQPage'; } catch { return false; } }),
+);
 let cleaned = 0;
 const walk = dir => {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -224,6 +229,7 @@ const walk = dir => {
     } else if (entry.name === 'index.html' && full !== templatePath) {
       const html = fs.readFileSync(full, 'utf8');
       const next = html.replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g, (block, json) => {
+        if (homeFaqBlocks.has(json.trim())) return '';
         if (!json.includes('/#faq') || !businessGraph) return block;
         return `<script type="application/ld+json">${JSON.stringify(businessGraph)}</script>`;
       });
@@ -237,21 +243,23 @@ const walk = dir => {
 walk(distDir);
 console.log(`✓ Homepage FAQ schema scoped to homepage (${cleaned} pages cleaned)`);
 
-// ─── Homepage crawlable summary ──────────────────────────────────────────────────────────────
-const homeFaqs = (() => {
+// ─── Homepage crawlable summary ──────────────────────────────────────────────
+// The FAQ now lives on /faq, so the homepage drops its FAQPage schema node.
+const homeTemplateNoFaq = homeTemplate.replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g, (block, json) => {
   try {
-    const match = homeTemplate.match(/<script type="application\/ld\+json">([\s\S]*?#business[\s\S]*?)<\/script>/);
-    const faq = JSON.parse(match[1])['@graph'].find(node => node['@type'] === 'FAQPage');
-    return faq.mainEntity.map(item => ({ q: item.name, a: item.acceptedAnswer.text }));
+    const parsed = JSON.parse(json);
+    if (parsed['@type'] === 'FAQPage') return '';
+    if (!Array.isArray(parsed['@graph'])) return block;
+    parsed['@graph'] = parsed['@graph'].filter(node => node['@type'] !== 'FAQPage');
+    return `<script type="application/ld+json">${JSON.stringify(parsed)}</script>`;
   } catch {
-    return [];
+    return block;
   }
-})();
-const homeBody = prerender(`<h1>Pest Control in Mooresville, Lake Norman &amp; the Charlotte Metro</h1>
-  <p><strong>Selke Pest Control</strong> is a family-owned, licensed and insured pest control company based in Mooresville, North Carolina (NC License# 2215P). We provide residential general pest control, mosquito control, flea and tick control, and rodent control across ${cities.length} cities in ${counties.length} counties: ${counties.map(county => county.name).join(', ')}. Same-day service is available, our average residential service takes more than 56 minutes, and every quarterly plan includes the Selke Guarantee &mdash; if pests return between scheduled treatments, we re-treat at no additional charge.</p>
+});
+const homeBody = prerender(`<h1>Trusted Pest Control Across Lake Norman &amp; the Charlotte Metro</h1>
+  <p><strong>Selke Pest Control</strong> is a family-owned, licensed and insured pest control company based in Mooresville, North Carolina (NC License# 2215P). We provide residential general pest control, mosquito control, flea and tick control, rodent control, exclusion work, and carpenter ant, fire ant, and carpenter bee control across ${cities.length} cities in ${counties.length} counties: ${counties.map(county => county.name).join(', ')}. Same-day service is available, our average residential service takes more than 56 minutes, and every quarterly plan includes the Selke Guarantee &mdash; if pests return between scheduled treatments, we re-treat at no additional charge.</p>
   <h2>Pest control services</h2>
   ${servicesList}
-  ${homeFaqs.length ? faqHtml(homeFaqs) : ''}
-  <p><a href="/blog">Pest control tips and articles</a></p>`);
-fs.writeFileSync(templatePath, homeTemplate.replace(/<div id="root"><\/div>/, `${homeBody}<div id="root"></div>`));
+  <p><a href="/faq">Frequently asked questions</a> &middot; <a href="/blog">Pest control tips and articles</a></p>`);
+fs.writeFileSync(templatePath, homeTemplateNoFaq.replace(/<div id="root"><\/div>/, `${homeBody}<div id="root"></div>`));
 console.log('✓ homepage prerender');
