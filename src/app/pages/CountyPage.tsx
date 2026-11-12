@@ -1,9 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
+import { SiteHeader } from '../components/SiteHeader';
+import { SiteFooter } from '../components/SiteFooter';
 import { ArrowRight, Bug, CheckCircle, ChevronDown, Home, Leaf, Mail, MapPin, Phone, Shield, Star } from 'lucide-react';
-import FooterLogo from '../components/FooterLogo';
-import { ServiceAreaMap } from '../components/ServiceAreaMap';
-import { ServiceAreasMenu } from '../components/ServiceAreasMenu';
-import newLogo from '../../imports/Screenshot_2026-05-18_213802.png';
 import { citiesInCounty, type ServiceCounty } from '../data/serviceAreas';
 
 const QuoteFormModal = lazy(() =>
@@ -76,24 +74,7 @@ export default function CountyPage({ county }: { county: ServiceCounty }) {
         </Suspense>
       )}
 
-      <header className="sticky top-0 z-50 bg-white shadow-md">
-        <div className="container mx-auto flex items-center justify-between gap-4 px-4 py-3">
-          <a href="/" aria-label="Selke Pest Control - Home">
-            <img src={newLogo} alt="Selke Pest Control logo" className="h-12 w-auto md:h-14" width="1656" height="382" />
-          </a>
-          <nav className="hidden items-center gap-6 lg:flex" aria-label="Main navigation">
-            <a href="/" className="text-gray-700 transition-colors hover:text-cyan-500">Home</a>
-            <a href="/#services" className="text-gray-700 transition-colors hover:text-cyan-500">Services</a>
-            <a href="/blog" className="text-gray-700 transition-colors hover:text-cyan-500">Blog</a>
-            <a href="/#faq" className="text-gray-700 transition-colors hover:text-cyan-500">FAQ</a>
-            <ServiceAreasMenu />
-          </nav>
-          <a href="tel:704-728-0204" className="flex items-center gap-2 rounded-lg bg-cyan-500 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-cyan-600 md:text-base">
-            <Phone className="h-4 w-4" aria-hidden="true" />
-            <span className="hidden sm:inline">704-728-0204</span>
-          </a>
-        </div>
-      </header>
+      <SiteHeader active="areas" />
 
       <nav className="border-b border-gray-200 bg-gray-50 py-3" aria-label="Breadcrumb">
         <ol className="container mx-auto flex items-center gap-2 px-4 text-sm text-gray-500">
@@ -199,20 +180,7 @@ export default function CountyPage({ county }: { county: ServiceCounty }) {
         </section>
       </main>
 
-      <footer className="bg-gray-900 py-12 text-white" role="contentinfo">
-        <div className="container mx-auto space-y-10 px-4">
-          <ServiceAreaMap />
-          <div className="flex flex-col items-start justify-between gap-6 border-t border-gray-800 pt-8 text-gray-400 md:flex-row md:items-center">
-            <FooterLogo className="h-14" />
-            <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-              <li className="flex items-center gap-2"><Phone className="h-4 w-4" aria-hidden="true" /><a href="tel:704-728-0204" className="hover:text-cyan-400">704-728-0204</a></li>
-              <li className="flex items-center gap-2"><Mail className="h-4 w-4" aria-hidden="true" /><a href="mailto:sales@selkepestcontrol.com" className="hover:text-cyan-400">sales@selkepestcontrol.com</a></li>
-              <li>License# 2215P</li>
-            </ul>
-          </div>
-          <p className="text-center text-sm text-gray-500">&copy; {new Date().getFullYear()} Selke Pest Control. All rights reserved.</p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

@@ -1,13 +1,11 @@
 import { Phone, Shield, Star, Bug, Leaf, Home, Award, Users, Clock, ChevronDown, MapPin, Mail, Menu, X } from 'lucide-react';
+import { SiteHeader } from '../components/SiteHeader';
+import { SiteFooter } from '../components/SiteFooter';
 import { useEffect, useState } from 'react';
 import { QuoteFormModal } from '../components/QuoteFormModal';
 import { LegalModal } from '../components/LegalModal';
 import { ReviewsCarousel } from '../components/ReviewsCarousel';
-import FooterLogo from '../components/FooterLogo';
-import newLogo from '../../imports/Screenshot_2026-05-18_213802.png';
 import { CityData } from '../data/cityData';
-import { MobileServiceAreas, ServiceAreasMenu } from '../components/ServiceAreasMenu';
-import { ServiceAreaMap } from '../components/ServiceAreaMap';
 import { citiesInCounty, getCountyForCitySlug, serviceCities } from '../data/serviceAreas';
 
 interface CityPageProps {
@@ -93,44 +91,7 @@ export default function CityPage({ city }: CityPageProps) {
         }}
       />
 
-      {/* Header */}
-      <header className="bg-white shadow-md sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-3 flex items-center justify-between gap-4">
-          <a href="/" aria-label="Selke Pest Control - Home">
-            <img src={newLogo} alt="Selke Pest Control logo" className="h-14 md:h-16" />
-          </a>
-          <nav className="hidden lg:flex items-center gap-6">
-            <a href="/" className="text-gray-700 hover:text-cyan-500 transition-colors">Home</a>
-            <a href="/#services" className="text-gray-700 hover:text-cyan-500 transition-colors">Services</a>
-            <a href="/#why-us" className="text-gray-700 hover:text-cyan-500 transition-colors">Why Us</a>
-            <a href="/#faq" className="text-gray-700 hover:text-cyan-500 transition-colors">FAQ</a>
-            <ServiceAreasMenu />
-          </nav>
-          <div className="flex items-center gap-3">
-            <a href="tel:704-728-0204" className="bg-cyan-500 text-white px-4 md:px-6 py-3 rounded-lg hover:bg-cyan-600 transition-colors flex items-center gap-2 text-sm md:text-base">
-              <Phone className="w-4 h-4" />
-              <span className="hidden sm:inline">704-728-0204</span>
-            </a>
-            <button
-              type="button"
-              onClick={() => setIsMobileMenuOpen(open => !open)}
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 lg:hidden"
-              aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-              aria-expanded={isMobileMenuOpen}
-            >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
-        </div>
-        {isMobileMenuOpen && (
-          <nav className="max-h-[75vh] overflow-y-auto border-t border-gray-100 bg-white px-4 py-4 shadow-lg lg:hidden" aria-label="Mobile navigation">
-            {[['Home', '/'], ['Services', '/#services'], ['Blog', '/blog'], ['Frequently Asked Questions', '/#faq']].map(([label, href]) => (
-              <a key={href} href={href} className="block rounded-lg px-4 py-3 font-medium text-gray-700 hover:bg-cyan-50 hover:text-cyan-700">{label}</a>
-            ))}
-            <MobileServiceAreas onNavigate={() => setIsMobileMenuOpen(false)} />
-          </nav>
-        )}
-      </header>
+      <SiteHeader active="areas" />
 
       {/* Breadcrumb */}
       <nav className="border-b border-gray-200 bg-gray-50 py-3" aria-label="Breadcrumb">
@@ -407,43 +368,7 @@ export default function CityPage({ city }: CityPageProps) {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <FooterLogo className="h-20 mb-4" />
-              <p className="text-gray-400 mb-3">Family-owned and locally operated. Protecting Charlotte Metro homes with professional, reliable pest control services.</p>
-              <address className="text-gray-400 not-italic">
-                <MapPin className="w-4 h-4 inline mr-2" />
-                Based out of Mooresville, North Carolina
-              </address>
-            </div>
-            <div>
-              <h3 className="text-lg mb-4">Contact Info</h3>
-              <ul className="space-y-3 text-gray-400">
-                <li className="flex items-center gap-2">
-                  <Phone className="w-4 h-4" />
-                  <a href="tel:704-728-0204" className="hover:text-cyan-400 transition-colors">704-728-0204</a>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Mail className="w-4 h-4" />
-                  <a href="mailto:sales@selkepestcontrol.com" className="hover:text-cyan-400 transition-colors">sales@selkepestcontrol.com</a>
-                </li>
-              </ul>
-              <div className="mt-6">
-                <button onClick={() => setIsLegalModalOpen(true)} className="text-gray-400 hover:text-cyan-400 transition-colors text-sm">Privacy Policy & Terms</button>
-              </div>
-            </div>
-          </div>
-          <div className="mb-8">
-            <ServiceAreaMap />
-          </div>
-          <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>&copy; {new Date().getFullYear()} Selke Pest Control. All rights reserved. Licensed & Insured. License# 2215P.</p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
