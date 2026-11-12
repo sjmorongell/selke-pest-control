@@ -1,0 +1,395 @@
+{
+  "counties": [
+    {
+      "id": "mecklenburg",
+      "name": "Mecklenburg County",
+      "seat": "Charlotte",
+      "slug": "pest-control-mecklenburg-county-nc",
+      "lat": 35.2468,
+      "lng": -80.8333,
+      "summary": "Selke Pest Control provides residential general pest control, mosquito control, flea and tick control, and rodent control throughout Mecklenburg County, North Carolina, including Charlotte, Huntersville, Cornelius, Davidson, and Matthews.",
+      "geography": "Mecklenburg County is the most urbanized county in the Charlotte region, but it is also one of the most pest-active. Lake Norman borders the county to the north, Mountain Island Lake and the Catawba River form its western edge, and greenway creek corridors such as Little Sugar Creek, McAlpine Creek, Mallard Creek, and Torrence Creek run directly through residential neighborhoods. Those creek buffers and the county's large tree canopy hold humidity and shade, which is why mosquitoes, ticks, and moisture-loving pests stay active from early spring through late fall.",
+      "pests": [
+        "Asian tiger mosquitoes and Culex mosquitoes along creeks and retention ponds",
+        "Lone star, American dog, and black-legged ticks on wooded lot lines",
+        "Fire ants in new-construction lawns and common areas",
+        "American and German cockroaches in denser neighborhoods",
+        "House mice and roof rats entering homes in fall and winter"
+      ],
+      "faqs": [
+        {
+          "q": "Does Selke Pest Control serve all of Mecklenburg County?",
+          "a": "Yes. We serve residential properties across Mecklenburg County, including Charlotte, Huntersville, Cornelius, Davidson, and Matthews, along with surrounding unincorporated communities. Call 704-728-0204 to confirm service for your address."
+        },
+        {
+          "q": "When is mosquito season in Mecklenburg County?",
+          "a": "Mosquito activity in Mecklenburg County typically runs from late March or April through October, peaking from June through August. Monthly barrier treatments during the warm season provide the most consistent protection."
+        },
+        {
+          "q": "How much does pest control cost in Mecklenburg County?",
+          "a": "Pricing depends on home size, lot size, and the pests involved. Selke Pest Control provides free quotes by phone at 704-728-0204 or through the online quote form, and every quarterly plan includes the Selke Guarantee for free re-treatments between visits."
+        }
+      ],
+      "cities": [
+        "pest-control-charlotte-nc",
+        "pest-control-huntersville-nc",
+        "pest-control-cornelius-nc",
+        "pest-control-davidson-nc",
+        "pest-control-matthews-nc"
+      ]
+    },
+    {
+      "id": "iredell",
+      "name": "Iredell County",
+      "seat": "Statesville",
+      "slug": "pest-control-iredell-county-nc",
+      "lat": 35.8064,
+      "lng": -80.874,
+      "summary": "Selke Pest Control is headquartered in Mooresville and provides residential pest control throughout Iredell County, North Carolina, including Mooresville, Statesville, and Troutman.",
+      "geography": "Iredell County stretches from the northern shoreline of Lake Norman up through the Piedmont foothills. Southern Iredell, including Mooresville and the Brawley School Road peninsula, has hundreds of miles of lakefront coves that create extended mosquito seasons. Central and northern Iredell, including Troutman and Statesville, mix farmland, wooded creeks such as Fifth Creek and Third Creek, and fast-growing subdivisions, which drives tick, fire ant, and rodent pressure.",
+      "pests": [
+        "Mosquitoes along Lake Norman coves and shoreline properties",
+        "Ticks on wooded and rural acreage",
+        "Fire ants in open lawns and new subdivisions",
+        "Carpenter ants in older and moisture-damaged structures",
+        "Mice and rats moving in from farmland in the fall"
+      ],
+      "faqs": [
+        {
+          "q": "Is Selke Pest Control based in Iredell County?",
+          "a": "Yes. Selke Pest Control is a family-owned company based in Mooresville, in southern Iredell County, which lets us offer fast scheduling and same-day service availability for Iredell County homeowners."
+        },
+        {
+          "q": "Which Iredell County towns does Selke serve?",
+          "a": "We serve Mooresville, Statesville, Troutman, and the surrounding Iredell County communities, including Lake Norman lakefront neighborhoods."
+        },
+        {
+          "q": "What pests are most common in Iredell County?",
+          "a": "The most common pest problems in Iredell County are mosquitoes near Lake Norman, ticks on wooded and rural properties, fire ants, ants and spiders around foundations, and rodents seeking shelter in cooler months."
+        }
+      ],
+      "cities": [
+        "pest-control-mooresville-nc",
+        "pest-control-statesville-nc",
+        "pest-control-troutman-nc"
+      ]
+    },
+    {
+      "id": "cabarrus",
+      "name": "Cabarrus County",
+      "seat": "Concord",
+      "slug": "pest-control-cabarrus-county-nc",
+      "lat": 35.3869,
+      "lng": -80.5533,
+      "summary": "Selke Pest Control provides residential general pest control, mosquito control, flea and tick control, and rodent control in Cabarrus County, North Carolina, with dedicated service in Concord.",
+      "geography": "Cabarrus County sits just northeast of Charlotte and is one of the fastest-growing counties in North Carolina. The Rocky River, Coddle Creek, and Irish Buffalo Creek wind through the county, and new subdivisions are being built on former farmland and wooded tracts. Disturbed soil favors fire ants, creek buffers favor mosquitoes and ticks, and the transition from farmland to housing pushes mice and rats into new homes.",
+      "pests": [
+        "Mosquitoes along the Rocky River and creek greenways",
+        "Fire ants in new-construction yards",
+        "Ticks on wooded lot lines and open space",
+        "Ants and spiders around slab and crawl-space foundations",
+        "Rodents displaced by ongoing development"
+      ],
+      "faqs": [
+        {
+          "q": "Does Selke Pest Control serve Cabarrus County?",
+          "a": "Yes. We serve residential homes in Cabarrus County, including Concord and nearby communities. Call 704-728-0204 to confirm availability for your address."
+        },
+        {
+          "q": "Why are fire ants so common in Cabarrus County?",
+          "a": "Rapid residential construction across Cabarrus County disturbs soil and creates open, sunny lawns, which are ideal conditions for fire ant colonies to establish and spread."
+        },
+        {
+          "q": "Does Selke offer mosquito control in Concord and Cabarrus County?",
+          "a": "Yes. Selke Pest Control provides seasonal mosquito barrier treatments for Concord and Cabarrus County homes, typically from spring through fall."
+        }
+      ],
+      "cities": [
+        "pest-control-concord-nc"
+      ]
+    },
+    {
+      "id": "rowan",
+      "name": "Rowan County",
+      "seat": "Salisbury",
+      "slug": "pest-control-rowan-county-nc",
+      "lat": 35.639,
+      "lng": -80.525,
+      "summary": "Selke Pest Control provides residential pest control in western Rowan County, North Carolina, including Mount Ulla and the rural communities along the Iredell County line.",
+      "geography": "Western Rowan County is rural Piedmont country made up of farmland, horse properties, ponds, and large wooded lots just east of Mooresville. Barns, outbuildings, hay storage, livestock water, and tree lines create year-round habitat for rodents, ticks, stinging insects, and mosquitoes that are different from the pest pressure in suburban subdivisions.",
+      "pests": [
+        "Ticks in pastures, field edges, and wooded acreage",
+        "Mice and rats around barns, feed, and outbuildings",
+        "Mosquitoes breeding in ponds and livestock water",
+        "Wasps, hornets, and yellow jackets on rural structures",
+        "Fire ants in open fields and yards"
+      ],
+      "faqs": [
+        {
+          "q": "Does Selke Pest Control serve Rowan County?",
+          "a": "Yes. We serve western Rowan County, including Mount Ulla and nearby rural communities close to Mooresville. Call 704-728-0204 to confirm service for your property."
+        },
+        {
+          "q": "Can Selke treat large rural properties in Mount Ulla?",
+          "a": "Yes. We treat homes on acreage and focus on the areas where pests start: foundations, outbuilding perimeters, tree lines, and shaded resting areas for mosquitoes and ticks."
+        }
+      ],
+      "cities": [
+        "pest-control-mount-ulla-nc"
+      ]
+    },
+    {
+      "id": "lincoln",
+      "name": "Lincoln County",
+      "seat": "Lincolnton",
+      "slug": "pest-control-lincoln-county-nc",
+      "lat": 35.4867,
+      "lng": -81.2245,
+      "summary": "Selke Pest Control provides residential pest control in eastern Lincoln County, North Carolina, including Denver and the Lake Norman west shore.",
+      "geography": "Eastern Lincoln County lines the western shore of Lake Norman. Communities around Denver combine lakefront coves, golf course communities, and heavily wooded lots, which makes it one of the most mosquito- and tick-active parts of the Lake Norman region.",
+      "pests": [
+        "Mosquitoes in lake coves and wooded backyards",
+        "Ticks along wooded lot lines and golf course roughs",
+        "Fire ants in open lawns",
+        "Wasps and other stinging insects around docks and decks",
+        "Spiders around lakefront homes"
+      ],
+      "faqs": [
+        {
+          "q": "Does Selke Pest Control serve Lincoln County?",
+          "a": "Yes. We serve eastern Lincoln County, including Denver and the Lake Norman west shore. Call 704-728-0204 to confirm service for your address."
+        },
+        {
+          "q": "Why are mosquitoes so bad in Denver, NC?",
+          "a": "Denver sits on the west shore of Lake Norman, where sheltered coves, shade, and dense vegetation create ideal mosquito breeding and resting habitat from spring through fall."
+        }
+      ],
+      "cities": [
+        "pest-control-denver-nc"
+      ]
+    },
+    {
+      "id": "catawba",
+      "name": "Catawba County",
+      "seat": "Newton",
+      "slug": "pest-control-catawba-county-nc",
+      "lat": 35.662,
+      "lng": -81.214,
+      "summary": "Selke Pest Control provides residential pest control in southeastern Catawba County, North Carolina, including Sherrills Ford and the Lake Norman shoreline.",
+      "geography": "Southeastern Catawba County wraps around the northwest arm of Lake Norman. Sherrills Ford and Terrell have long shorelines, wetlands, and rural wooded acreage, so mosquito season starts early and rodent and tick pressure stays high.",
+      "pests": [
+        "Early-season mosquitoes near coves and wetlands",
+        "Ticks on rural and wooded properties",
+        "Mice and rats around homes near woods and fields",
+        "Stinging insects around docks and outbuildings",
+        "Ants and spiders around foundations"
+      ],
+      "faqs": [
+        {
+          "q": "Does Selke Pest Control serve Catawba County?",
+          "a": "Yes. We serve southeastern Catawba County, including Sherrills Ford and nearby Lake Norman communities. Call 704-728-0204 to confirm service for your address."
+        }
+      ],
+      "cities": [
+        "pest-control-sherrills-ford-nc"
+      ]
+    },
+    {
+      "id": "union",
+      "name": "Union County",
+      "seat": "Monroe",
+      "slug": "pest-control-union-county-nc",
+      "lat": 34.988,
+      "lng": -80.53,
+      "summary": "Selke Pest Control provides residential pest control in western Union County, North Carolina, including Indian Trail, Weddington, and Waxhaw.",
+      "geography": "Western Union County borders south Charlotte and has grown from farmland into large-lot subdivisions and equestrian properties. Creeks such as Crooked Creek, Twelve Mile Creek, and Waxhaw Creek, along with many retention ponds, create mosquito habitat, while disturbed soil and wooded buffers drive fire ant and tick activity.",
+      "pests": [
+        "Mosquitoes around retention ponds and creek corridors",
+        "Fire ants in new and established lawns",
+        "Ticks on large and wooded lots",
+        "Ants, spiders, and cockroaches around homes",
+        "Rodents moving in from surrounding farmland"
+      ],
+      "faqs": [
+        {
+          "q": "Does Selke Pest Control serve Union County?",
+          "a": "Yes. We serve western Union County, including Indian Trail, Weddington, and Waxhaw. Call 704-728-0204 to confirm service for your address."
+        },
+        {
+          "q": "What is the most common pest problem in Union County?",
+          "a": "Mosquitoes and fire ants are the most common complaints in western Union County because of the many retention ponds, creeks, and newly graded lawns in the area."
+        }
+      ],
+      "cities": [
+        "pest-control-indian-trail-nc",
+        "pest-control-weddington-nc",
+        "pest-control-waxhaw-nc"
+      ]
+    }
+  ],
+  "cities": [
+    {
+      "name": "Charlotte",
+      "slug": "pest-control-charlotte-nc",
+      "county": "mecklenburg",
+      "lat": 35.2271,
+      "lng": -80.8431,
+      "zips": [
+        "28202",
+        "28207",
+        "28209",
+        "28210",
+        "28211",
+        "28226",
+        "28277"
+      ]
+    },
+    {
+      "name": "Huntersville",
+      "slug": "pest-control-huntersville-nc",
+      "county": "mecklenburg",
+      "lat": 35.4107,
+      "lng": -80.8429,
+      "zips": [
+        "28078"
+      ]
+    },
+    {
+      "name": "Cornelius",
+      "slug": "pest-control-cornelius-nc",
+      "county": "mecklenburg",
+      "lat": 35.4868,
+      "lng": -80.8601,
+      "zips": [
+        "28031"
+      ]
+    },
+    {
+      "name": "Davidson",
+      "slug": "pest-control-davidson-nc",
+      "county": "mecklenburg",
+      "lat": 35.4993,
+      "lng": -80.8487,
+      "zips": [
+        "28035",
+        "28036"
+      ]
+    },
+    {
+      "name": "Matthews",
+      "slug": "pest-control-matthews-nc",
+      "county": "mecklenburg",
+      "lat": 35.1168,
+      "lng": -80.7237,
+      "zips": [
+        "28104",
+        "28105"
+      ]
+    },
+    {
+      "name": "Mooresville",
+      "slug": "pest-control-mooresville-nc",
+      "county": "iredell",
+      "lat": 35.5849,
+      "lng": -80.8101,
+      "zips": [
+        "28115",
+        "28117"
+      ],
+      "hq": true
+    },
+    {
+      "name": "Statesville",
+      "slug": "pest-control-statesville-nc",
+      "county": "iredell",
+      "lat": 35.7826,
+      "lng": -80.8873,
+      "zips": [
+        "28625",
+        "28677"
+      ]
+    },
+    {
+      "name": "Troutman",
+      "slug": "pest-control-troutman-nc",
+      "county": "iredell",
+      "lat": 35.7007,
+      "lng": -80.8881,
+      "zips": [
+        "28166"
+      ]
+    },
+    {
+      "name": "Concord",
+      "slug": "pest-control-concord-nc",
+      "county": "cabarrus",
+      "lat": 35.4088,
+      "lng": -80.5795,
+      "zips": [
+        "28025",
+        "28027"
+      ]
+    },
+    {
+      "name": "Mount Ulla",
+      "slug": "pest-control-mount-ulla-nc",
+      "county": "rowan",
+      "lat": 35.646,
+      "lng": -80.7237,
+      "zips": [
+        "28125"
+      ]
+    },
+    {
+      "name": "Denver",
+      "slug": "pest-control-denver-nc",
+      "county": "lincoln",
+      "lat": 35.5313,
+      "lng": -81.0298,
+      "zips": [
+        "28037"
+      ]
+    },
+    {
+      "name": "Sherrills Ford",
+      "slug": "pest-control-sherrills-ford-nc",
+      "county": "catawba",
+      "lat": 35.6204,
+      "lng": -80.9851,
+      "zips": [
+        "28673"
+      ]
+    },
+    {
+      "name": "Indian Trail",
+      "slug": "pest-control-indian-trail-nc",
+      "county": "union",
+      "lat": 35.0768,
+      "lng": -80.6692,
+      "zips": [
+        "28079"
+      ]
+    },
+    {
+      "name": "Weddington",
+      "slug": "pest-control-weddington-nc",
+      "county": "union",
+      "lat": 35.0226,
+      "lng": -80.7609,
+      "zips": [
+        "28104",
+        "28173"
+      ]
+    },
+    {
+      "name": "Waxhaw",
+      "slug": "pest-control-waxhaw-nc",
+      "county": "union",
+      "lat": 34.9246,
+      "lng": -80.7434,
+      "zips": [
+        "28173"
+      ]
+    }
+  ]
+}

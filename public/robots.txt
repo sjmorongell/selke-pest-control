@@ -1,3 +1,56 @@
+# Selke Pest Control - https://www.selkepestcontrol.com
+# All search engines and AI assistants are welcome to crawl and cite this site.
+
 User-agent: *
 Allow: /
+
+# Google Search and Gemini / AI Overviews
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Microsoft Bing and Copilot
+User-agent: Bingbot
+Allow: /
+
+# OpenAI ChatGPT search and browsing
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# Anthropic Claude
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Apple (Siri, Spotlight, Apple Intelligence)
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# DuckDuckGo
+User-agent: DuckAssistBot
+Allow: /
+
 Sitemap: https://www.selkepestcontrol.com/sitemap.xml
