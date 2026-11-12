@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { SiteHeader } from '../components/SiteHeader';
+import { SiteFooter } from '../components/SiteFooter';
 import {
   ArrowRight,
   BookOpen,
@@ -11,7 +13,6 @@ import {
   Sparkles,
   X,
 } from 'lucide-react';
-import newLogo from '../../imports/Screenshot_2026-05-18_213802.png';
 import { blogIndexArticles, type BlogCategory } from '../data/blogIndexData';
 
 const categories: Array<'All Articles' | BlogCategory> = [
@@ -56,83 +57,7 @@ export default function BlogIndexPage() {
         Skip to articles
       </a>
 
-      <header className="sticky top-0 z-40 border-b border-slate-100 bg-white/95 shadow-sm backdrop-blur">
-        <div className="container mx-auto flex items-center justify-between gap-4 px-4 py-3">
-          <a href="/" aria-label="Selke Pest Control home">
-            <img
-              src={newLogo}
-              alt="Selke Pest Control"
-              className="h-14 w-auto md:h-16"
-              width="1656"
-              height="382"
-            />
-          </a>
-          <nav className="hidden items-center gap-7 lg:flex" aria-label="Main navigation">
-            <a href="/" className="font-medium text-slate-600 transition-colors hover:text-cyan-600">
-              Home
-            </a>
-            <a href="/#services" className="font-medium text-slate-600 transition-colors hover:text-cyan-600">
-              Services
-            </a>
-            <a href="/blog" className="font-semibold text-cyan-700" aria-current="page">
-              Blog
-            </a>
-            <a href="/#areas" className="font-medium text-slate-600 transition-colors hover:text-cyan-600">
-              Service Areas
-            </a>
-            <a href="/#faq" className="font-medium text-slate-600 transition-colors hover:text-cyan-600">
-              FAQ
-            </a>
-          </nav>
-          <div className="flex items-center gap-2">
-            <a
-              href="tel:7047280204"
-              className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-cyan-600 px-4 py-2 font-bold text-white transition-colors hover:bg-cyan-700"
-            >
-              <Phone className="size-4" aria-hidden="true" />
-              <span className="hidden sm:inline">704-728-0204</span>
-              <span className="sm:hidden">Call</span>
-            </a>
-            <button
-              type="button"
-              onClick={() => setIsMobileMenuOpen(open => !open)}
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-700 lg:hidden"
-              aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-              aria-expanded={isMobileMenuOpen}
-              aria-controls="blog-mobile-navigation"
-            >
-              {isMobileMenuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
-            </button>
-          </div>
-        </div>
-        {isMobileMenuOpen && (
-          <nav
-            id="blog-mobile-navigation"
-            className="border-t border-slate-100 bg-white px-4 py-4 shadow-lg lg:hidden"
-            aria-label="Mobile navigation"
-          >
-            {[
-              ['Home', '/'],
-              ['Services', '/#services'],
-              ['Blog', '/blog'],
-              ['Service Areas', '/#areas'],
-              ['Frequently Asked Questions', '/#faq'],
-            ].map(([label, href]) => (
-              <a
-                key={href}
-                href={href}
-                className={`block rounded-lg px-4 py-3 font-medium ${
-                  href === '/blog'
-                    ? 'bg-cyan-50 text-cyan-700'
-                    : 'text-slate-700 hover:bg-cyan-50'
-                }`}
-              >
-                {label}
-              </a>
-            ))}
-          </nav>
-        )}
-      </header>
+      <SiteHeader active="blog" />
 
       <main>
         <section className="relative overflow-hidden bg-slate-950 px-4 py-20 text-white md:py-28">
@@ -293,12 +218,7 @@ export default function BlogIndexPage() {
         </section>
       </main>
 
-      <footer className="bg-slate-950 px-4 py-9 text-sm text-slate-400">
-        <div className="mx-auto flex max-w-6xl flex-col justify-between gap-3 sm:flex-row">
-          <p>&copy; {new Date().getFullYear()} Selke Pest Control. Licensed &amp; Insured.</p>
-          <p>Mooresville, NC &bull; Charlotte Metro &bull; Lake Norman</p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

@@ -1,4 +1,6 @@
 import { ArrowLeft, Phone, CheckSquare, Minus, BookOpen } from 'lucide-react';
+import { SiteHeader } from '../components/SiteHeader';
+import { SiteFooter } from '../components/SiteFooter';
 import { blogArticles } from '../utils/blogContent';
 import { premiumServiceArticle } from '../utils/premiumServiceArticle';
 import { useEffect } from 'react';
@@ -208,22 +210,7 @@ export default function BlogPage({ slug }: { slug: string }) {
   return (
     <>
       <div className="min-h-screen bg-gray-50">
-        <header className="bg-white shadow-sm">
-          <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="/blog" className="flex items-center gap-2 text-gray-600 hover:text-cyan-600 transition-colors">
-              <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm font-medium">All Articles</span>
-            </a>
-            <div className="flex items-center gap-2">
-              <a href="/" className="hidden items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600 hover:text-cyan-600 sm:flex">Home</a>
-              <a href="tel:7047280204" className="flex items-center gap-2 bg-cyan-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-cyan-700 transition-colors">
-                <Phone className="w-4 h-4" />
-                <span className="hidden sm:inline">704-728-0204</span>
-                <span className="sm:hidden">Call</span>
-              </a>
-            </div>
-          </div>
-        </header>
+        <SiteHeader active="blog" />
 
         <div className="bg-gradient-to-br from-cyan-700 to-cyan-900 text-white py-12 px-4">
           <div className="max-w-4xl mx-auto">
@@ -252,10 +239,7 @@ export default function BlogPage({ slug }: { slug: string }) {
           </div>
         </main>
 
-        <footer className="bg-gray-800 text-gray-400 text-sm py-6 text-center mt-10">
-          <p>&copy; {new Date().getFullYear()} Selke Pest Control &mdash; Mooresville, NC &mdash; 704-728-0204</p>
-          <p className="mt-1">Serving the Lake Norman area &bull; Licensed &amp; Insured &bull; 100% Satisfaction Guarantee</p>
-        </footer>
+        <SiteFooter />
       </div>
     </>
   );
