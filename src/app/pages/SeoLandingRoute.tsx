@@ -1,11 +1,19 @@
 import CityPage from './CityPage';
+import CountyPage from './CountyPage';
 import PestPage from './PestPage';
-import { cityData } from '../data/cityData';
+import { cityData, type CityData } from '../data/cityData';
+import newCityData from '../data/newCityData.json';
 import { pestPages } from '../data/pestData';
+import { getCountyBySlug } from '../data/serviceAreas';
+
+const allCities: CityData[] = [...cityData, ...(newCityData as CityData[])];
 
 export default function SeoLandingRoute({ slug }: { slug: string }) {
-  const city = cityData.find(item => item.slug === slug);
+  const city = allCities.find(item => item.slug === slug);
   if (city) return <CityPage city={city} />;
+
+  const county = getCountyBySlug(slug);
+  if (county) return <CountyPage county={county} />;
 
   const pest = pestPages.find(item => item.slug === slug);
   if (pest) return <PestPage pest={pest} />;
