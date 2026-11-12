@@ -6,21 +6,9 @@ import { LegalModal } from '../components/LegalModal';
 import FooterLogo from '../components/FooterLogo';
 import newLogo from '../../imports/Screenshot_2026-05-18_213802.png';
 import { PestPageData } from '../data/pestData';
-
-const SERVICE_AREAS = [
-  { name: 'Mooresville', slug: 'pest-control-mooresville-nc' },
-  { name: 'Charlotte', slug: 'pest-control-charlotte-nc' },
-  { name: 'Huntersville', slug: 'pest-control-huntersville-nc' },
-  { name: 'Cornelius', slug: 'pest-control-cornelius-nc' },
-  { name: 'Davidson', slug: 'pest-control-davidson-nc' },
-  { name: 'Denver', slug: 'pest-control-denver-nc' },
-  { name: 'Sherrills Ford', slug: 'pest-control-sherrills-ford-nc' },
-  { name: 'Statesville', slug: 'pest-control-statesville-nc' },
-  { name: 'Troutman', slug: 'pest-control-troutman-nc' },
-  { name: 'Weddington', slug: 'pest-control-weddington-nc' },
-  { name: 'Waxhaw', slug: 'pest-control-waxhaw-nc' },
-  { name: 'Matthews', slug: 'pest-control-matthews-nc' },
-];
+import { MobileServiceAreas, ServiceAreasMenu } from '../components/ServiceAreasMenu';
+import { ServiceAreaMap } from '../components/ServiceAreaMap';
+import { serviceCounties } from '../data/serviceAreas';
 
 const PEST_LINKS = [
   { name: 'Mosquito Control', slug: 'mosquito-control-charlotte-nc' },
@@ -43,11 +31,9 @@ export default function PestPage({ pest }: PestPageProps) {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [isLegalModalOpen, setIsLegalModalOpen] = useState(false);
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
-  const [isAreasDropdownOpen, setIsAreasDropdownOpen] = useState(false);
   const [isPestsDropdownOpen, setIsPestsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobilePestsOpen, setMobilePestsOpen] = useState(false);
-  const [mobileAreasOpen, setMobileAreasOpen] = useState(false);
   const [showStickyCTA, setShowStickyCTA] = useState(false);
 
   useEffect(() => {
@@ -72,8 +58,8 @@ export default function PestPage({ pest }: PestPageProps) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://selkepestcontrol.com/" },
-      { "@type": "ListItem", "position": 2, "name": pest.heroHeadline, "item": `https://selkepestcontrol.com/${pest.slug}` }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.selkepestcontrol.com/" },
+      { "@type": "ListItem", "position": 2, "name": pest.heroHeadline, "item": `https://www.selkepestcontrol.com/${pest.slug}` }
     ]
   };
 
@@ -81,8 +67,9 @@ export default function PestPage({ pest }: PestPageProps) {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": `${pest.pest} Control Charlotte NC`,
-    "provider": { "@type": "LocalBusiness", "name": "Selke Pest Control", "telephone": "+1-704-728-0204" },
-    "areaServed": { "@type": "State", "name": "North Carolina" },
+    "url": `https://www.selkepestcontrol.com/${pest.slug}`,
+    "provider": { "@type": "LocalBusiness", "@id": "https://www.selkepestcontrol.com/#business", "name": "Selke Pest Control", "telephone": "+1-704-728-0204" },
+    "areaServed": serviceCounties.map(county => ({ "@type": "AdministrativeArea", "name": `${county.name}, NC` })),
     "description": pest.intro
   };
 
@@ -121,20 +108,7 @@ export default function PestPage({ pest }: PestPageProps) {
                 </div>
               )}
             </div>
-            <div className="relative" onMouseEnter={() => setIsAreasDropdownOpen(true)} onMouseLeave={() => setIsAreasDropdownOpen(false)}>
-              <button className="flex items-center gap-1 text-sm text-gray-700 hover:text-cyan-500 transition-colors">
-                Service Areas <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isAreasDropdownOpen ? 'rotate-180' : ''}`} />
-              </button>
-              {isAreasDropdownOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50">
-                  <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2 grid grid-cols-2 min-w-[340px]">
-                    {SERVICE_AREAS.map(({ name, slug }) => (
-                      <a key={slug} href={`/${slug}`} className="px-4 py-2.5 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 transition-colors">{name}, NC</a>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
+            <ServiceAreasMenu labelClassName="text-sm text-gray-700" />
           </nav>
           <div className="flex items-center gap-3">
             <a href="#" className="hidden md:block text-sm text-gray-700 hover:text-cyan-500 transition-colors px-4 py-2 border border-gray-300 rounded-lg hover:border-cyan-500">Customer Portal</a>
@@ -166,18 +140,7 @@ export default function PestPage({ pest }: PestPageProps) {
                   </div>
                 )}
               </div>
-              <div>
-                <button onClick={() => setMobileAreasOpen(!mobileAreasOpen)} className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-cyan-50 rounded-lg transition-colors">
-                  <span>Service Areas</span><ChevronDown className={`w-4 h-4 transition-transform ${mobileAreasOpen ? 'rotate-180' : ''}`} />
-                </button>
-                {mobileAreasOpen && (
-                  <div className="pl-4 grid grid-cols-2 gap-1 pb-2">
-                    {SERVICE_AREAS.map(({ name, slug }) => (
-                      <a key={slug} href={`/${slug}`} className="px-3 py-2 text-sm text-gray-600 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>{name}</a>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <MobileServiceAreas onNavigate={() => setIsMobileMenuOpen(false)} />
               <a href="#" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors">Customer Portal</a>
               <a href="tel:704-728-0204" className="block bg-cyan-500 text-white px-4 py-3 rounded-lg text-center font-semibold hover:bg-cyan-600 transition-colors mt-2">Call 704-728-0204</a>
             </div>
@@ -423,11 +386,11 @@ export default function PestPage({ pest }: PestPageProps) {
           <div className="max-w-3xl mx-auto space-y-4">
             {pest.faqs.map((faq, i) => (
               <div key={i} className="bg-white rounded-xl shadow-lg overflow-hidden">
-                <button onClick={() => setOpenFAQ(openFAQ === i ? null : i)} className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 transition-colors">
+                <button onClick={() => setOpenFAQ(openFAQ === i ? null : i)} aria-expanded={openFAQ === i} className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 transition-colors">
                   <span className="text-lg pr-8">{faq.q}</span>
                   <ChevronDown className={`w-5 h-5 text-cyan-600 flex-shrink-0 transition-transform ${openFAQ === i ? 'rotate-180' : ''}`} />
                 </button>
-                {openFAQ === i && <div className="px-6 pb-5 text-gray-600">{faq.a}</div>}
+                <div className={openFAQ === i ? 'px-6 pb-5 text-gray-600' : 'hidden'}>{faq.a}</div>
               </div>
             ))}
           </div>
@@ -481,8 +444,11 @@ export default function PestPage({ pest }: PestPageProps) {
               </div>
             </div>
           </div>
+          <div className="mb-8">
+            <ServiceAreaMap />
+          </div>
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>&copy; {new Date().getFullYear()} Selke Pest Control. All rights reserved. Licensed & Insured.</p>
+            <p>&copy; {new Date().getFullYear()} Selke Pest Control. All rights reserved. Licensed & Insured. License# 2215P.</p>
           </div>
         </div>
       </footer>

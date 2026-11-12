@@ -1,26 +1,14 @@
-import { Phone, Shield, Star, Bug, Leaf, Home, Award, Users, Clock, ChevronDown, Check, MapPin, Mail } from 'lucide-react';
-import { useState } from 'react';
+import { Phone, Shield, Star, Bug, Leaf, Home, Award, Users, Clock, ChevronDown, MapPin, Mail, Menu, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { QuoteFormModal } from '../components/QuoteFormModal';
 import { LegalModal } from '../components/LegalModal';
 import { ReviewsCarousel } from '../components/ReviewsCarousel';
 import FooterLogo from '../components/FooterLogo';
 import newLogo from '../../imports/Screenshot_2026-05-18_213802.png';
 import { CityData } from '../data/cityData';
-
-const SERVICE_AREAS = [
-  { name: 'Mooresville', slug: 'pest-control-mooresville-nc' },
-  { name: 'Charlotte', slug: 'pest-control-charlotte-nc' },
-  { name: 'Huntersville', slug: 'pest-control-huntersville-nc' },
-  { name: 'Cornelius', slug: 'pest-control-cornelius-nc' },
-  { name: 'Davidson', slug: 'pest-control-davidson-nc' },
-  { name: 'Denver', slug: 'pest-control-denver-nc' },
-  { name: 'Sherrills Ford', slug: 'pest-control-sherrills-ford-nc' },
-  { name: 'Statesville', slug: 'pest-control-statesville-nc' },
-  { name: 'Troutman', slug: 'pest-control-troutman-nc' },
-  { name: 'Weddington', slug: 'pest-control-weddington-nc' },
-  { name: 'Waxhaw', slug: 'pest-control-waxhaw-nc' },
-  { name: 'Matthews', slug: 'pest-control-matthews-nc' },
-];
+import { MobileServiceAreas, ServiceAreasMenu } from '../components/ServiceAreasMenu';
+import { ServiceAreaMap } from '../components/ServiceAreaMap';
+import { citiesInCounty, getCountyForCitySlug, serviceCities } from '../data/serviceAreas';
 
 interface CityPageProps {
   city: CityData;
@@ -30,7 +18,24 @@ export default function CityPage({ city }: CityPageProps) {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [isLegalModalOpen, setIsLegalModalOpen] = useState(false);
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
-  const [isAreasDropdownOpen, setIsAreasDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const county = getCountyForCitySlug(city.slug);
+  const canonical = `https://www.selkepestcontrol.com/${city.slug}`;
+  const here = serviceCities.find(item => item.slug === city.slug);
+  // Nearest other service cities by straight-line distance, for internal linking.
+  const nearby = here
+    ? serviceCities
+        .filter(item => item.slug !== city.slug)
+        .map(item => ({ ...item, d: Math.hypot(item.lat - here.lat, (item.lng - here.lng) * 0.82) }))
+        .sort((a, b) => a.d - b.d)
+        .slice(0, 6)
+    : [];
+
+  useEffect(() => {
+    document.title = city.metaTitle;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', city.metaDescription);
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', canonical);
+  }, [city, canonical]);
 
   return (
     <div className="min-h-screen bg-white">
@@ -42,28 +47,48 @@ export default function CityPage({ city }: CityPageProps) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Selke Pest Control",
-            "description": `Professional pest control services in ${city.name}, ${city.state} — general pest, mosquito, and flea/tick control.`,
-            "url": `https://www.selkepestcontrol.com/${city.slug}`,
-            "telephone": "+1-704-728-0204",
-            "email": "sales@selkepestcontrol.com",
-            "areaServed": {
-              "@type": "City",
-              "name": city.name,
-              "containedInPlace": { "@type": "State", "name": "North Carolina" }
-            },
-            "geo": {
-              "@type": "GeoCoordinates",
-              "latitude": city.latitude,
-              "longitude": city.longitude
-            },
-            "openingHoursSpecification": [{
-              "@type": "OpeningHoursSpecification",
-              "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-              "opens": "08:00",
-              "closes": "20:00"
-            }]
+            "@graph": [
+              {
+                "@type": "Service",
+                "name": `Pest Control in ${city.name}, ${city.state}`,
+                "serviceType": "Residential pest control",
+                "url": canonical,
+                "description": city.metaDescription,
+                "provider": {
+                  "@type": "LocalBusiness",
+                  "@id": "https://www.selkepestcontrol.com/#business",
+                  "name": "Selke Pest Control",
+                  "telephone": "+1-704-728-0204",
+                  "email": "sales@selkepestcontrol.com",
+                  "url": "https://www.selkepestcontrol.com/",
+                  "address": { "@type": "PostalAddress", "addressLocality": "Mooresville", "addressRegion": "NC", "addressCountry": "US" },
+                  "openingHoursSpecification": [{
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+                    "opens": "08:00",
+                    "closes": "20:00"
+                  }]
+                },
+                "areaServed": {
+                  "@type": "City",
+                  "name": `${city.name}, ${city.state}`,
+                  "geo": { "@type": "GeoCoordinates", "latitude": city.latitude, "longitude": city.longitude },
+                  "containedInPlace": { "@type": "AdministrativeArea", "name": `${city.county}, North Carolina` }
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.selkepestcontrol.com/" },
+                  ...(county ? [{ "@type": "ListItem", "position": 2, "name": county.name, "item": `https://www.selkepestcontrol.com/${county.slug}` }] : []),
+                  { "@type": "ListItem", "position": county ? 3 : 2, "name": `Pest Control ${city.name}, ${city.state}`, "item": canonical }
+                ]
+              },
+              {
+                "@type": "FAQPage",
+                "mainEntity": city.faqItems.map(faq => ({ "@type": "Question", "name": faq.q, "acceptedAnswer": { "@type": "Answer", "text": faq.a } }))
+              }
+            ]
           })
         }}
       />
@@ -79,32 +104,48 @@ export default function CityPage({ city }: CityPageProps) {
             <a href="/#services" className="text-gray-700 hover:text-cyan-500 transition-colors">Services</a>
             <a href="/#why-us" className="text-gray-700 hover:text-cyan-500 transition-colors">Why Us</a>
             <a href="/#faq" className="text-gray-700 hover:text-cyan-500 transition-colors">FAQ</a>
-            <div className="relative" onMouseEnter={() => setIsAreasDropdownOpen(true)} onMouseLeave={() => setIsAreasDropdownOpen(false)}>
-              <button className="flex items-center gap-1 text-gray-700 hover:text-cyan-500 transition-colors">
-                Service Areas
-                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isAreasDropdownOpen ? 'rotate-180' : ''}`} />
-              </button>
-              {isAreasDropdownOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50">
-                  <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2 grid grid-cols-2 min-w-[340px]">
-                    {SERVICE_AREAS.map(({ name, slug }) => (
-                      <a key={slug} href={`/${slug}`} className="px-4 py-2.5 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 transition-colors">
-                        {name}, NC
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
+            <ServiceAreasMenu />
           </nav>
           <div className="flex items-center gap-3">
             <a href="tel:704-728-0204" className="bg-cyan-500 text-white px-4 md:px-6 py-3 rounded-lg hover:bg-cyan-600 transition-colors flex items-center gap-2 text-sm md:text-base">
               <Phone className="w-4 h-4" />
               <span className="hidden sm:inline">704-728-0204</span>
             </a>
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen(open => !open)}
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 lg:hidden"
+              aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={isMobileMenuOpen}
+            >
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
           </div>
         </div>
+        {isMobileMenuOpen && (
+          <nav className="max-h-[75vh] overflow-y-auto border-t border-gray-100 bg-white px-4 py-4 shadow-lg lg:hidden" aria-label="Mobile navigation">
+            {[['Home', '/'], ['Services', '/#services'], ['Blog', '/blog'], ['Frequently Asked Questions', '/#faq']].map(([label, href]) => (
+              <a key={href} href={href} className="block rounded-lg px-4 py-3 font-medium text-gray-700 hover:bg-cyan-50 hover:text-cyan-700">{label}</a>
+            ))}
+            <MobileServiceAreas onNavigate={() => setIsMobileMenuOpen(false)} />
+          </nav>
+        )}
       </header>
+
+      {/* Breadcrumb */}
+      <nav className="border-b border-gray-200 bg-gray-50 py-3" aria-label="Breadcrumb">
+        <ol className="container mx-auto flex flex-wrap items-center gap-2 px-4 text-sm text-gray-500">
+          <li><a href="/" className="hover:text-cyan-600">Home</a></li>
+          {county && (
+            <>
+              <li aria-hidden="true" className="text-gray-300">/</li>
+              <li><a href={`/${county.slug}`} className="hover:text-cyan-600">{county.name}</a></li>
+            </>
+          )}
+          <li aria-hidden="true" className="text-gray-300">/</li>
+          <li className="font-medium text-gray-700" aria-current="page">{city.name}, {city.state}</li>
+        </ol>
+      </nav>
 
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-cyan-900 text-white py-20 md:py-32">
@@ -117,7 +158,7 @@ export default function CityPage({ city }: CityPageProps) {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-cyan-500/20 border border-cyan-400/30 rounded-full px-4 py-2 mb-6">
               <MapPin className="w-4 h-4 text-cyan-400" />
-              <span className="text-sm text-cyan-100">{city.name}, {city.state} — {city.county}</span>
+              <span className="text-sm text-cyan-100">{city.name}, {city.state} — {county ? <a href={`/${county.slug}`} className="underline-offset-4 hover:underline">{city.county}</a> : city.county}</span>
             </div>
             <h1 className="text-4xl md:text-6xl mb-6 leading-tight">{city.heroHeadline}</h1>
             <p className="text-lg md:text-xl mb-4 text-gray-300 max-w-3xl mx-auto">{city.heroSubheadline}</p>
@@ -156,6 +197,12 @@ export default function CityPage({ city }: CityPageProps) {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 max-w-4xl">
           <h2 className="text-3xl md:text-4xl mb-6">Pest Control in {city.name}, {city.state}</h2>
+          <div className="mb-8 rounded-2xl border border-cyan-100 bg-cyan-50/60 p-6">
+            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-cyan-700">Quick answer</p>
+            <p className="mt-2 text-lg leading-relaxed text-gray-800">
+              Selke Pest Control is a family-owned, licensed pest control company (NC License# 2215P) based in Mooresville that serves {city.name}, {city.state} and {city.county}. We provide general pest control, mosquito control, flea and tick control, and rodent control with same-day service available, 75+ five-star Google reviews, and the Selke Guarantee. Call <a href="tel:704-728-0204" className="font-semibold text-cyan-700">704-728-0204</a> for a free quote.
+            </p>
+          </div>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">{city.intro}</p>
           <p className="text-lg text-gray-700 leading-relaxed">{city.geographyPest}</p>
         </div>
@@ -306,17 +353,37 @@ export default function CityPage({ city }: CityPageProps) {
               <div key={i} className="bg-gray-50 rounded-xl shadow-lg overflow-hidden">
                 <button
                   onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
+                  aria-expanded={openFAQ === i}
                   className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-100 transition-colors"
                 >
                   <span className="text-lg pr-8">{faq.q}</span>
                   <ChevronDown className={`w-5 h-5 text-cyan-600 flex-shrink-0 transition-transform ${openFAQ === i ? 'rotate-180' : ''}`} />
                 </button>
-                {openFAQ === i && <div className="px-6 pb-5 text-gray-600">{faq.a}</div>}
+                <div className={openFAQ === i ? 'px-6 pb-5 text-gray-600' : 'hidden'}>{faq.a}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Nearby service areas */}
+      {nearby.length > 0 && (
+        <section className="border-t border-gray-100 bg-white py-14" aria-labelledby="nearby-areas">
+          <div className="container mx-auto max-w-5xl px-4">
+            <h2 id="nearby-areas" className="mb-2 text-2xl md:text-3xl">Pest control near {city.name}</h2>
+            <p className="mb-6 text-gray-600">
+              We also serve {county ? `${citiesInCounty(county.id).filter(item => item.slug !== city.slug).map(item => item.name).join(', ') || 'surrounding communities'} in ${county.name}` : 'surrounding communities'} and these nearby cities.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {nearby.map(item => (
+                <a key={item.slug} href={`/${item.slug}`} className="rounded-full border border-gray-200 bg-gray-50 px-5 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:border-cyan-300 hover:bg-cyan-50 hover:text-cyan-700">
+                  Pest Control {item.name}, NC
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* CTA */}
       <section className="py-20 bg-gradient-to-r from-cyan-600 to-cyan-700 text-white">
@@ -369,8 +436,11 @@ export default function CityPage({ city }: CityPageProps) {
               </div>
             </div>
           </div>
+          <div className="mb-8">
+            <ServiceAreaMap />
+          </div>
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>&copy; {new Date().getFullYear()} Selke Pest Control. All rights reserved. Licensed & Insured.</p>
+            <p>&copy; {new Date().getFullYear()} Selke Pest Control. All rights reserved. Licensed & Insured. License# 2215P.</p>
           </div>
         </div>
       </footer>
