@@ -1,0 +1,181 @@
+[
+  {
+    "slug": "general-pest-control",
+    "name": "General Pest Control",
+    "tileName": "Pest Control",
+    "icon": "bug",
+    "summary": "Year-round protection against ants, roaches, spiders, and the everyday pests that find their way into Charlotte-area homes.",
+    "features": ["Interior & exterior treatment", "Quarterly service with free re-treats", "Safe for pets & children"],
+    "metaTitle": "General Pest Control in Charlotte & Lake Norman, NC | Selke Pest Control",
+    "metaDescription": "Quarterly interior and exterior pest control for ants, roaches, spiders, and more across Lake Norman and the Charlotte Metro. Backed by the Selke Guarantee.",
+    "headline": "General Pest Control That Keeps Working Between Visits",
+    "intro": "Selke Pest Control's general pest control plan is a quarterly interior and exterior service for homes across Lake Norman and the Charlotte Metro. Each visit treats the places pests live, travel, and enter, from baseboards and cracks inside to the foundation, eaves, and landscaping outside. If pests come back between scheduled visits, we come back and re-treat at no extra charge.",
+    "frequency": "Quarterly, with free re-treatments between visits",
+    "included": [
+      {"title": "Interior treatment", "desc": "Baseboards, cracks, crevices, kitchens, bathrooms, and other areas where pests hide and travel."},
+      {"title": "Exterior foundation barrier", "desc": "A protective band around the foundation, doors, windows, and utility entry points."},
+      {"title": "Dewebbing", "desc": "Spider webs and wasp starts removed from eaves, porches, and entryways."},
+      {"title": "Granular yard treatment", "desc": "Landscape beds and lawn edges treated to stop pests before they reach the house."}
+    ],
+    "pests": [
+      {"name": "Ants", "href": "/ant-control-charlotte-nc"},
+      {"name": "Cockroaches", "href": "/cockroach-control-charlotte-nc"},
+      {"name": "Spiders", "href": "/spider-control-charlotte-nc"},
+      {"name": "Wasps", "href": "/wasp-control-charlotte-nc"},
+      {"name": "Silverfish"},
+      {"name": "Earwigs"},
+      {"name": "Crickets"},
+      {"name": "Stink bugs"}
+    ],
+    "faqs": [
+      {"q": "How often is general pest control serviced?", "a": "General pest control is serviced quarterly. Between visits, the Selke Guarantee covers you: if pests return, we come back and re-treat at no additional charge."},
+      {"q": "Do you treat inside the home?", "a": "Yes. Every general pest control visit includes interior treatment of baseboards, cracks, crevices, and problem areas, along with exterior foundation and yard treatment."},
+      {"q": "Is general pest control safe for kids and pets?", "a": "Yes. We use EPA-approved products applied by licensed technicians. Treated areas are safe once dry, and we give you specific guidance for every visit."}
+    ]
+  },
+  {
+    "slug": "mosquito-control",
+    "name": "Mosquito Control",
+    "icon": "wind",
+    "summary": "Targeted barrier treatments that reduce mosquito populations by up to 96%, so you can get back to enjoying your yard.",
+    "features": ["Yard & perimeter barrier", "Monthly seasonal service", "Event treatments available"],
+    "metaTitle": "Mosquito Control in Charlotte & Lake Norman, NC | Selke Pest Control",
+    "metaDescription": "Monthly mosquito barrier treatments for Lake Norman and Charlotte Metro yards. Reduce mosquitoes by up to 96% and reclaim your outdoor space.",
+    "headline": "Mosquito Control for Lake Norman and Charlotte Yards",
+    "intro": "Selke Pest Control's mosquito control is a monthly barrier treatment throughout mosquito season for homes across Lake Norman and the Charlotte Metro. We treat the shaded foliage, fence lines, and damp areas where mosquitoes rest during the day and remove breeding sites we find on the property. Our barrier treatments reduce mosquito populations by up to 96%.",
+    "frequency": "Monthly during mosquito season, plus one-time event treatments",
+    "included": [
+      {"title": "Barrier treatment", "desc": "Shrubs, tree lines, fence lines, and shaded resting areas treated where adult mosquitoes rest."},
+      {"title": "Breeding-site checks", "desc": "Standing water in gutters, planters, tarps, and low spots identified and reduced."},
+      {"title": "Larvicide where needed", "desc": "Water that can't be drained is treated to stop larvae from developing."},
+      {"title": "Event treatments", "desc": "One-time treatments before parties, weddings, and backyard gatherings."}
+    ],
+    "pests": [
+      {"name": "Asian tiger mosquitoes", "href": "/mosquito-control-charlotte-nc"},
+      {"name": "House mosquitoes", "href": "/mosquito-control-charlotte-nc"},
+      {"name": "Gnats"},
+      {"name": "No-see-ums"}
+    ],
+    "faqs": [
+      {"q": "How often are mosquito treatments applied?", "a": "Mosquito barrier treatments are applied monthly throughout mosquito season, which typically runs from spring through fall in the Charlotte area."},
+      {"q": "How much will mosquito treatments reduce mosquitoes?", "a": "Our barrier treatments reduce mosquito populations by up to 96% when combined with removing standing water around the property."},
+      {"q": "Can you treat before a party or event?", "a": "Yes. We offer one-time event treatments ahead of parties, weddings, and other outdoor gatherings. Call 704-728-0204 to schedule."}
+    ]
+  },
+  {
+    "slug": "flea-tick-control",
+    "name": "Flea & Tick Control",
+    "icon": "paw",
+    "summary": "Protect your pets and family from fleas and ticks with yard, shade, and pet-area treatments that break the life cycle.",
+    "features": ["Indoor & outdoor treatment", "Pet-area focused", "Follow-up inspections included"],
+    "metaTitle": "Flea & Tick Control in Charlotte & Lake Norman, NC | Selke Pest Control",
+    "metaDescription": "Flea and tick treatments for yards, pet areas, and homes across Lake Norman and the Charlotte Metro. Protect your family and pets.",
+    "headline": "Flea & Tick Control That Protects Your Pets and Family",
+    "intro": "Selke Pest Control's flea and tick control treats the yard edges, shaded areas, and pet zones where fleas and ticks wait for a host, along with interior treatment when fleas are already inside. Treatments are timed to break the flea life cycle, and follow-up inspections make sure the problem is fully resolved for homes across Lake Norman and the Charlotte Metro.",
+    "frequency": "Seasonal outdoor treatments, with interior treatment and follow-ups as needed",
+    "included": [
+      {"title": "Yard & shade treatment", "desc": "Wooded edges, tall grass, leaf litter, and shaded areas where ticks and fleas live."},
+      {"title": "Pet-area focus", "desc": "Kennels, dog runs, and the spots your pets rest are treated carefully."},
+      {"title": "Interior flea treatment", "desc": "Carpets, rugs, and furniture edges treated when fleas have moved indoors."},
+      {"title": "Follow-up inspection", "desc": "A return visit confirms the life cycle has been broken."}
+    ],
+    "pests": [
+      {"name": "Fleas", "href": "/flea-control-charlotte-nc"},
+      {"name": "Ticks", "href": "/tick-control-charlotte-nc"},
+      {"name": "Chiggers"}
+    ],
+    "faqs": [
+      {"q": "Why do fleas keep coming back after I treat my pet?", "a": "Most of the flea population lives in the environment as eggs and larvae, not on your pet. Treating the yard and home breaks the life cycle so fleas stop returning."},
+      {"q": "Where do ticks live in my yard?", "a": "Ticks live in wooded edges, tall grass, leaf litter, and shaded, humid areas. Those zones are the focus of every tick treatment."},
+      {"q": "Is flea and tick treatment safe for my pets?", "a": "Yes. Treatments use EPA-approved products, and pets can return to treated areas once they are dry."}
+    ]
+  },
+  {
+    "slug": "rodent-control",
+    "name": "Rodent Control",
+    "icon": "rat",
+    "summary": "Get mice and rats out of your home with a full inspection, targeted trapping and baiting, and ongoing monitoring.",
+    "features": ["Full home inspection", "Trapping & tamper-resistant baiting", "Ongoing monitoring"],
+    "metaTitle": "Rodent Control in Charlotte & Lake Norman, NC | Mice & Rats | Selke Pest Control",
+    "metaDescription": "Mice and rat control for Lake Norman and Charlotte Metro homes. Inspection, trapping, tamper-resistant baiting, and monitoring from a licensed local team.",
+    "headline": "Rodent Control That Gets Mice and Rats Out for Good",
+    "intro": "Selke Pest Control's rodent control removes mice and rats from homes across Lake Norman and the Charlotte Metro. It starts with a full inspection of the attic, crawl space, garage, and exterior to find activity and entry points, followed by targeted trapping, tamper-resistant bait stations, and monitoring visits until activity stops. Pair it with exclusion work to keep rodents from getting back in.",
+    "frequency": "Initial service plus monitoring visits until activity stops",
+    "included": [
+      {"title": "Full inspection", "desc": "Attic, crawl space, garage, and exterior checked for droppings, rub marks, and entry points."},
+      {"title": "Trapping", "desc": "Traps placed along the paths rodents travel inside the home."},
+      {"title": "Tamper-resistant bait stations", "desc": "Exterior stations that reduce rodent pressure while keeping pets and children safe."},
+      {"title": "Monitoring visits", "desc": "Return visits check traps and stations until activity is gone."}
+    ],
+    "pests": [
+      {"name": "House mice", "href": "/rodent-control-charlotte-nc"},
+      {"name": "Norway rats", "href": "/rodent-control-charlotte-nc"},
+      {"name": "Roof rats", "href": "/rodent-control-charlotte-nc"}
+    ],
+    "faqs": [
+      {"q": "How do I know if I have mice or rats?", "a": "Common signs include scratching in walls or the attic at night, droppings in cabinets or the garage, chewed packaging, and grease marks along walls."},
+      {"q": "How small of a gap can a mouse fit through?", "a": "A mouse can squeeze through a gap about the size of a dime. That is why sealing entry points with exclusion work is important after rodents are removed."},
+      {"q": "When are rodents most active in the Charlotte area?", "a": "Rodent activity rises from September through February as mice and rats move indoors looking for warmth and food."}
+    ]
+  },
+  {
+    "slug": "exclusion",
+    "name": "Exclusion Work",
+    "icon": "hammer",
+    "summary": "Seal the gaps, vents, and openings pests use to get inside, so rodents and insects stay out for good.",
+    "features": ["Entry-point inspection", "Gaps sealed with durable materials", "Door sweeps & vent screens"],
+    "metaTitle": "Pest Exclusion Services in Charlotte & Lake Norman, NC | Selke Pest Control",
+    "metaDescription": "Pest exclusion for Lake Norman and Charlotte Metro homes. We seal gaps, vents, and entry points with durable materials to keep rodents and insects out.",
+    "headline": "Exclusion Work That Keeps Pests From Getting Back In",
+    "intro": "Exclusion is the physical work of sealing the openings pests use to enter a home. Selke Pest Control inspects the foundation, rooflines, vents, garage doors, and utility penetrations, then seals gaps with durable, rodent-resistant materials such as copper mesh, hardware cloth, sealant, door sweeps, and vent screens. Exclusion pairs with rodent control and general pest control for long-term protection.",
+    "frequency": "One-time project, with a follow-up check",
+    "included": [
+      {"title": "Entry-point inspection", "desc": "Foundation, rooflines, soffits, vents, and garage doors checked for openings."},
+      {"title": "Gap sealing", "desc": "Holes and gaps closed with copper mesh, hardware cloth, and exterior-grade sealant."},
+      {"title": "Door sweeps & garage seals", "desc": "Gaps under doors and garage doors closed where pests slip in."},
+      {"title": "Vent & utility screening", "desc": "Crawl space vents, dryer vents, and pipe penetrations screened and sealed."}
+    ],
+    "pests": [
+      {"name": "Mice & rats", "href": "/rodent-control-charlotte-nc"},
+      {"name": "Cockroaches", "href": "/cockroach-control-charlotte-nc"},
+      {"name": "Spiders", "href": "/spider-control-charlotte-nc"},
+      {"name": "Crickets"},
+      {"name": "Stink bugs"}
+    ],
+    "faqs": [
+      {"q": "What is pest exclusion?", "a": "Exclusion is sealing the gaps, cracks, vents, and openings pests use to get inside, so they are physically blocked from entering your home."},
+      {"q": "Do I need exclusion if I already have pest control?", "a": "Treatments reduce pests, while exclusion removes the way in. Homes with rodent activity or recurring invaders get the best long-term results with both."},
+      {"q": "What materials do you use?", "a": "We use durable, rodent-resistant materials such as copper mesh, hardware cloth, exterior-grade sealant, door sweeps, and vent screens."}
+    ]
+  },
+  {
+    "slug": "carpenter-ant-fire-ant-carpenter-bee-control",
+    "name": "Carpenter Ant, Fire Ant & Carpenter Bee Control",
+    "shortName": "Ants & Carpenter Bees",
+    "tileName": "Carpenter Ant, Fire Ant & Carpenter Bee",
+    "icon": "bee",
+    "summary": "Stop wood-damaging carpenter ants and bees and painful fire ant mounds before they damage your home or yard.",
+    "features": ["Fire ant mound & lawn treatment", "Carpenter ant colony treatment", "Carpenter bee gallery treatment"],
+    "metaTitle": "Carpenter Ant, Fire Ant & Carpenter Bee Control in Charlotte, NC | Selke Pest Control",
+    "metaDescription": "Treatment for carpenter ants, fire ants, and carpenter bees across Lake Norman and the Charlotte Metro. Protect your wood, deck, and lawn.",
+    "headline": "Carpenter Ant, Fire Ant & Carpenter Bee Control",
+    "intro": "Selke Pest Control treats the three pests that do the most damage to Charlotte-area homes and yards outside of termites: fire ants that build painful mounds in lawns, carpenter ants that tunnel through damp wood, and carpenter bees that drill into decks, fascia, and eaves. Each is treated at the source, whether that is the colony, the mound, or the gallery, for homes across Lake Norman and the Charlotte Metro.",
+    "frequency": "Targeted treatments, with seasonal follow-ups as needed",
+    "included": [
+      {"title": "Fire ant treatment", "desc": "Mounds treated directly, plus broadcast lawn treatment to stop new colonies."},
+      {"title": "Carpenter ant treatment", "desc": "Colonies located and treated in damp or damaged wood, with moisture issues noted."},
+      {"title": "Carpenter bee treatment", "desc": "Active galleries in decks, fascia, and eaves treated in spring."},
+      {"title": "Prevention advice", "desc": "Guidance on sealing holes, painting bare wood, and fixing moisture problems."}
+    ],
+    "pests": [
+      {"name": "Fire ants", "href": "/ant-control-charlotte-nc"},
+      {"name": "Carpenter ants", "href": "/ant-control-charlotte-nc"},
+      {"name": "Carpenter bees"}
+    ],
+    "faqs": [
+      {"q": "Do carpenter ants eat wood?", "a": "No. Carpenter ants tunnel through damp or damaged wood to build nests, which can weaken it over time. Finding the moisture source is part of treatment."},
+      {"q": "When are carpenter bees most active?", "a": "Carpenter bees are most active in spring, when they drill new galleries in bare or weathered wood such as decks, fascia, and eaves."},
+      {"q": "How do you treat fire ants in a lawn?", "a": "We treat active mounds directly and apply a broadcast lawn treatment so new colonies are less likely to form."}
+    ]
+  }
+]
