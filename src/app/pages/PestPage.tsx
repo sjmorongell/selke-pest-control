@@ -1,13 +1,11 @@
 import { Phone, Shield, Star, ChevronDown, MapPin, Mail, Menu, X, AlertTriangle, CheckCircle, Bug } from 'lucide-react';
+import { SiteHeader } from '../components/SiteHeader';
+import { SiteFooter } from '../components/SiteFooter';
 import { useState, useEffect } from 'react';
 import { QuoteFormModal } from '../components/QuoteFormModal';
 import { ReviewsCarousel } from '../components/ReviewsCarousel';
 import { LegalModal } from '../components/LegalModal';
-import FooterLogo from '../components/FooterLogo';
-import newLogo from '../../imports/Screenshot_2026-05-18_213802.png';
 import { PestPageData } from '../data/pestData';
-import { MobileServiceAreas, ServiceAreasMenu } from '../components/ServiceAreasMenu';
-import { ServiceAreaMap } from '../components/ServiceAreaMap';
 import { serviceCounties } from '../data/serviceAreas';
 
 const PEST_LINKS = [
@@ -82,71 +80,7 @@ export default function PestPage({ pest }: PestPageProps) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
 
-      {/* Header */}
-      <header className="bg-white shadow-md sticky top-0 z-50 relative" role="banner">
-        <div className="container mx-auto px-4 py-3 flex items-center justify-between gap-4">
-          <a href="/" aria-label="Selke Pest Control - Home">
-            <img src={newLogo} alt="Selke Pest Control logo" className="h-14 md:h-16" />
-          </a>
-          <nav className="hidden lg:flex items-center gap-4" aria-label="Main navigation">
-            <a href="/#services" className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">Services</a>
-            <a href="/#why-us" className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">Why Us</a>
-            <a href="/" className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">Pest Library</a>
-            <a href="/#tips" className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">Tips</a>
-            <a href="/#faq" className="text-sm text-gray-700 hover:text-cyan-500 transition-colors">FAQ</a>
-            <div className="relative" onMouseEnter={() => setIsPestsDropdownOpen(true)} onMouseLeave={() => setIsPestsDropdownOpen(false)}>
-              <button className="flex items-center gap-1 text-sm text-gray-700 hover:text-cyan-500 transition-colors">
-                Pest Control <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isPestsDropdownOpen ? 'rotate-180' : ''}`} />
-              </button>
-              {isPestsDropdownOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50">
-                  <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2 min-w-[220px]">
-                    {PEST_LINKS.map(({ name, slug }) => (
-                      <a key={slug} href={`/${slug}`} className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 transition-colors">{name}</a>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-            <ServiceAreasMenu labelClassName="text-sm text-gray-700" />
-          </nav>
-          <div className="flex items-center gap-3">
-            <a href="#" className="hidden md:block text-sm text-gray-700 hover:text-cyan-500 transition-colors px-4 py-2 border border-gray-300 rounded-lg hover:border-cyan-500">Customer Portal</a>
-            <a href="tel:704-728-0204" className="bg-cyan-500 text-white px-4 md:px-6 py-3 rounded-lg hover:bg-cyan-600 transition-colors flex items-center gap-2 text-sm md:text-base">
-              <Phone className="w-4 h-4" /><span className="hidden sm:inline">704-728-0204</span>
-            </a>
-            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Toggle menu">
-              {isMobileMenuOpen ? <X className="w-6 h-6 text-gray-700" /> : <Menu className="w-6 h-6 text-gray-700" />}
-            </button>
-          </div>
-        </div>
-        {isMobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-xl border-t border-gray-100 z-50 max-h-[80vh] overflow-y-auto">
-            <div className="container mx-auto px-4 py-3 space-y-1">
-              <a href="/#services" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Services</a>
-              <a href="/#why-us" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Why Us</a>
-              <a href="/" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Pest Library</a>
-              <a href="/#tips" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Tips</a>
-              <a href="/#faq" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
-              <div>
-                <button onClick={() => setMobilePestsOpen(!mobilePestsOpen)} className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-cyan-50 rounded-lg transition-colors">
-                  <span>Pest Control</span><ChevronDown className={`w-4 h-4 transition-transform ${mobilePestsOpen ? 'rotate-180' : ''}`} />
-                </button>
-                {mobilePestsOpen && (
-                  <div className="pl-4 space-y-1 pb-2">
-                    {PEST_LINKS.map(({ name, slug }) => (
-                      <a key={slug} href={`/${slug}`} className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>{name}</a>
-                    ))}
-                  </div>
-                )}
-              </div>
-              <MobileServiceAreas onNavigate={() => setIsMobileMenuOpen(false)} />
-              <a href="#" className="block px-4 py-3 text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors">Customer Portal</a>
-              <a href="tel:704-728-0204" className="block bg-cyan-500 text-white px-4 py-3 rounded-lg text-center font-semibold hover:bg-cyan-600 transition-colors mt-2">Call 704-728-0204</a>
-            </div>
-          </div>
-        )}
-      </header>
+      <SiteHeader />
 
       {/* Breadcrumb */}
       <nav className="bg-gray-50 border-b border-gray-200 py-3" aria-label="Breadcrumb">
@@ -416,42 +350,7 @@ export default function PestPage({ pest }: PestPageProps) {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12" role="contentinfo">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <FooterLogo className="h-20 mb-4" />
-              <p className="text-gray-400 mb-3">Family-owned and locally operated. Protecting Charlotte Metro homes with professional, reliable pest control services.</p>
-              <address className="text-gray-400 not-italic"><MapPin className="w-4 h-4 inline mr-2" />Based out of Mooresville, North Carolina</address>
-            </div>
-            <div>
-              <h3 className="text-lg mb-4">Pest Control Services</h3>
-              <ul className="space-y-2 text-gray-400">
-                {PEST_LINKS.map(({ name, slug }) => (
-                  <li key={slug}><a href={`/${slug}`} className="hover:text-cyan-400 transition-colors">{name}</a></li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg mb-4">Contact Info</h3>
-              <ul className="space-y-3 text-gray-400">
-                <li className="flex items-center gap-2"><Phone className="w-4 h-4" /><a href="tel:704-728-0204" className="hover:text-cyan-400 transition-colors">704-728-0204</a></li>
-                <li className="flex items-center gap-2"><Mail className="w-4 h-4" /><a href="mailto:sales@selkepestcontrol.com" className="hover:text-cyan-400 transition-colors">sales@selkepestcontrol.com</a></li>
-              </ul>
-              <div className="mt-6">
-                <button onClick={() => setIsLegalModalOpen(true)} className="text-gray-400 hover:text-cyan-400 transition-colors text-sm">Privacy Policy & Terms</button>
-              </div>
-            </div>
-          </div>
-          <div className="mb-8">
-            <ServiceAreaMap />
-          </div>
-          <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>&copy; {new Date().getFullYear()} Selke Pest Control. All rights reserved. Licensed & Insured. License# 2215P.</p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       {/* Sticky bottom CTA */}
       {showStickyCTA && (
